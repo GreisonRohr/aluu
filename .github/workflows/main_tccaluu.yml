@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'tccaluu'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_26A328907B744BD4B43C79AF32591CEA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE4846072FEE4D0F929BFB4E9CF4AB1C }}
