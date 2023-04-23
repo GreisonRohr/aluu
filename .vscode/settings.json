@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/26adb452-4bf8-4cd1-9eed-1bc7d719d82b/resourceGroups/tccaluu_group/providers/Microsoft.Web/sites/tccaluu",
+    "appService.deploySubpath": "."
+}
