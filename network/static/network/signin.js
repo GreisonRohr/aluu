@@ -11,3 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 })
+
+
+//Em resumo, esse código verifica se os campos de nome de usuário e senha estão preenchidos e habilita/desabilita o botão de envio do formulário de acordo.

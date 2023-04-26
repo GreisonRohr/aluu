@@ -1,29 +1,40 @@
-
+// seleciona o elemento .body e recupera o valor do atributo data-page
 document.addEventListener('DOMContentLoaded', () => {
     let active = document.querySelector('.body').dataset.page;
-    document.querySelector("#"+active).classList.add('active');
+    // seleciona o elemento com o ID correspondente ao valor de active e adiciona a classe 'active' a ele
+    document.querySelector("#" + active).classList.add('active');
 });
-
+// função chamada quando um evento de clique acontece
 function drop_down(event) {
+    // seleciona o menu suspenso que é um filho do elemento pai do botão que foi clicado
     let drop_down = event.target.parentElement.querySelector(".dropdown-menu");
+    // espera por 100 milissegundos antes de exibir o menu suspenso
     setTimeout(() => {
-        drop_down.style.display = 'block';
+        drop_down.style.display = 'block';// define a propriedade de estilo display como "block"
+        // calcula a largura do menu suspenso e a largura do botão que foi clicado
         width = drop_down.offsetWidth;
         let btn_width = drop_down.parentElement.querySelector('button').offsetWidth;
-        let left = width-btn_width;
-        drop_down.style.left = '-'+left+'px';
+        let left = width - btn_width;
+        // posiciona o menu suspenso para que pareça estar alinhado com o botão
+        drop_down.style.left = '-' + left + 'px';
+        // adiciona um ouvinte de evento para o evento "keydown"
         document.addEventListener('keydown', event => {
-            if(event.key === 'Escape') {
-                drop_down.style.display = 'none';
+            if (event.key === 'Escape') { // se a tecla "Escape" for pressionada
+                drop_down.style.display = 'none'; // define a propriedade de estilo display como "none" para ocultar o menu suspenso
             }
         });
     }, 100);
 }
 
 function remove_drop_down(event) {
+    // Define uma função que é chamada quando um evento é acionado em um elemento HTML.
     setTimeout(() => {
+     // Define uma função que será executada após 250 milissegundos (ou 0,25 segundos).
+     // Essa função usa arrow function para definir o código que será executado após o tempo estabelecido.
         event.target.parentElement.querySelector(".dropdown-menu").style.display = 'none';
-    },250);
+        // Localiza o elemento pai do elemento que acionou o evento e encontra um elemento HTML filho com a classe `.dropdown-menu`.
+        // Finalmente, define o estilo do elemento HTML filho como `display:none` para ocultar o menu suspenso.
+    }, 250);
 }
 
 function createpost() {
@@ -35,10 +46,10 @@ function createpost() {
     document.querySelector('#insert-img').onchange = previewFile;
     popup.querySelector('.large-popup').querySelector('form').setAttribute('onsubmit', '');
     popup.querySelector('.large-popup').querySelector("#post-text").addEventListener('input', (event) => {
-        if(event.target.value.trim().length > 0) {
+        if (event.target.value.trim().length > 0) {
             popup.querySelector('.submit-btn').disabled = false;
         }
-        else if(event.target.parentElement.querySelector('#img-div').style.backgroundImage) {
+        else if (event.target.parentElement.querySelector('#img-div').style.backgroundImage) {
             popup.querySelector('.submit-btn').disabled = false;
         }
         else {
@@ -62,7 +73,7 @@ function delete_post(id) {
     setTimeout(() => {
         let post = 0;
         document.querySelectorAll('.post').forEach(eachpost => {
-            if(eachpost.dataset.post_id==id) {
+            if (eachpost.dataset.post_id == id) {
                 post = eachpost;
             }
         });
@@ -70,10 +81,10 @@ function delete_post(id) {
         post.addEventListener('animationend', () => {
             post.remove();
         });
-        fetch('/n/post/'+parseInt(id)+'/delete', {
+        fetch('/n/post/' + parseInt(id) + '/delete', {
             method: 'PUT'
         });
-    },200);
+    }, 200);
 }
 
 function edit_post(element) {
@@ -84,7 +95,7 @@ function edit_post(element) {
         let post_image = post.querySelector('.post-image').style.backgroundImage;
 
         popup.querySelector('#post-text').value = post_text;
-        if(post_image) {
+        if (post_image) {
             popup.querySelector('#img-div').style.backgroundImage = post_image;
             document.querySelector('#del-img').addEventListener('click', del_image);
             popup.querySelector('#img-div').style.display = 'block';
@@ -106,42 +117,42 @@ function edit_post_submit(post_id) {
     let pic = popup.querySelector('#insert-img');
     let chg = popup.querySelector('#img-change');
     let formdata = new FormData();
-    formdata.append('text',text);
-    formdata.append('picture',pic.files[0]);
+    formdata.append('text', text);
+    formdata.append('picture', pic.files[0]);
     formdata.append('img_change', chg.value);
-    formdata.append('id',post_id);
-    fetch('/n/post/'+parseInt(post_id)+'/edit', {
-        method:'POST',
+    formdata.append('id', post_id);
+    fetch('/n/post/' + parseInt(post_id) + '/edit', {
+        method: 'POST',
         body: formdata
     })
-    .then(response => response.json())
-    .then(response => {
-        if(response.success) {
-            let posts = document.querySelectorAll('.post');
-            posts.forEach(post => {
-                if(parseInt(post.dataset.post_id) === parseInt(post_id)) {
-                    if(response.text) {
-                        post.querySelector('.post-content').innerText = response.text;
+        .then(response => response.json())
+        .then(response => {
+            if (response.success) {
+                let posts = document.querySelectorAll('.post');
+                posts.forEach(post => {
+                    if (parseInt(post.dataset.post_id) === parseInt(post_id)) {
+                        if (response.text) {
+                            post.querySelector('.post-content').innerText = response.text;
+                        }
+                        else {
+                            post.querySelector('.post-content').innerText = "";
+                        }
+                        if (response.picture) {
+                            post.querySelector('.post-image').style.backgroundImage = `url(${response.picture})`;
+                            post.querySelector('.post-image').style.display = 'block';
+                        }
+                        else {
+                            post.querySelector('.post-image').style.backgroundImage = '';
+                            post.querySelector('.post-image').style.display = 'none';
+                        }
                     }
-                    else {
-                        post.querySelector('.post-content').innerText = "";
-                    }
-                    if(response.picture) {
-                        post.querySelector('.post-image').style.backgroundImage = `url(${response.picture})`;
-                        post.querySelector('.post-image').style.display = 'block';
-                    }
-                    else {
-                        post.querySelector('.post-image').style.backgroundImage = '';
-                        post.querySelector('.post-image').style.display = 'none';
-                    }
-                }
-            });
-            return false;
-        }
-        else {
-            console.log('There was an error while editing the post.');
-        }
-    });
+                });
+                return false;
+            }
+            else {
+                console.log('There was an error while editing the post.');
+            }
+        });
     remove_popup();
     return false;
 }
@@ -171,21 +182,21 @@ function login_popup(action) {
     popup.querySelector('.login-popup').style.display = 'block';
     document.querySelector('.body').setAttribute('aria-hidden', 'true');
     document.querySelector('body').style.overflow = "hidden";
-    if(action === 'like') {
+    if (action === 'like') {
         document.querySelector('.icon-div').innerHTML = `
         <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="#e0245e" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
         </svg>`;
         document.querySelector('.main_text-div').querySelector('h2').innerText = 'Like a post to share the love';
     }
-    else if(action === 'comment') {
+    else if (action === 'comment') {
         document.querySelector('.icon-div').innerHTML = `
         <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-chat-fill" fill="#1da1f2" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
         </svg>`;
         document.querySelector('.main_text-div').querySelector('h2').innerText = 'Comment to join the conversation';
     }
-    else if(action === 'save') {
+    else if (action === 'save') {
         document.querySelector('.icon-div').innerHTML = `
         <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-bookmark-fill" fill="#17bf63" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M3 3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V3z"/>
@@ -208,9 +219,9 @@ function previewFile() {
     document.querySelector('#del-img').style.display = 'none';
     document.querySelector('#del-img').addEventListener('click', del_image);
     var preview = document.querySelector('#img-div');
-    var file    = document.querySelector('input[type=file]').files[0];
-    var reader  = new FileReader();
-    
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
+
     reader.onloadend = function () {
         preview.style.backgroundImage = `url(${reader.result})`;
         document.querySelector('.large-popup').querySelector('#img-change').value = 'true';
@@ -221,21 +232,21 @@ function previewFile() {
         //    document.querySelector('#spinner').style.display = 'block';
         //});
         document.querySelector('.form-action-btns').querySelector('input[type=submit]').disabled = false;
-        var promise = new Promise(function(resolve, reject){
+        var promise = new Promise(function (resolve, reject) {
             setTimeout(() => {
                 var read = reader.readAsDataURL(file);
                 resolve(read);
-            },500);
+            }, 500);
         });
-        promise 
-            .then(function () { 
+        promise
+            .then(function () {
                 document.querySelector('#spinner').style.display = 'none';
                 document.querySelector('#del-img').style.display = 'block';
             })
-            .catch(function () { 
-                console.log('Some error has occured'); 
+            .catch(function () {
+                console.log('Some error has occured');
             });
-        
+
     }
     else {
         document.querySelector('#spinner').style.display = 'none';
@@ -248,151 +259,151 @@ function del_image() {
     document.querySelector('#img-div').style.backgroundImage = '';
     document.querySelector('#img-div').style.display = 'none';
     document.querySelector('.large-popup').querySelector('#img-change').value = 'true';
-    if(document.querySelector('.large-popup').querySelector('#post-text').value.trim().length <= 0) {
+    if (document.querySelector('.large-popup').querySelector('#post-text').value.trim().length <= 0) {
         document.querySelector('.large-popup').querySelector('.form-action-btns').querySelector('input[type=submit]').disabled = true;
     }
 }
 
 function like_post(element) {
-    if(document.querySelector('#user_is_authenticated').value === 'False') {
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('like');
         return false;
     }
     let id = element.dataset.post_id;
-    fetch('/n/post/'+parseInt(id)+'/like', {
+    fetch('/n/post/' + parseInt(id) + '/like', {
         method: 'PUT'
     })
-    .then(() => {
-        let count = element.querySelector('.likes_count');
-        let value = count.innerHTML;
-        value++;
-        count.innerHTML = value;
-        element.querySelector('.svg-span').innerHTML = `
+        .then(() => {
+            let count = element.querySelector('.likes_count');
+            let value = count.innerHTML;
+            value++;
+            count.innerHTML = value;
+            element.querySelector('.svg-span').innerHTML = `
             <svg width="1.1em" height="1.1em" viewBox="0 -1 16 16" class="bi bi-heart-fill" fill="#e0245e" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
             </svg>`;
-        element.setAttribute('onclick','unlike_post(this)');
-    })
+            element.setAttribute('onclick', 'unlike_post(this)');
+        })
 }
 
 function unlike_post(element) {
     let id = element.dataset.post_id;
-    fetch('/n/post/'+parseInt(id)+'/unlike', {
+    fetch('/n/post/' + parseInt(id) + '/unlike', {
         method: 'PUT'
     })
-    .then(() => {
-        let count = element.querySelector('.likes_count');
-        let value = count.innerHTML;
-        value--;
-        count.innerHTML = value;
-        element.querySelector('.svg-span').innerHTML = `
+        .then(() => {
+            let count = element.querySelector('.likes_count');
+            let value = count.innerHTML;
+            value--;
+            count.innerHTML = value;
+            element.querySelector('.svg-span').innerHTML = `
             <svg width="1.1em" height="1.1em" viewBox="0 -1 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
             </svg>`;
-        element.setAttribute('onclick','like_post(this)');
-    })
+            element.setAttribute('onclick', 'like_post(this)');
+        })
 }
 
 function save_post(element) {
-    if(document.querySelector('#user_is_authenticated').value === 'False') {
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('save');
         return false;
     }
     let id = element.dataset.post_id;
-    fetch('/n/post/'+parseInt(id)+'/save', {
+    fetch('/n/post/' + parseInt(id) + '/save', {
         method: 'PUT'
     })
-    .then(() => {
-        element.querySelector('.svg-span').innerHTML = `
+        .then(() => {
+            element.querySelector('.svg-span').innerHTML = `
             <svg width="1.1em" height="1.1em" viewBox="0.5 0 15 15" class="bi bi-bookmark-fill" fill="#17bf63" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3 3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12l-5-3-5 3V3z"/>
             </svg>`;
-        element.setAttribute('onclick','unsave_post(this)');
-    });
+            element.setAttribute('onclick', 'unsave_post(this)');
+        });
 }
 
 function unsave_post(element) {
     let id = element.dataset.post_id;
-    fetch('/n/post/'+parseInt(id)+'/unsave', {
+    fetch('/n/post/' + parseInt(id) + '/unsave', {
         method: 'PUT'
     })
-    .then(() => {
-        element.querySelector('.svg-span').innerHTML = `
+        .then(() => {
+            element.querySelector('.svg-span').innerHTML = `
         <svg width="1.1em" height="1.1em" viewBox="0.5 0 15 15" class="bi bi-bookmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M8 12l5 3V3a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V3a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10.234z"/>
         </svg>`;
-        element.setAttribute('onclick','save_post(this)');
-    });
+            element.setAttribute('onclick', 'save_post(this)');
+        });
 }
 
 
 function follow_user(element, username, origin) {
-    if(document.querySelector('#user_is_authenticated').value === 'False') {
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('follow');
         return false;
     }
-    fetch('/'+username+'/follow', {
+    fetch('/' + username + '/follow', {
         method: 'PUT'
     })
-    .then(() => {
-        if(origin === 'suggestion') {
-            element.parentElement.innerHTML = `<button class="btn btn-success" type="button" onclick="unfollow_user(this,'${username}','suggestion')">Following</button>`;
-        }
-        else if(origin === 'edit_page') {
-            element.parentElement.innerHTML = `<button class="btn btn-success float-right" onclick="unfollow_user(this,'${username}','edit_page')" id="following-btn">Following</button>`;
-        }
-        else if(origin === 'dropdown') {
-            ////////////////////////////////////////////////////////////////////////////////////////////
-        }
+        .then(() => {
+            if (origin === 'suggestion') {
+                element.parentElement.innerHTML = `<button class="btn btn-success" type="button" onclick="unfollow_user(this,'${username}','suggestion')">Following</button>`;
+            }
+            else if (origin === 'edit_page') {
+                element.parentElement.innerHTML = `<button class="btn btn-success float-right" onclick="unfollow_user(this,'${username}','edit_page')" id="following-btn">Following</button>`;
+            }
+            else if (origin === 'dropdown') {
+                ////////////////////////////////////////////////////////////////////////////////////////////
+            }
 
-        if(document.querySelector('.body').dataset.page === 'profile') {
-            if(document.querySelector('.profile-view').dataset.user === username) {
-                document.querySelector('#follower__count').innerHTML++;
+            if (document.querySelector('.body').dataset.page === 'profile') {
+                if (document.querySelector('.profile-view').dataset.user === username) {
+                    document.querySelector('#follower__count').innerHTML++;
+                }
             }
-        }
-        if(document.querySelector('.body').dataset.page === 'profile') {
-            if(document.querySelector('.profile-view').dataset.user === document.querySelector('#user_is_authenticated').dataset.username) {
-                document.querySelector('#following__count').innerHTML++;
+            if (document.querySelector('.body').dataset.page === 'profile') {
+                if (document.querySelector('.profile-view').dataset.user === document.querySelector('#user_is_authenticated').dataset.username) {
+                    document.querySelector('#following__count').innerHTML++;
+                }
             }
-        }
-    });
+        });
 }
 
 function unfollow_user(element, username, origin) {
-    if(document.querySelector('#user_is_authenticated').value === 'False') {
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('follow');
         return false;
     }
-    fetch('/'+username+'/unfollow', {
+    fetch('/' + username + '/unfollow', {
         method: 'PUT'
     })
-    .then(() => {
-        if(origin === 'suggestion') {
-            element.parentElement.innerHTML = `<button class="btn btn-outline-success" type="button" onclick="follow_user(this,'${username}','suggestion')">Follow</button>`;
-        }
-        else if(origin === 'edit_page') {
-            element.parentElement.innerHTML = `<button class="btn btn-outline-success float-right" onclick="follow_user(this,'${username}','edit_page')" id="follow-btn">Follow</button>`;
-        }
-        else if(origin === 'dropdown') {
-            ///////////////////////////////////////////////////////////////////////////////////////////
-        }
+        .then(() => {
+            if (origin === 'suggestion') {
+                element.parentElement.innerHTML = `<button class="btn btn-outline-success" type="button" onclick="follow_user(this,'${username}','suggestion')">Follow</button>`;
+            }
+            else if (origin === 'edit_page') {
+                element.parentElement.innerHTML = `<button class="btn btn-outline-success float-right" onclick="follow_user(this,'${username}','edit_page')" id="follow-btn">Follow</button>`;
+            }
+            else if (origin === 'dropdown') {
+                ///////////////////////////////////////////////////////////////////////////////////////////
+            }
 
-        if(document.querySelector('.body').dataset.page === 'profile') {
-            if(document.querySelector('.profile-view').dataset.user === username) {
-                document.querySelector('#follower__count').innerHTML--;
+            if (document.querySelector('.body').dataset.page === 'profile') {
+                if (document.querySelector('.profile-view').dataset.user === username) {
+                    document.querySelector('#follower__count').innerHTML--;
+                }
             }
-        }
-        if(document.querySelector('.body').dataset.page === 'profile') {
-            if(document.querySelector('.profile-view').dataset.user === document.querySelector('#user_is_authenticated').dataset.username) {
-                document.querySelector('#following__count').innerHTML--;
+            if (document.querySelector('.body').dataset.page === 'profile') {
+                if (document.querySelector('.profile-view').dataset.user === document.querySelector('#user_is_authenticated').dataset.username) {
+                    document.querySelector('#following__count').innerHTML--;
+                }
             }
-        }
-    });
+        });
 }
 
 
 function show_comment(element) {
-    if(document.querySelector('#user_is_authenticated').value === 'False') {
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('comment');
         return;
     }
@@ -401,26 +412,26 @@ function show_comment(element) {
     let comment_div = post_div.querySelector('.comment-div');
     let comment_div_data = comment_div.querySelector('.comment-div-data');
     let comment_comments = comment_div_data.querySelector('.comment-comments');
-    if(comment_div.style.display === 'block') {
+    if (comment_div.style.display === 'block') {
         comment_div.querySelector('input').focus()
         return;
     }
     comment_div.querySelector('#spinner').style.display = 'block';
     comment_div.style.display = 'block';
-    fetch('/n/post/'+parseInt(post_id)+'/comments')
-    .then(response => response.json())
-    .then(comments => {
-        comments.forEach(comment => {
-            display_comment(comment,comment_comments);
+    fetch('/n/post/' + parseInt(post_id) + '/comments')
+        .then(response => response.json())
+        .then(comments => {
+            comments.forEach(comment => {
+                display_comment(comment, comment_comments);
+            });
+        })
+        .then(() => {
+            setTimeout(() => {
+                comment_div.querySelector('.spinner-div').style.display = 'none';
+                comment_div.querySelector('.comment-div-data').style.display = 'block';
+                comment_div.style.overflow = 'auto';
+            }, 500);
         });
-    })
-    .then(() => {
-        setTimeout(() => {
-            comment_div.querySelector('.spinner-div').style.display = 'none';
-            comment_div.querySelector('.comment-div-data').style.display = 'block';
-            comment_div.style.overflow = 'auto';
-        }, 500);
-    });
 }
 
 function write_comment(element) {
@@ -428,27 +439,27 @@ function write_comment(element) {
     let comment_text = element.querySelector('.comment-input').value;
     let comment_comments = element.parentElement.parentElement.parentElement.parentElement.querySelector('.comment-comments');
     let comment_count = comment_comments.parentElement.parentElement.parentElement.querySelector('.cmt-count');
-    if(comment_text.trim().length <= 0) {
+    if (comment_text.trim().length <= 0) {
         return false;
     }
-    fetch('/n/post/'+parseInt(post_id)+'/write_comment',{
+    fetch('/n/post/' + parseInt(post_id) + '/write_comment', {
         method: 'POST',
         body: JSON.stringify({
             comment_text: comment_text
         })
     })
-    .then(response => response.json())
-    .then(comment => {
-        console.log(comment);
-        element.querySelector('input').value = '';
-        comment_count.innerHTML++;
-        display_comment(comment[0],comment_comments,true);
-        return false;
-    });
+        .then(response => response.json())
+        .then(comment => {
+            console.log(comment);
+            element.querySelector('input').value = '';
+            comment_count.innerHTML++;
+            display_comment(comment[0], comment_comments, true);
+            return false;
+        });
     return false;
 }
 
-function display_comment(comment, container, new_comment=false) {
+function display_comment(comment, container, new_comment = false) {
     let writer = document.querySelector('#user_is_authenticated').dataset.username;
     let eachrow = document.createElement('div');
     eachrow.className = 'eachrow';
