@@ -11,9 +11,9 @@ def main():
         from django.core.management import execute_from_command_line
     except ImportError as exc:
         raise ImportError(
-            "Não foi possível importar o Django. Tem certeza de que ele está instalado e "
-            "disponível em sua variável de ambiente PYTHONPATH? Você "
-            "esqueceu de ativar um ambiente virtual?"
+            "Couldn't import Django. Are you sure it's installed and "
+            "available on your PYTHONPATH environment variable? Did you "
+            "forget to activate a virtual environment?"
         ) from exc
     # Chama a função execute_from_command_line com os argumentos da linha de comando (sys.argv) para iniciar o aplicativo Django.
     execute_from_command_line(sys.argv)
