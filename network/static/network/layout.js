@@ -29,8 +29,8 @@ function drop_down(event) {
 function remove_drop_down(event) {
     // Define uma função que é chamada quando um evento é acionado em um elemento HTML.
     setTimeout(() => {
-     // Define uma função que será executada após 250 milissegundos (ou 0,25 segundos).
-     // Essa função usa arrow function para definir o código que será executado após o tempo estabelecido.
+        // Define uma função que será executada após 250 milissegundos (ou 0,25 segundos).
+        // Essa função usa arrow function para definir o código que será executado após o tempo estabelecido.
         event.target.parentElement.querySelector(".dropdown-menu").style.display = 'none';
         // Localiza o elemento pai do elemento que acionou o evento e encontra um elemento HTML filho com a classe `.dropdown-menu`.
         // Finalmente, define o estilo do elemento HTML filho como `display:none` para ocultar o menu suspenso.
@@ -347,10 +347,10 @@ function follow_user(element, username, origin) {
     })
         .then(() => {
             if (origin === 'suggestion') {
-                element.parentElement.innerHTML = `<button class="btn btn-success" type="button" onclick="unfollow_user(this,'${username}','suggestion')">Following</button>`;
+                element.parentElement.innerHTML = `<button class="btn btn-success" type="button" onclick="unfollow_user(this,'${username}','suggestion')">Seguindo</button>`;
             }
             else if (origin === 'edit_page') {
-                element.parentElement.innerHTML = `<button class="btn btn-success float-right" onclick="unfollow_user(this,'${username}','edit_page')" id="following-btn">Following</button>`;
+                element.parentElement.innerHTML = `<button class="btn btn-success float-right" onclick="unfollow_user(this,'${username}','edit_page')" id="following-btn">Seguindo</button>`;
             }
             else if (origin === 'dropdown') {
                 ////////////////////////////////////////////////////////////////////////////////////////////
