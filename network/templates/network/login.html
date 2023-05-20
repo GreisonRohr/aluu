@@ -7,14 +7,14 @@
 {% endblock %}
 
 {% block body %}
-    <div class="user-box">
+    <div class="user-box"style="width: 100%">
         <div>
             <center>
-                <img src="{% static 'network/Images/logo-aluu.png' %}" height="45em" style="margin-bottom: 2vh;">
+                <img src="{% static 'network/Images/logo-aluu.png' %}" height="90em" style="margin-bottom: 2vh;">
                 <h3>Cadastro em Aluu</h3><br>
             </center>
         </div>
-    
+
         <form action="{% url 'login' %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;">
             {% csrf_token %}
             <div class="form-group">
@@ -28,7 +28,7 @@
                 <input class="btn btn-primary" type="submit" value="Acessar" style="margin-top: 10px; width: 95%;" disabled>
             </center>
         </form>
-    
+
         <div>
             <center>
                 Não tem uma conta? &nbsp;&nbsp;<a href="{% url 'register' %}">Criar</a>

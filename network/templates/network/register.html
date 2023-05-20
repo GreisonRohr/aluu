@@ -11,14 +11,14 @@ Inscrever-se | Aluu
 {% endblock %}
 
 {% block body %}
-    <div class="user-box" style="margin-top: 6vh;">
+    <div class="user-box" style="width: 100%">
         <div>
             <center>
-                <img src="{% static 'network/Images/logo-aluu.png' %}" height="45em" style="margin-bottom: 2vh;">
+                <img src="{% static 'network/Images/logo-aluu.png' %}" style="width: 50%">
                 <h3>Cadastre - se </h2><br>
             </center>
         </div>
-    
+
         <form action="{% url 'register' %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;"  enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
@@ -69,7 +69,7 @@ Inscrever-se | Aluu
                 <input class="btn btn-primary" type="submit" value="Cadastrar" style="margin-top: 10px; width: 95%;" disabled>
             </center>
         </form>
-    
+
         <div>
             <center>
                 Já tem uma conta?&nbsp;&nbsp;<a href="{% url 'login' %}">Acessar</a>
