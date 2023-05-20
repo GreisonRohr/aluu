@@ -167,8 +167,20 @@ def saved(request):
         })
     else:
         return HttpResponseRedirect(reverse('login'))
-        
+    
+@login_required        
+def ranking(request):
+    # Logic to retrieve the ranking data and pass it to the template
+    # For example, you could query the database to get a list of ranked items
 
+    # Assuming you have a list of ranked items called 'ranking_data'
+    ranking_data = [
+        {'name': 'Item 1', 'score': 100},
+        {'name': 'Item 2', 'score': 90},
+        {'name': 'Item 3', 'score': 80},
+    ]
+
+    return render(request, 'network/ranking.html', {'ranking_data': ranking_data})
 
 @login_required
 def create_post(request):
