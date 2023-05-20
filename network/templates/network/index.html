@@ -79,7 +79,6 @@
                                             <div class="post-image" style="display: none;"></div>
                                         {% endif %}
                                         <div class="post-actions">
-
                                             {% if user in post.likers.all %}
                                                 <div class="like" onclick="unlike_post(this)" data-post_id="{{post.id}}">
                                                     <div class="svg-span">
@@ -101,7 +100,7 @@
                                                     <div style="padding: 7px 0px;" class="likes_count">{{post.likers.count}}</div>
                                                 </div>
                                             {% endif %}
-
+                                        
                                             <div class="comment" onclick="show_comment(this)">
                                                 <div class="svg-span">
                                                     <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-chat" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -110,10 +109,11 @@
                                                 </div>&nbsp;
                                                 <div style="padding: 7px 0px;" class="cmt-count">{{post.comment_count}}</div>
                                             </div>
-
-
-
-
+                                        
+                                            <div class="rating">
+                                                <input type="number" min="0" max="10" step="1" value="{{post.rating}}" onchange="rate_post(this, {{post.id}})">
+                                            </div>
+                                        
                                             {% if user in post.savers.all %}
                                                 <div class="save" onclick="unsave_post(this)" data-post_id="{{post.id}}">
                                                     <div class="svg-span">
@@ -131,8 +131,8 @@
                                                     </div>
                                                 </div>
                                             {% endif %}
-
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="comment-div" style="display: none;" data-post_id="{{post.id}}">
