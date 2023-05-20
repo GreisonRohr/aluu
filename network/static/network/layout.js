@@ -434,6 +434,23 @@ function show_comment(element) {
         });
 }
 
+function showRatingField(element) {
+    var ratingField = document.getElementById("ratingField");
+    ratingField.style.display = "block";
+}
+
+function submitRating(element) {
+    var ratingInput = document.getElementById("ratingInput");
+    var ratingValue = ratingInput.value;
+
+    // Perform further actions with the rating value, e.g., store it or update the UI
+
+    // Hide the rating field after submitting
+    var ratingField = document.getElementById("ratingField");
+    ratingField.style.display = "none";
+}
+
+
 function write_comment(element) {
     let post_id = element.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.post_id;
     let comment_text = element.querySelector('.comment-input').value;

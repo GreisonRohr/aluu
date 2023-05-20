@@ -131,13 +131,16 @@
                                             {% endif %}
                                         
                                             <div class="rating">
-                                                <div class="svg-span">
+                                                <div class="svg-span" onclick="showRatingField(this)">
                                                     <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
-                                                        <polygon points="12 2 15.09 8.72 22 9.82 17 14 18.18 21 12 17.27 5.82 21 7 14 2 9.82 8.91 8.72 12 2"/>
+                                                        <polygon points="12 2 15.09 8.72 22 9.82 17 14 18.18 21 12 17.27 5 18.18 6.91 14 2 9.82 8.91 8.72 12 2"/>
                                                     </svg>
                                                 </div>
                                                 &nbsp;
-                                                <div style="padding: 7px 0px;">{{post.rating}}</div>
+                                                <div id="ratingField" style="display: none;">
+                                                    <input type="number" id="ratingInput" placeholder="Enter rating" min="0" max="10" step="0.1">
+                                                    <button onclick="submitRating(this)">Submit</button>
+                                                </div>
                                             </div>
                                         </div>
                                         
