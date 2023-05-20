@@ -492,9 +492,6 @@ function display_comment(comment, container, new_comment = false) {
 
 
 
-
-
-
 function goto_register() {
     window.location.href = '/n/register';
 }
