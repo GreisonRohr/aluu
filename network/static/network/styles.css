@@ -1,18 +1,22 @@
-
-.body{
+.body {
     display: flex;
     min-height: 100%;
     font-family: system-ui, sans-serif;
 }
-.btn{
+
+.btn {
     border-radius: 20px;
     padding: 0.32rem 1rem 0.375rem 1rem;
 }
-.btn, .btn:focus, .btn:active{
+
+.btn,
+.btn:focus,
+.btn:active {
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
 }
-.btn:disabled{
+
+.btn:disabled {
     cursor: default;
 }
 
@@ -26,22 +30,27 @@
     border-radius: 999px;
     width: max-content;
 }
-.icon-btn:hover{
+
+.icon-btn:hover {
     background-color: rgba(40, 167, 69, .1);
     transition-duration: .35s;
     cursor: pointer;
 }
-.icon-btn:active{
+
+.icon-btn:active {
     background-color: rgba(40, 167, 69, .23);
     transition-duration: .35s;
 }
-.icon-btn:focus{
+
+.icon-btn:focus {
     outline: none;
 }
-.grey{
+
+.grey {
     color: #657786;
 }
-svg{
+
+svg {
     vertical-align: text-top;
 }
 
@@ -59,39 +68,46 @@ svg{
     padding-left: 3%;
     background-color: white;
 }
-.sidenav ul{
+
+.sidenav ul {
     list-style: none;
     padding-left: 0px;
     margin-top: 3vh;
 }
-.sidenav li{
+
+.sidenav li {
     margin-top: 7px;
 }
-.sidenav .nav-link{
+
+.sidenav .nav-link {
     color: #14171a;
     line-height: .7em;
     font-weight: 700;
     padding: 0px;
 }
-.sidenav .nav-link > div{
+
+.sidenav .nav-link>div {
     padding: 10px 20px 8px 12px;
     border-radius: 25px;
     line-height: 0.9em;
     width: max-content;
 }
-.sidenav .nav-link > div:hover{
+
+.sidenav .nav-link>div:hover {
     color: #42b8c4;
     background-color: #e7f8ef;
     transition-duration: .2s;
 }
-.new-post-btn{
+
+.new-post-btn {
     padding-left: 55px !important;
     padding-right: 55px !important;
     font-size: .95em;
     font-weight: 530;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 24px !important;
 }
-.user_account{
+
+.user_account {
     display: flex;
     font-size: .82rem;
     font-weight: normal;
@@ -99,18 +115,20 @@ svg{
     padding-bottom: 3px !important;
     padding-left: 3px !important;
 }
-.user_account .small-profilepic{
+
+.user_account .small-profilepic {
     transform: scale(.82);
     margin-left: auto;
     margin-top: auto;
 }
-.active a{
+
+.active a {
     color: #42b8c4 !important;
 }
 
 
 
-.main-div{
+.main-div {
     position: relative;
     width: 47.25%;
     min-height: 100vh;
@@ -118,13 +136,16 @@ svg{
     /*display: flex;
     flex-basis: auto;*/
 }
-.left-div{
+
+.left-div {
     position: relative;
 }
-.head{
+
+.head {
     height: 7.5vh;
 }
-.heading{
+
+.heading {
     position: fixed;
     width: 47.255%;
     top: 0px;
@@ -136,15 +157,16 @@ svg{
     z-index: 1000;
 }
 
-.left-div-content{
+.left-div-content {
     margin-top: 7.5vh;
 }
 
-.new-post > div{
+.new-post>div {
     display: flex;
     padding: 8px 18px 8px 18px;
 }
-.small-profilepic{
+
+.small-profilepic {
     width: 3.1vw;
     height: 3.1vw;
     border-radius: 9999px;
@@ -168,21 +190,26 @@ svg{
     margin-top: 10px;
     cursor: auto;
 }
+
 .textarea[contenteditable]:empty::before {
     content: "What's happening?";
     color: gray;
 }
-.textarea[contenteditable]:empty::before:hover{
+
+.textarea[contenteditable]:empty::before:hover {
     cursor: auto;
 }
-.form-area{
+
+.form-area {
     width: 100%;
-}/*
+}
+
+/*
 .form-area textarea{
     width: 100%;
     max-height: 10vh;
 }*/
-.form-icon-btn{
+.form-icon-btn {
     margin-left: -6px;
     margin-top: 5px;
     cursor: pointer;
@@ -190,60 +217,64 @@ svg{
     padding: 6px 10px;
 }
 
-#img-div{
+#img-div {
     height: 290px;
     width: 100%;
     border-radius: 15px;
-    display:none;
+    display: none;
     margin-top: 10px;
     margin-bottom: 10px;
-    color:white;
+    color: white;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-#spinner{
-    position:relative;
+#spinner {
+    position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     display: none;
 }
 
-#del-img{
+#del-img {
     cursor: pointer;
     position: relative;
     z-index: 10;
     left: .6%;
     top: .6%;
     padding: 3px;
-    background:none;
-    border:none;
-    outline:none;
+    background: none;
+    border: none;
+    outline: none;
     margin-bottom: 0px;
 }
-#del-img > svg{
+
+#del-img>svg {
     background-color: rgba(0, 0, 0, 0.77);
     border-radius: 20px;
     padding: 4px;
 }
-#del-img > svg:hover{
+
+#del-img>svg:hover {
     background-color: rgba(0, 0, 0, 0.67);
 }
-#del-img > svg:active{
+
+#del-img>svg:active {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.form-action-btns{
+.form-action-btns {
     margin-top: 8px;
 }
 
 
-.space{
+.space {
     height: 8px;
     background-color: #e6ecf0;
 }
+
 /*.main-div > div{
     margin-top: 10px;
     max-height: 100vh;
@@ -253,14 +284,15 @@ svg{
 
 
 /********** Profile Section **********/
-.cover-image{
+.cover-image {
     height: 210px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #ccd6dd;
 }
-.profile-image{
+
+.profile-image {
     width: 160px;
     height: 160px;
     position: absolute;
@@ -273,41 +305,48 @@ svg{
     background-position: center;
     background-color: white;
 }
-.profile-details{
+
+.profile-details {
     padding: 15px 20px;
 }
-.profile-details button{
+
+.profile-details button {
     padding-bottom: 0.3rem;
 }
-.profile-details > .details-data{
+
+.profile-details>.details-data {
     margin-top: 52px;
     font-size: .92em;
 }
-.profile-details h5{
+
+.profile-details h5 {
     font-weight: 800;
     margin-bottom: 0px;
 }
-.profile-details a{
+
+.profile-details a {
     color: black;
     text-decoration: none;
 }
-.bio{
+
+.bio {
     margin-top: 8px;
 }
 
 
 /********* Posts Section **********/
 
-@keyframes hidee{
-    0%{
+@keyframes hidee {
+    0% {
         opacity: 1;
     }
-    100%{
+
+    100% {
         opacity: 0;
     }
 }
 
-.post{
+.post {
     background-color: white;
     border-top: 1px solid #e6ecf0;
     padding: 8px 18px 8px 18px;
@@ -317,29 +356,35 @@ svg{
     animation-fill-mode: forwards;
     animation-play-state: paused;
 }
+
 /*.post:hover{
     background-color: #f5f8fa;
     transition-duration: .4s;
     cursor: pointer;
 }*/
-.post > div{
+.post>div {
     display: flex;
 }
-.post a{
+
+.post a {
     text-decoration: none;
     color: black;
 }
-.post-main{
+
+.post-main {
     flex: 1;
 }
-.post-user{
+
+.post-user {
     display: flex;
     justify-content: space-between;
 }
-.dropdown-toggle::after{
+
+.dropdown-toggle::after {
     content: none;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     padding: 0px;
     overflow: hidden;
     box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
@@ -350,24 +395,28 @@ svg{
     z-index: 99999;
 }
 
-.dropdown-item{
+.dropdown-item {
     padding-bottom: 13px;
     padding-top: 13px;
     font-size: .9em;
     color: #3f4244;
 }
-.dropdown-item:active{
+
+.dropdown-item:active {
     background-color: #f3f4f5;
     color: rgb(65, 56, 56);
     transition-duration: .1s;
 }
-.dropdown-item:focus{
+
+.dropdown-item:focus {
     outline: none;
 }
-.post-content{
+
+.post-content {
     margin-top: 5px;
 }
-.post-image{
+
+.post-image {
     height: 290px;
     width: 100%;
     border-radius: 15px;
@@ -376,7 +425,8 @@ svg{
     background-position: center;
     background-repeat: no-repeat;
 }
-.post-actions{
+
+.post-actions {
     display: flex;
     flex: 1;
     align-items: stretch;
@@ -384,46 +434,54 @@ svg{
     color: #657786;
     margin-top: 10px;
 }
-.post-actions > div{
+
+.post-actions>div {
     line-height: 1em;
     padding-left: 10px;
     padding-right: 10px;
     text-align: center;
     display: flex;
 }
-.post-actions .like:hover{
+
+.post-actions .like:hover {
     color: #e0245e;
     transition-duration: .2s;
 }
-.post-actions .comment:hover{
+
+.post-actions .comment:hover {
     color: #1da1f2;
     transition-duration: .2s;
 }
-.post-actions .save:hover{
+
+.post-actions .save:hover {
     color: #42b8c4;
     transition-duration: .2s;
 }
-.post-actions .svg-span{
+
+.post-actions .svg-span {
     padding: 6px;
     max-height: max-content;
     border-radius: 999px;
     line-height: .68em;
 }
-.post-actions .like:hover .svg-span{
+
+.post-actions .like:hover .svg-span {
     color: #e0245e;
     background-color: #f3e3eb;
     box-shadow: 0 0 0 3px #f3e3eb;
     transition-duration: .2s;
     cursor: pointer;
 }
-.post-actions .comment:hover .svg-span{
+
+.post-actions .comment:hover .svg-span {
     color: #1da1f2;
     background-color: #dfeffa;
     box-shadow: 0 0 0 3px #dfeffa;
     transition-duration: .2s;
     cursor: pointer;
 }
-.post-actions .save:hover .svg-span{
+
+.post-actions .save:hover .svg-span {
     color: #42b8c4;
     background-color: #def2eb;
     box-shadow: 0 0 0 3px #def2eb;
@@ -431,49 +489,56 @@ svg{
     cursor: pointer;
 }
 
-.comment-div{
+.comment-div {
     margin: 10px 0px;
     padding-left: 10px;
     max-height: 75vh;
     overflow: hidden;
 }
-.comment-div #spinner{
+
+.comment-div #spinner {
     transform: translate(-50%, 0%);
 }
-.comment-div > div{
+
+.comment-div>div {
     width: 100%;
 }
-.head-comment-input{
+
+.head-comment-input {
     width: 100%;
     display: flex;
 }
 
-@keyframes godown{
-    0%{
+@keyframes godown {
+    0% {
         margin-top: -10px;
         opacity: .7;
     }
-    100%{
+
+    100% {
         margin-top: 10px;
         opacity: 1;
     }
 }
 
-.eachrow{
+.eachrow {
     display: flex;
     margin-top: 10px;
     width: 90%;
 }
-.godown{
+
+.godown {
     animation-name: godown;
     animation-duration: .3s;
     animation-fill-mode: forwards;
 }
-.comment-div .small-profilepic{
+
+.comment-div .small-profilepic {
     width: 2.7vw;
     height: 2.7vw;
 }
-.comment-input-div{
+
+.comment-input-div {
     width: 100%;
     height: 100%;
     border-radius: 17px;
@@ -482,14 +547,17 @@ svg{
     padding: 0px 10px;
     transition-duration: .4s;
 }
-.post:hover .comment-input-div{
+
+.post:hover .comment-input-div {
     /*background-color: white;*/
     transition-duration: .4s;
 }
-.comment-input-div form{
+
+.comment-input-div form {
     height: 100%;
 }
-.comment-input-div input{
+
+.comment-input-div input {
     background: none;
     width: 100%;
     height: 100%;
@@ -497,44 +565,53 @@ svg{
     outline: none;
     font-size: 1.1em;
 }
-.comment-text-div{
-    padding:8px 13px;
+
+.comment-text-div {
+    padding: 8px 13px;
     background-color: #f0f2f5;
     border-radius: 17px;
     cursor: auto;
     display: inline-block;
 }
-.post:hover .comment-text-div{
+
+.post:hover .comment-text-div {
     /*background-color: white;*/
     transition-duration: .4s;
 }
-.comment-text-div a{
+
+.comment-text-div a {
     font-size: .93em;
     font-weight: 630;
 }
-.comment-text-div a:hover{
+
+.comment-text-div a:hover {
     text-decoration: underline;
 }
 
-.pagination-bar{
+.pagination-bar {
     margin-top: 35px;
     margin-bottom: 35px;
 }
-.pagination-bar .page-link{
+
+.pagination-bar .page-link {
     line-height: .9em;
 }
-.page-item.active .page-link{
+
+.page-item.active .page-link {
     color: white !important;
     background-color: #42b8c4;
     border-color: #42b8c4;
 }
-.page-link{
+
+.page-link {
     color: #42b8c4;
 }
-.page-link:hover{
+
+.page-link:hover {
     color: #42b8c4;
 }
-.page-link:focus{
+
+.page-link:focus {
     box-shadow: none !important;
     z-index: 0;
 }
@@ -542,7 +619,7 @@ svg{
 
 
 
-.right-div{
+.right-div {
     width: 28%;
     height: 100vh;
     position: fixed;
@@ -550,10 +627,12 @@ svg{
     border-left: .5px solid #e6ecf0;
     background-color: white;
 }
-.right-div .head{
+
+.right-div .head {
     padding: .9vh 1.5vw;
 }
-.right-div .search-div{
+
+.right-div .search-div {
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -564,7 +643,8 @@ svg{
     padding-right: 10px;
     vertical-align: middle;
 }
-#search-box{
+
+#search-box {
     height: 5.7vh;
     border: none;
     background: none;
@@ -572,123 +652,141 @@ svg{
     width: 100%;
     margin-left: 8px;
 }
-#search-box::placeholder{
+
+#search-box::placeholder {
     color: #6d7e8c;
 }
 
 
-.right-div-content{
+.right-div-content {
     height: 92.5vh;
     overflow: auto;
     padding-left: 1.5vw;
     padding-right: 1.5vw;
 }
-.suggestion-box, .guest-box{
+
+.suggestion-box,
+.guest-box {
     border-radius: 15px;
     overflow: hidden;
     background-color: #f5f8fa;
 }
-.user-details #user-name:hover{
+
+.user-details #user-name:hover {
     text-decoration: underline;
 }
-.suggestion-header{
+
+.suggestion-header {
     padding: 13px 15px;
     line-height: .9em;
     font-weight: 800;
     border-bottom: .5px solid #e6ecf0;
 }
-.suggestion-user{
+
+.suggestion-user {
     display: flex;
     padding: 10px 15px;
     font-size: .9em;
     border-bottom: .5px solid #e6ecf0;
 }
-.suggestion-user:hover{
+
+.suggestion-user:hover {
     background-color: #edf0f4;
     cursor: pointer;
     transition-duration: .2s;
 }
-.suggestion-user  a{
+
+.suggestion-user a {
     color: black;
     text-decoration: none;
 }
-.user-details{
+
+.user-details {
     flex: 1;
     line-height: 1.1em;
     padding: 5px 0px 7px 0px;
 }
-.suggestion-user .btn{
+
+.suggestion-user .btn {
     padding: 0em 1em .09em 1em;
 }
-.suggestion-footer{
+
+.suggestion-footer {
     padding: 13px 15px;
     line-height: .9em;
 }
-.suggestion-footer a{
+
+.suggestion-footer a {
     text-decoration: none;
 }
 
-.guest-header{
+.guest-header {
     padding: 13px 15px 8px 15px;
     line-height: .9em;
     font-weight: bolder;
 }
-.guest-header h5{
+
+.guest-header h5 {
     margin-bottom: 0px;
 }
-.guest-content{
+
+.guest-content {
     padding: 0px 15px 10px 15px;
     font-size: .88em;
 }
-.guest-btn{
+
+.guest-btn {
     padding: 0px 15px 15px 15px;
 }
 
 
 
-.right-div-content::-webkit-scrollbar{
+.right-div-content::-webkit-scrollbar {
     visibility: hidden;
     width: 8px;
     transition-duration: .5s;
     background-color: transparent;
 }
 
-.right-div-content:hover::-webkit-scrollbar, .right-div-content:hover::-webkit-scrollbar-thumb{
+.right-div-content:hover::-webkit-scrollbar,
+.right-div-content:hover::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: grey;
     transition-duration: .5s;
 }
 
 
-.blackout{
+.blackout {
     position: fixed;
     width: 100vw;
     height: 100%;
-    background-color: rgba(0,0,0,.25);
+    background-color: rgba(0, 0, 0, .25);
     display: none;
     z-index: 5499;
 }
 
-@keyframes large_popup{
-    0%{
+@keyframes large_popup {
+    0% {
         transform: scale(.9);
     }
-    100%{
+
+    100% {
         transform: scale(1);
     }
 }
 
-@keyframes small_popup{
-    0%{
+@keyframes small_popup {
+    0% {
         transform: scale(.8);
     }
-    100%{
+
+    100% {
         transform: scale(1);
     }
 }
 
 
-.popup{
+.popup {
     display: none;
     position: fixed;
     width: 100vw;
@@ -696,17 +794,19 @@ svg{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999999;
 }
-.popup .btn{
+
+.popup .btn {
     padding-left: 30px;
     padding-right: 30px;
 }
-.small-popup{
+
+.small-popup {
     display: none;
     position: absolute;
     top: 200px;
     left: 37%;
     width: 23%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background-color: white;
     align-items: center;
     text-align: center;
@@ -717,14 +817,15 @@ svg{
     animation-duration: .2s;
     animation-fill-mode: forwards;
 }
-.large-popup{
+
+.large-popup {
     display: none;
     position: absolute;
     top: 34px;
     left: 25%;
     width: 47.5%;
     max-height: 90vh;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background-color: white;
     padding: 24px 20px 15px 20px;
     overflow: auto;
@@ -733,41 +834,48 @@ svg{
     animation-duration: .2s;
     animation-fill-mode: forwards;
 }
-.large-popup div{
+
+.large-popup div {
     display: flex;
 }
-.large-popup form{
+
+.large-popup form {
     margin-top: 5px;
     width: 100%;
 }
-.large-popup textarea{
+
+.large-popup textarea {
     width: 100%;
     outline: none;
     border: none;
 }
-.large-popup hr{
+
+.large-popup hr {
     margin: 0px;
 }
-.large-popup textarea:focus hr{
+
+.large-popup textarea:focus hr {
     color: #42b8c4;
 }
-.large-popup .form-action-btns{
+
+.large-popup .form-action-btns {
     display: flex;
     justify-content: space-between;
 }
-.large-popup .float-right{
+
+.large-popup .float-right {
     margin-left: 10px;
 }
 
 
-.login-popup{
+.login-popup {
     display: none;
     position: absolute;
     top: 65px;
     left: 25%;
     width: 47.5%;
     max-height: 90vh;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background-color: white;
     padding: 15px 20px 15px 20px;
     overflow: auto;
@@ -776,22 +884,27 @@ svg{
     animation-duration: .2s;
     animation-fill-mode: forwards;
 }
-.login-popup .icon-div{
+
+.login-popup .icon-div {
     margin-top: 40px;
 }
-.login-popup .icon-btn{
+
+.login-popup .icon-btn {
     margin-left: -10px;
     margin-top: -5px;
 }
-.login-popup .main_text-div{
+
+.login-popup .main_text-div {
     margin-top: 55px;
 }
-.login-popup .btn-div{
+
+.login-popup .btn-div {
     margin-top: 65px;
     width: 350px;
     margin-bottom: 35px;
 }
-.login-popup .btn-div button{
+
+.login-popup .btn-div button {
     padding-top: 8px;
     padding-bottom: 8px;
     margin-bottom: 15px;
@@ -806,11 +919,44 @@ svg{
 ::-webkit-scrollbar-track {
     background: none;
 }
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #ccc;
     border-radius: 5px;
+}
+
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating .svg-span {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.rating #ratingField {
+    display: none;
+    margin-left: 10px;
+}
+
+.rating #ratingField input {
+    padding: 5px;
+    width: 60px;
+    font-size: 14px;
+}
+
+.rating #ratingField button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #e0245e;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
