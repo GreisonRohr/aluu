@@ -3,24 +3,6 @@ from django.db import models
 from django.utils import timezone
 
 
-class Rating(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='ratings')
-    rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings_given')
-    value = models.FloatField(default=0)
-    rating_time = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"Post: {self.post} | Rater: {self.rater} | Value: {self.value}"
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "rater": self.rater.serialize(),
-            "value": self.value,
-            "timestamp": self.rating_time.strftime("%b %d %Y, %I:%M %p")
-        }
-
-
 class User(AbstractUser):
     profile_pic = models.ImageField(upload_to='profile_pic/')
     bio = models.TextField(max_length=160, blank=True, null=True)
@@ -38,13 +20,15 @@ class User(AbstractUser):
             "last_name": self.last_name
         }
 
+
 class Post(models.Model):
-    creater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    creater = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='posts')
     date_created = models.DateTimeField(default=timezone.now)
     content_text = models.TextField(max_length=140, blank=True)
     content_image = models.ImageField(upload_to='posts/', blank=True)
-    likers = models.ManyToManyField(User,blank=True , related_name='likes')
-    savers = models.ManyToManyField(User,blank=True , related_name='saved')
+    likers = models.ManyToManyField(User, blank=True, related_name='likes')
+    savers = models.ManyToManyField(User, blank=True, related_name='saved')
     comment_count = models.IntegerField(default=0)
 
     def __str__(self):
@@ -56,9 +40,32 @@ class Post(models.Model):
     def append(self, name, value):
         self.name = value
 
+
+class Rating(models.Model):
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='ratings')
+    rater = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='ratings_given')
+    value = models.FloatField(default=0)
+    rating_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Post: {self.post} | Rater: {self.rater} | Value: {self.value}"
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "rater": self.rater.serialize(),
+            "value": self.value,
+            "timestamp": self.rating_time.strftime("%b %d %Y, %I:%M %p")
+        }
+
+
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commenters')
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='comments')
+    commenter = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='commenters')
     comment_content = models.TextField(max_length=90)
     comment_time = models.DateTimeField(default=timezone.now)
 
@@ -72,11 +79,13 @@ class Comment(models.Model):
             "body": self.comment_content,
             "timestamp": self.comment_time.strftime("%b %d %Y, %I:%M %p")
         }
-    
+
+
 class Follower(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
-    followers = models.ManyToManyField(User, blank=True, related_name='following')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='followers')
+    followers = models.ManyToManyField(
+        User, blank=True, related_name='following')
 
     def __str__(self):
         return f"User: {self.user}"
-        
