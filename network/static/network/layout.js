@@ -435,30 +435,7 @@ function show_comment(element) {
 }
 
 
-function write_rating(element) {
-    let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
-    let rating_value = element.parentElement.querySelector('.rating-input').value;
-    let rating_ratings = element.parentElement.parentElement.querySelector('.rating-ratings');
-    let rating_count = element.parentElement.parentElement.querySelector('.rating-count');
-    if (rating_value.trim().length <= 0) {
-        return false;
-    }
-    fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
-        method: 'POST',
-        body: JSON.stringify({
-            rating_value: rating_value
-        })
-    })
-        .then(response => response.json())
-        .then(rating => {
-            console.log(rating);
-            element.parentElement.querySelector('.rating-input').value = '';
-            rating_count.innerHTML++;
-            display_rating(rating[0], rating_ratings, true);
-            return false;
-        });
-    return false;
-}
+
 
 
 
