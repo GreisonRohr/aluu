@@ -460,33 +460,7 @@ function write_rating(element) {
     return false;
 }
 
-function display_rating(rating, container, new_rating = false) {
-    let eachrow = document.createElement('div');
-    eachrow.className = 'eachrow';
-    eachrow.setAttribute('data-id', rating.id);
-    eachrow.innerHTML = `
-      <div>
-        <a href='/${rating.rater.username}'>
-          <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
-        </a>
-      </div>
-      <div style="flex: 1;">
-        <div class="rating-text-div">
-          <div class="rating-user">
-            <a href="/${rating.rater.username}">
-              ${rating.rater.first_name} ${rating.rater.last_name}
-            </a>
-          </div>
-          ${rating.value}
-        </div>
-      </div>`;
-    if (new_rating) {
-        eachrow.classList.add('godown');
-        container.prepend(eachrow);
-    } else {
-        container.append(eachrow);
-    }
-}
+
 
 
 function write_comment(element) {
