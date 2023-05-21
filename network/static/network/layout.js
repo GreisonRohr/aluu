@@ -434,19 +434,21 @@ function show_comment(element) {
         });
 }
 
+
+
 function showRatingField(element) {
-    var ratingField = document.getElementById("ratingField");
+    var ratingField = element.nextElementSibling;
     ratingField.style.display = "block";
 }
 
 function submitRating(element) {
-    var ratingInput = document.getElementById("ratingInput");
+    var ratingInput = element.previousElementSibling;
     var ratingValue = ratingInput.value;
 
-     // Execute outras ações com o valor da classificação, por exemplo, armazene-o ou atualize a interface do usuário
+    // Execute outras ações com o valor da avaliação, por exemplo, armazene-o ou atualize a interface do usuário
 
-    // Ocultar o campo de classificação após o envio
-    var ratingField = document.getElementById("ratingField");
+    // Ocultar o campo de avaliação após o envio
+    var ratingField = element.parentElement;
     ratingField.style.display = "none";
 }
 
