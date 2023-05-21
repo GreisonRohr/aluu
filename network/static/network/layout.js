@@ -379,10 +379,10 @@ function unfollow_user(element, username, origin) {
     })
         .then(() => {
             if (origin === 'suggestion') {
-                element.parentElement.innerHTML = `<button class="btn btn-outline-success" type="button" onclick="follow_user(this,'${username}','suggestion')">Follow</button>`;
+                element.parentElement.innerHTML = `<button class="btn btn-outline-success" type="button" onclick="follow_user(this,'${username}','suggestion')">Seguir</button>`;
             }
             else if (origin === 'edit_page') {
-                element.parentElement.innerHTML = `<button class="btn btn-outline-success float-right" onclick="follow_user(this,'${username}','edit_page')" id="follow-btn">Follow</button>`;
+                element.parentElement.innerHTML = `<button class="btn btn-outline-success float-right" onclick="follow_user(this,'${username}','edit_page')" id="follow-btn">Seguir</button>`;
             }
             else if (origin === 'dropdown') {
                 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -434,18 +434,13 @@ function show_comment(element) {
         });
 }
 
-function showRatingField(element) {
-    var ratingField = document.getElementById("ratingField");
-    ratingField.style.display = "block";
-}
-
 function submitRating(element) {
     var ratingInput = document.getElementById("ratingInput");
     var ratingValue = ratingInput.value;
 
-    // Perform further actions with the rating value, e.g., store it or update the UI
+    // Execute outras ações com o valor da classificação, por exemplo, armazene-o ou atualize a interface do usuário
 
-    // Hide the rating field after submitting
+    // Ocultar o campo de classificação após o envio
     var ratingField = document.getElementById("ratingField");
     ratingField.style.display = "none";
 }
