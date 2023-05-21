@@ -434,11 +434,16 @@ function show_comment(element) {
         });
 }
 
+function showRatingField(element) {
+    var ratingField = document.getElementById("ratingField");
+    ratingField.style.display = "block";
+}
+
 function submitRating(element) {
     var ratingInput = document.getElementById("ratingInput");
     var ratingValue = ratingInput.value;
 
-    // Execute outras ações com o valor da classificação, por exemplo, armazene-o ou atualize a interface do usuário
+     // Execute outras ações com o valor da classificação, por exemplo, armazene-o ou atualize a interface do usuário
 
     // Ocultar o campo de classificação após o envio
     var ratingField = document.getElementById("ratingField");
