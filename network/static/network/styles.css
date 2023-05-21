@@ -941,18 +941,18 @@ svg {
     margin-right: 5px;
 }
 
-.rating #ratingField {
+.rating {
     display: none;
     margin-left: 10px;
 }
 
-.rating #ratingField input {
+.rating input {
     padding: 5px;
     width: 60px;
     font-size: 14px;
 }
 
-.rating #ratingField button {
+.rating button {
     padding: 5px 10px;
     font-size: 14px;
     background-color: #e0245e;

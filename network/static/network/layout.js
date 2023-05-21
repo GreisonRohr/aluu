@@ -434,6 +434,10 @@ function show_comment(element) {
         });
 }
 
+function showRatingField(element) {
+    let ratingField = element.nextElementSibling;
+    ratingField.style.display = 'block';
+  }
 
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
