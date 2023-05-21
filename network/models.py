@@ -3,6 +3,24 @@ from django.db import models
 from django.utils import timezone
 
 
+class Rating(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='ratings')
+    rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings_given')
+    value = models.FloatField(default=0)
+    rating_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Post: {self.post} | Rater: {self.rater} | Value: {self.value}"
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "rater": self.rater.serialize(),
+            "value": self.value,
+            "timestamp": self.rating_time.strftime("%b %d %Y, %I:%M %p")
+        }
+
+
 class User(AbstractUser):
     profile_pic = models.ImageField(upload_to='profile_pic/')
     bio = models.TextField(max_length=160, blank=True, null=True)
