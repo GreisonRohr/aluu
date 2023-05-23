@@ -197,6 +197,38 @@ def ranking(request):
 
     return render(request, "network/index.html", {'ranking_data': ranking_data})
 
+@login_required
+def write_rating(request, post_id):
+    # Lógica para processar a avaliação
+    user = request.user
+    post = Post.objects.get(id=post_id)
+    if Rating.objects.filter(post=post, user=user).exists():
+        data = {
+            'success': False,
+            'message': 'Você já fez uma avaliação para essa postagem.'
+        }
+        return JsonResponse(data)
+
+    # Processar a avaliação
+    rating_value = request.POST.get('rating_value')
+    rating = Rating.objects.create(post=post, user=user, value=rating_value)
+
+    # Atualizar a média de avaliação da postagem
+    average_rating = Rating.objects.filter(post=post).aggregate(Avg('value'))['value__avg']
+    post.average_rating = average_rating
+    post.save()
+
+    # Exemplo de retorno como JSON
+    data = {
+        'success': True,
+        'message': 'Avaliação registrada com sucesso.'
+    }
+    return JsonResponse(data)
+
+
+
+
+    
 
 @login_required
 def create_post(request):
