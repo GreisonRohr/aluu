@@ -479,14 +479,19 @@ function submitRating(element) {
         })
     })
         .then(response => response.json())
-        .then(rating => {
-            console.log(rating);
-            ratingInput.value = '';
-            ratingAverage.textContent = rating.average.toFixed(1);
-            ratingCount.textContent = rating.count;
-            displayRating(rating, ratingRatings, true);
-            userHasRated = true;
-            return false;
+        .then(data => {
+            if (data.success) {
+                ratingInput.value = '';
+                ratingAverage.textContent = data.average_rating.toFixed(1);
+                userHasRated = true;
+                alert(data.message);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Ocorreu um erro ao processar a avaliação.");
         });
 
     return false;
@@ -523,46 +528,53 @@ function displayRating(rating, container, newRating = false) {
 
 
 
-
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
-    let rating_value = element.parentElement.querySelector('.rating-input').value;
-    let rating_ratings = element.parentElement.parentElement.querySelector('.rating-ratings');
-    let rating_count = element.parentElement.parentElement.querySelector('.rating-count');
+    let ratingInput = element.parentElement.querySelector('input[type="number"]');
+    let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
 
-    // Verificar se o usuário está autenticado
     if (!isUserAuthenticated) {
         alert("Você precisa estar logado para realizar uma avaliação.");
         return false;
     }
-    // Verificar se o usuário já fez uma avaliação
     if (userHasRated) {
         alert("Você já fez uma avaliação nesta postagem.");
         return false;
     }
 
-    if (rating_value.trim().length <= 0) {
+    let ratingValue = parseFloat(ratingInput.value);
+    if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
+        alert("Por favor, insira uma nota válida entre 0 e 10.");
         return false;
     }
 
     fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
         method: 'POST',
         body: JSON.stringify({
-            rating_value: rating_value
+            rating_value: ratingValue
         })
     })
         .then(response => response.json())
-        .then(rating => {
-            console.log(rating);
-            element.parentElement.querySelector('.rating-input').value = '';
-            rating_count.innerHTML++;
-            display_rating(rating[0], rating_ratings, true);
-            // Atualizar a variável de controle para indicar que o usuário já fez uma avaliação
-            userHasRated = true;
-            return false;
+        .then(data => {
+            if (data.success) {
+                ratingInput.value = '';
+                ratingAverage.textContent = data.average_rating.toFixed(1);
+                userHasRated = true;
+                alert(data.message);
+                // Exiba a avaliação na página, se necessário
+                displayRating(data.rating, rating_ratings, true);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Ocorreu um erro ao processar a avaliação.");
         });
+
     return false;
 }
+
 
 
 
