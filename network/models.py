@@ -21,18 +21,34 @@ class User(AbstractUser):
         }
 
 
+class Rating(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='ratings')
+    rater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings_given')
+    value = models.DecimalField(max_digits=3, decimal_places=1)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = [['post', 'rater']]  # To ensure each user can rate a post only once
+
+    def __str__(self):
+        return f"Post: {self.post} | Rater: {self.rater} | Value: {self.value}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.post.update_rating_average()
+
 class Post(models.Model):
-    creater = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='posts')
+    creater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     date_created = models.DateTimeField(default=timezone.now)
     content_text = models.TextField(max_length=140, blank=True)
     content_image = models.ImageField(upload_to='posts/', blank=True)
     likers = models.ManyToManyField(User, blank=True, related_name='likes')
     savers = models.ManyToManyField(User, blank=True, related_name='saved')
     comment_count = models.IntegerField(default=0)
+    rating_average = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
 
     def __str__(self):
-        return f"Post ID: {self.id} (creater: {self.creater})"
+        return f"Post ID: {self.id} (Creator: {self.creater})"
 
     def img_url(self):
         return self.content_image.url
@@ -40,25 +56,12 @@ class Post(models.Model):
     def append(self, name, value):
         self.name = value
 
+    def update_rating_average(self):
+        average = self.ratings.aggregate(avg_rating=Avg('value'))['avg_rating']
+        self.rating_average = average
+        self.save()
 
-class Rating(models.Model):
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name='ratings')
-    rater = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='ratings_given')
-    value = models.FloatField(default=0)
-    rating_time = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return f"Post: {self.post} | Rater: {self.rater} | Value: {self.value}"
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "rater": self.rater.serialize(),
-            "value": self.value,
-            "timestamp": self.rating_time.strftime("%b %d %Y, %I:%M %p")
-        }
 
 
 class Comment(models.Model):
