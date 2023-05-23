@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -20,7 +21,8 @@ class User(AbstractUser):
             "last_name": self.last_name
         }
 
-    class Post(models.Model):
+
+class Post(models.Model):
     creater = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
     date_created = models.DateTimeField(default=timezone.now)
@@ -29,42 +31,15 @@ class User(AbstractUser):
     likers = models.ManyToManyField(User, blank=True, related_name='likes')
     savers = models.ManyToManyField(User, blank=True, related_name='saved')
     comment_count = models.IntegerField(default=0)
-    rating_average = models.DecimalField(
-        max_digits=3, decimal_places=1, null=True, blank=True)
 
     def __str__(self):
-        return f"Post ID: {self.id} (Creator: {self.creater})"
+        return f"Post ID: {self.id} (creater: {self.creater})"
 
     def img_url(self):
         return self.content_image.url
 
     def append(self, name, value):
         self.name = value
-
-    def update_rating_average(self):
-        average = self.ratings.aggregate(avg_rating=Avg('value'))['avg_rating']
-        self.rating_average = average
-        self.save()
-
-
-class Rating(models.Model):
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name='ratings')
-    rater = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='ratings_given')
-    value = models.DecimalField(max_digits=3, decimal_places=1)
-    created_at = models.DateTimeField(default=timezone.now)
-
-    class Meta:
-        # To ensure each user can rate a post only once
-        unique_together = [['post', 'rater']]
-
-    def __str__(self):
-        return f"Post: {self.post} | Rater: {self.rater} | Value: {self.value}"
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.post.update_rating_average()
 
 
 class Comment(models.Model):
@@ -95,3 +70,17 @@ class Follower(models.Model):
 
     def __str__(self):
         return f"User: {self.user}"
+
+
+class Rating(models.Model):
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='ratings')
+    rater = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='ratings')
+    value = models.IntegerField()
+
+    class Meta:
+        unique_together = ('post', 'rater')
+
+    def __str__(self):
+        return f"Rating ID: {self.id} (rater: {self.rater}, post: {self.post})"
