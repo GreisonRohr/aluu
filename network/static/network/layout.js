@@ -210,7 +210,15 @@ function login_popup(action) {
         </svg>`;
         document.querySelector('.main_text-div').querySelector('h2').innerText = 'Siga pessoas que te inspiram';
     }
+    else if (action === 'rate') {
+        document.querySelector('.icon-div').innerHTML = `
+        <svg width="2.5em" height="2.5em" viewBox="0 0 24 24" fill="#fbbc05" class="r-1re7ezh r-4qtqp9 r-yyyyoo r-1q142lx r-1xvli5t r-19einr3 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr">
+            <g><path d="M12 2.05l3.24 6.88 7.64.92-5.54 5.39 1.3 7.62-6.79-3.58-6.79 3.58 1.29-7.62-5.54-5.39 7.64-.92z"></path></g>
+        </svg>`;
+        document.querySelector('.main_text-div').querySelector('h2').innerText = 'Avalie essa postagem';
+    }
 }
+
 
 
 function previewFile() {
@@ -435,6 +443,11 @@ function show_comment(element) {
 }
 
 function showRatingField(element) {
+
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
+        login_popup('rate');
+        return false;
+    }
     let ratingField = element.nextElementSibling;
     ratingField.style.display = 'block';
 }
