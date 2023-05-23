@@ -439,62 +439,75 @@ function showRatingField(element) {
     ratingField.style.display = 'block';
 }
 
-function write_rating(element) {
-    let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
-    let rating_value = element.parentElement.querySelector('.rating-input').value;
-    let rating_ratings = element.parentElement.parentElement.querySelector('.rating-ratings');
-    let rating_count = element.parentElement.parentElement.querySelector('.rating-count');
-    if (rating_value.trim().length <= 0) {
+function submitRating(element) {
+    let post_id = element.parentElement.id.split('_')[1];
+    let ratingInput = element.parentElement.querySelector('input[type="number"]');
+    let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
+
+    if (!isUserAuthenticated) {
+        alert("Você precisa estar logado para realizar uma avaliação.");
         return false;
     }
+    if (userHasRated) {
+        alert("Você já fez uma avaliação nesta postagem.");
+        return false;
+    }
+
+    let ratingValue = parseFloat(ratingInput.value);
+    if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
+        alert("Por favor, insira uma nota válida entre 0 e 10.");
+        return false;
+    }
+
     fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
         method: 'POST',
         body: JSON.stringify({
-            rating_value: rating_value
+            rating_value: ratingValue
         })
     })
         .then(response => response.json())
         .then(rating => {
             console.log(rating);
-            element.parentElement.querySelector('.rating-input').value = '';
-            rating_count.innerHTML++;
-            display_rating(rating[0], rating_ratings, true);
+            ratingInput.value = '';
+            ratingAverage.textContent = rating.average.toFixed(1);
+            ratingCount.textContent = rating.count;
+            displayRating(rating, ratingRatings, true);
+            userHasRated = true;
             return false;
         });
+
     return false;
 }
 
-function display_rating(rating, container, new_rating = false) {
-    let eachrow = document.createElement('div');
-    eachrow.className = 'eachrow';
-    eachrow.setAttribute('data-id', rating.id);
-    eachrow.innerHTML = `
-      <div>
-        <a href='/${rating.rater.username}'>
-          <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
-        </a>
-      </div>
-      <div style="flex: 1;">
-        <div class="rating-text-div">
-          <div class="rating-user">
-            <a href="/${rating.rater.username}">
-              ${rating.rater.first_name} ${rating.rater.last_name}
+function displayRating(rating, container, newRating = false) {
+    let eachRow = document.createElement('div');
+    eachRow.className = 'eachrow';
+    eachRow.setAttribute('data-id', rating.id);
+    eachRow.innerHTML = `
+        <div>
+            <a href='/${rating.rater.username}'>
+                <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
             </a>
-          </div>
-          ${rating.value}
         </div>
-      </div>
-      <div class="rating-average">
-        Média: ${rating.average.toFixed(1)}
-      </div>
-    `;
-    if (new_rating) {
-        eachrow.classList.add('godown');
-        container.prepend(eachrow);
+        <div style="flex: 1;">
+            <div class="rating-text-div">
+                <div class="rating-user">
+                    <a href="/${rating.rater.username}">
+                        ${rating.rater.first_name} ${rating.rater.last_name}
+                    </a>
+                </div>
+                ${rating.value}
+            </div>
+        </div>`;
+
+    if (newRating) {
+        eachRow.classList.add('godown');
+        container.prepend(eachRow);
     } else {
-        container.append(eachrow);
+        container.append(eachRow);
     }
 }
+
 
 
 
@@ -537,6 +550,7 @@ function write_rating(element) {
         });
     return false;
 }
+
 
 
 function display_comment(comment, container, new_comment = false) {
