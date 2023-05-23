@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
+from django.shortcuts import redirect
 
 from django.db.models import Avg
 import json
@@ -199,6 +200,10 @@ def ranking(request):
 
     return render(request, "network/index.html", {'ranking_data': ranking_data})
 
+
+from django.shortcuts import redirect
+from django.db.models import Avg
+
 @login_required
 def write_rating(request, post_id):
     # Lógica para processar a avaliação
@@ -228,9 +233,6 @@ def write_rating(request, post_id):
     return JsonResponse(data)
 
 
-
-
-    
 
 @login_required
 def create_post(request):
