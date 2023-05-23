@@ -960,3 +960,9 @@ svg {
     border: none;
     cursor: pointer;
 }
+
+.rating-average {
+    font-size: 14px;
+    color: #999999;
+    margin-top: 5px;
+}

@@ -437,7 +437,7 @@ function show_comment(element) {
 function showRatingField(element) {
     let ratingField = element.nextElementSibling;
     ratingField.style.display = 'block';
-  }
+}
 
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
@@ -483,7 +483,11 @@ function display_rating(rating, container, new_rating = false) {
           </div>
           ${rating.value}
         </div>
-      </div>`;
+      </div>
+      <div class="rating-average">
+        Média: ${rating.average.toFixed(1)}
+      </div>
+    `;
     if (new_rating) {
         eachrow.classList.add('godown');
         container.prepend(eachrow);
@@ -491,6 +495,7 @@ function display_rating(rating, container, new_rating = false) {
         container.append(eachrow);
     }
 }
+
 
 
 function write_comment(element) {
