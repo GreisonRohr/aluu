@@ -205,32 +205,53 @@ def ranking(request):
 
 @login_required
 def write_rating(request, post_id):
-    # Lógica para processar a avaliação
     user = request.user
     post = get_object_or_404(Post, id=post_id)
 
-    # Verifica se o usuário já fez uma avaliação para essa postagem
     if Rating.objects.filter(post=post, user=user).exists():
         data = {
             'success': False,
-            'message': 'Você já fez uma avaliação para essa postagem.'
+            'message': 'Você já fez uma avaliação para essa postagem.',
         }
         return JsonResponse(data)
 
-    # Processar a avaliação
     rating_value = request.POST.get('rating_value')
+    try:
+        rating_value = float(rating_value)
+    except (TypeError, ValueError):
+        data = {
+            'success': False,
+            'message': 'Valor de avaliação inválido.',
+        }
+        return JsonResponse(data)
+
+    if rating_value < 0 or rating_value > 10:
+        data = {
+            'success': False,
+            'message': 'Avaliação fora do intervalo permitido (0-10).',
+        }
+        return JsonResponse(data)
+
     rating = Rating.objects.create(post=post, user=user, value=rating_value)
 
-    # Atualizar a média de avaliação da postagem
     average_rating = Rating.objects.filter(post=post).aggregate(Avg('value'))['value__avg']
     post.average_rating = average_rating
     post.save()
 
-    # Exemplo de retorno como JSON
     data = {
         'success': True,
         'message': 'Avaliação registrada com sucesso.',
-        'average_rating': average_rating  # Adiciona a média atualizada na resposta
+        'average_rating': average_rating,
+        'rating': {
+            'id': rating.id,
+            'rater': {
+                'username': rating.user.username,
+                'profile_pic': rating.user.profile_pic,
+                'first_name': rating.user.first_name,
+                'last_name': rating.user.last_name,
+            },
+            'value': rating.value,
+        }
     }
     return JsonResponse(data)
 
