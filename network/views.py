@@ -201,14 +201,13 @@ def ranking(request):
     return render(request, "network/index.html", {'ranking_data': ranking_data})
 
 
-from django.shortcuts import redirect
-from django.db.models import Avg
-
 @login_required
 def write_rating(request, post_id):
     # Lógica para processar a avaliação
     user = request.user
-    post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, id=post_id)
+
+    # Verifica se o usuário já fez uma avaliação para essa postagem
     if Rating.objects.filter(post=post, user=user).exists():
         data = {
             'success': False,
@@ -221,7 +220,8 @@ def write_rating(request, post_id):
     rating = Rating.objects.create(post=post, user=user, value=rating_value)
 
     # Atualizar a média de avaliação da postagem
-    average_rating = Rating.objects.filter(post=post).aggregate(Avg('value'))['value__avg']
+    average_rating = Rating.objects.filter(
+        post=post).aggregate(Avg('value'))['value__avg']
     post.average_rating = average_rating
     post.save()
 
@@ -231,7 +231,6 @@ def write_rating(request, post_id):
         'message': 'Avaliação registrada com sucesso.'
     }
     return JsonResponse(data)
-
 
 
 @login_required
