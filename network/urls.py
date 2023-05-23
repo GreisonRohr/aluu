@@ -26,6 +26,9 @@ urlpatterns = [
     path("n/post/<int:post_id>/delete", views.delete_post, name="deletepost"),
     path("<str:username>/follow", views.follow, name="followuser"),
     path("<str:username>/unfollow", views.unfollow, name="unfollowuser"),
-    path("n/post/<int:post_id>/edit", views.edit_post, name="editpost")
+    path("n/post/<int:post_id>/edit", views.edit_post, name="editpost"),
+    path("n/post/<int:post_id>/write_rating",
+         views.write_rating, name="writerating")
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
