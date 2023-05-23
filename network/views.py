@@ -230,10 +230,9 @@ def write_rating(request, post_id):
     data = {
         'success': True,
         'message': 'Avaliação registrada com sucesso.',
-        'average_rating': average_rating
+        'average_rating': average_rating  # Adiciona a média atualizada na resposta
     }
     return JsonResponse(data)
-
 
 @login_required
 def create_post(request):
