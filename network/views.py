@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
+from .models import Post, Rating
+
 
 from django.db.models import Avg
 import json
@@ -201,7 +203,6 @@ def ranking(request):
 
     return render(request, "network/index.html", {'ranking_data': ranking_data})
 
-
 @login_required
 def write_rating(request, post_id):
     # Lógica para processar a avaliação
@@ -221,15 +222,15 @@ def write_rating(request, post_id):
     rating = Rating.objects.create(post=post, user=user, value=rating_value)
 
     # Atualizar a média de avaliação da postagem
-    average_rating = Rating.objects.filter(
-        post=post).aggregate(Avg('value'))['value__avg']
+    average_rating = Rating.objects.filter(post=post).aggregate(Avg('value'))['value__avg']
     post.average_rating = average_rating
     post.save()
 
     # Exemplo de retorno como JSON
     data = {
         'success': True,
-        'message': 'Avaliação registrada com sucesso.'
+        'message': 'Avaliação registrada com sucesso.',
+        'average_rating': average_rating
     }
     return JsonResponse(data)
 
