@@ -498,30 +498,46 @@ function display_rating(rating, container, new_rating = false) {
 
 
 
-function write_comment(element) {
-    let post_id = element.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.post_id;
-    let comment_text = element.querySelector('.comment-input').value;
-    let comment_comments = element.parentElement.parentElement.parentElement.parentElement.querySelector('.comment-comments');
-    let comment_count = comment_comments.parentElement.parentElement.parentElement.querySelector('.cmt-count');
-    if (comment_text.trim().length <= 0) {
+function write_rating(element) {
+    let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
+    let rating_value = element.parentElement.querySelector('.rating-input').value;
+    let rating_ratings = element.parentElement.parentElement.querySelector('.rating-ratings');
+    let rating_count = element.parentElement.parentElement.querySelector('.rating-count');
+
+    // Verificar se o usuário está autenticado
+    if (!isUserAuthenticated) {
+        alert("Você precisa estar logado para realizar uma avaliação.");
         return false;
     }
-    fetch('/n/post/' + parseInt(post_id) + '/write_comment', {
+    // Verificar se o usuário já fez uma avaliação
+    if (userHasRated) {
+        alert("Você já fez uma avaliação nesta postagem.");
+        return false;
+    }
+
+    if (rating_value.trim().length <= 0) {
+        return false;
+    }
+
+    fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
         method: 'POST',
         body: JSON.stringify({
-            comment_text: comment_text
+            rating_value: rating_value
         })
     })
         .then(response => response.json())
-        .then(comment => {
-            console.log(comment);
-            element.querySelector('input').value = '';
-            comment_count.innerHTML++;
-            display_comment(comment[0], comment_comments, true);
+        .then(rating => {
+            console.log(rating);
+            element.parentElement.querySelector('.rating-input').value = '';
+            rating_count.innerHTML++;
+            display_rating(rating[0], rating_ratings, true);
+            // Atualizar a variável de controle para indicar que o usuário já fez uma avaliação
+            userHasRated = true;
             return false;
         });
     return false;
 }
+
 
 function display_comment(comment, container, new_comment = false) {
     let writer = document.querySelector('#user_is_authenticated').dataset.username;
