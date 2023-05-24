@@ -137,7 +137,7 @@
                                                 </div>
                                                 <div id="ratingField_{{ post.id }}" style="display: none;">
                                                     <input type="number" id="ratingInput_{{ post.id }}" placeholder="0-10" min="0" max="10" step="0.1">
-                                                    <button onclick="submitRating(this)">Avaliar</button>
+                                                    <button onclick="submitRating(this); location.reload();">Avaliar</button>
                                                 </div>
                                                 <div class="rating-average">
                                                     Nota: <span class="average-value">{{ post.average_rating }}</span>
