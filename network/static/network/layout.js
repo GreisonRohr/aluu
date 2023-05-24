@@ -443,13 +443,18 @@ function show_comment(element) {
 }
 
 function showRatingField(element) {
-
     if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('rate');
         return false;
     }
+    
     let ratingField = element.nextElementSibling;
-    ratingField.style.display = 'block';
+    
+    if (ratingField.style.display === 'block') {
+        ratingField.style.display = 'none';
+    } else {
+        ratingField.style.display = 'block';
+    }
 }
 function submitRating(element) {
     let post_id = element.parentElement.id.split('_')[1];
