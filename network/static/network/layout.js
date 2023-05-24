@@ -525,7 +525,7 @@ function displayRating(rating, container, newRating = false) {
         container.append(eachRow);
     }
 }
-
+/*
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
     let ratingInput = element.parentElement.querySelector('input[type="number"]');
@@ -576,7 +576,7 @@ function write_rating(element) {
 
     return false;
 }
-
+*/
 
 
 
