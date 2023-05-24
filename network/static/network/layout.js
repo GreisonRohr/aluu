@@ -496,6 +496,18 @@ function submitRating(element) {
 
     return false;
 }
+
+
+
+// Obtém todos os botões "Avaliar" pelo seletor de classe
+const ratingButtons = document.querySelectorAll('.rating-button');
+
+// Itera sobre os botões e adiciona o ouvinte de evento de clique a cada um
+ratingButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        submitRating(button);
+    });
+});
 /*
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
