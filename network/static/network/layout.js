@@ -485,6 +485,8 @@ function submitRating(element) {
                 ratingAverage.textContent = data.average_rating.toFixed(1);
                 userHasRated = true;
                 alert(data.message);
+                // Ocultar o campo de avaliação após a avaliação ser enviada
+                element.parentElement.style.display = 'none';
             } else {
                 alert(data.message);
             }
@@ -496,6 +498,7 @@ function submitRating(element) {
 
     return false;
 }
+
 
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
