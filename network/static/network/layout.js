@@ -451,7 +451,6 @@ function showRatingField(element) {
     let ratingField = element.nextElementSibling;
     ratingField.style.display = 'block';
 }
-
 function submitRating(element) {
     let post_id = element.parentElement.id.split('_')[1];
     let ratingInput = element.parentElement.querySelector('input[type="number"]');
@@ -485,8 +484,7 @@ function submitRating(element) {
                 ratingAverage.textContent = data.average_rating.toFixed(1);
                 userHasRated = true;
                 alert(data.message);
-                // Ocultar o campo de avaliação após a avaliação ser enviada
-                element.parentElement.style.display = 'none';
+                location.reload();
             } else {
                 alert(data.message);
             }
@@ -498,8 +496,7 @@ function submitRating(element) {
 
     return false;
 }
-
-
+/*
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
     eachRow.className = 'eachrow';
@@ -528,7 +525,7 @@ function displayRating(rating, container, newRating = false) {
         container.append(eachRow);
     }
 }
-/*
+
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
     let ratingInput = element.parentElement.querySelector('input[type="number"]');
