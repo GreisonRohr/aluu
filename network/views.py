@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-
+from django.db.models import Sum
 from django.db.models import Avg
 import json
 
