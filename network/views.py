@@ -17,6 +17,7 @@ from .models import *
 
 
 def index(request):
+    
     all_posts = Post.objects.all().order_by('-date_created')
     paginator = Paginator(all_posts, 10)
     page_number = request.GET.get('page')
