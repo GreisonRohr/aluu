@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
-
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 from django.db.models import Avg
 import json
@@ -399,3 +400,51 @@ def delete_post(request, post_id):
             return HttpResponse("Method must be 'PUT'")
     else:
         return HttpResponseRedirect(reverse('login'))
+
+
+def calculate_average_rating(post_id):
+    post = Post.objects.get(id=post_id)
+    ratings = Rating.objects.filter(post=post)
+    rating_count = ratings.count()
+    rating_sum = ratings.aggregate(Sum('rating_value'))['rating_value__sum'] or 0
+
+    if rating_count > 0:
+        average_rating = rating_sum / rating_count
+    else:
+        average_rating = 0
+
+    post.average_rating = average_rating
+    post.save()
+
+    return average_rating
+
+
+@require_POST
+def write_rating(request, post_id):
+    # Verificar se o usuário está autenticado
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'message': 'Você precisa estar logado para realizar uma avaliação.'})
+
+    # Verificar se o usuário já fez uma avaliação
+    if Rating.objects.filter(user=request.user, post_id=post_id).exists():
+        return JsonResponse({'success': False, 'message': 'Você já fez uma avaliação nesta postagem.'})
+
+    rating_value = request.POST.get('rating_value')
+
+    if not rating_value:
+        return JsonResponse({'success': False, 'message': 'Valor de avaliação inválido.'})
+
+    try:
+        rating_value = float(rating_value)
+        if rating_value < 0 or rating_value > 10:
+            raise ValueError()
+    except ValueError:
+        return JsonResponse({'success': False, 'message': 'Por favor, insira uma nota válida entre 0 e 10.'})
+
+    # Salvar a avaliação no banco de dados ou fazer qualquer outra operação desejada
+
+    # Atualizar a média de avaliação para o post
+    average_rating = calculate_average_rating(post_id)
+
+    # Retornar uma resposta de sucesso com os dados atualizados
+    return JsonResponse({'success': True, 'message': 'Avaliação registrada com sucesso.', 'average_rating': average_rating})
