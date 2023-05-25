@@ -381,6 +381,8 @@ def comment(request, post_id):
         return JsonResponse([comment.serialize() for comment in comments], safe=False)
     else:
         return HttpResponseRedirect(reverse('login'))
+    
+    
 
 
 @csrf_exempt
