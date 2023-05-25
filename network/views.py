@@ -93,7 +93,7 @@ def register(request):
             if profile is not None:
                 user.profile_pic = profile
             else:
-                user.profile_pic = "/network/media/profile_pic/no_pic.png"
+                user.profile_pic = "/network/media/no_pic.png"
             user.cover = cover
             user.save()
             Follower.objects.create(user=user)
@@ -381,8 +381,6 @@ def comment(request, post_id):
         return JsonResponse([comment.serialize() for comment in comments], safe=False)
     else:
         return HttpResponseRedirect(reverse('login'))
-    
-    
 
 
 @csrf_exempt
