@@ -53,7 +53,7 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "network/login.html", {
-                "message": "Invalid username and/or password."
+                "message": "Nome de usuário e/ou senha inválidos."
             })
     else:
         return render(request, "network/login.html")
@@ -82,7 +82,7 @@ def register(request):
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(request, "network/register.html", {
-                "message": "Passwords must match."
+                "message": "As senhas devem corresponder."
             })
 
         # Attempt to create new user
@@ -93,13 +93,13 @@ def register(request):
             if profile is not None:
                 user.profile_pic = profile
             else:
-                user.profile_pic = "profile_pic/sem_foto.png"
+                user.profile_pic = "profile_pic/sem_foto.jpg"
             user.cover = cover
             user.save()
             Follower.objects.create(user=user)
         except IntegrityError:
             return render(request, "network/register.html", {
-                "message": "Username already taken."
+                "message": "Nome de usuário já utilizado."
             })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
