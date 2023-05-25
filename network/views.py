@@ -93,7 +93,7 @@ def register(request):
             if profile is not None:
                 user.profile_pic = profile
             else:
-                user.profile_pic = "no_pic.png"
+                user.profile_pic = "sem_foto.jpg"
             user.cover = cover
             user.save()
             Follower.objects.create(user=user)
