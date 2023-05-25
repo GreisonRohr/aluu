@@ -26,7 +26,7 @@
             <div class="large-popup">
                 <div>
                     <div>
-                        <div class="small-profilepic" style="background-image: url(/media/{{user.profile_pic}});"></div>
+                        <div class="small-profilepic" style="background-image: url(/network/media/{{user.profile_pic}});"></div>
                     </div>
                     <div class="form-area">
                         <form action="{% url 'createpost' %}" method="POST" class="newpost" enctype="multipart/form-data">
@@ -189,7 +189,7 @@
                             <li class="nav-item sidenav-user">
                                 <a href="{% url 'profile' user.username %}" class="nav-link">
                                     <div class="user_account">
-                                        <div class="small-profilepic" style="float: left; background-image: url(/media/{{user.profile_pic}})"></div>
+                                        <div class="small-profilepic" style="float: left; background-image: url(/network/media{{user.profile_pic}})"></div>
                                         <div style="height: 2.7vw; margin: auto;">
                                             <div style="margin-top: 4px;"><strong>{{user.first_name}} {{user.last_name}}</strong></div>
                                             <div class="grey" style="margin-top: 4px;">@{{ user.username }}</div>
@@ -235,7 +235,7 @@
                                 <div class="suggestion-user">
                                     <div>
                                         <a href="{% url 'profile' suggestion.username %}">
-                                            <div class="small-profilepic" style="background-image: url(/media/{{suggestion.profile_pic}})"></div>
+                                            <div class="small-profilepic" style="background-image: url(/network/media{{suggestion.profile_pic}})"></div>
                                         </a>
                                     </div>
                                     <div class="user-details">
