@@ -28,7 +28,7 @@
                                 <div>
                                     <div>
                                         <a href="{% url 'profile' post.creater.username %}">
-                                            <div class="small-profilepic" style="background-image: url(network/media/profile_pic{{post.creater.profile_pic}})"></div>
+                                            <div class="small-profilepic" style="background-image: url({{post.creater.profile_pic}})"></div>
                                         </a>
                                     </div>
                                     <div style="flex: 1">
@@ -158,7 +158,7 @@
                                             <div class="head-comment-input">
                                                 <div>
                                                     <a href="{% url 'profile' user.username %}">
-                                                        <div class="small-profilepic" style="background-image: url(network/media/profile_pic{{user.profile_pic}})"></div>
+                                                        <div class="small-profilepic" style="background-image: url({{user.profile_pic}})"></div>
                                                     </a>
                                                 </div>
                                                 <div style="flex: 1;">
