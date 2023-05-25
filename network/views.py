@@ -17,7 +17,7 @@ from .models import *
 
 
 def index(request):
-    
+
     all_posts = Post.objects.all().order_by('-date_created')
     paginator = Paginator(all_posts, 10)
     page_number = request.GET.get('page')
@@ -187,7 +187,6 @@ def saved(request):
         })
     else:
         return HttpResponseRedirect(reverse('login'))
-
 
 
 @login_required
@@ -407,7 +406,8 @@ def calculate_average_rating(post_id):
     post = Post.objects.get(id=post_id)
     ratings = Rating.objects.filter(post=post)
     rating_count = ratings.count()
-    rating_sum = ratings.aggregate(Sum('rating_value'))['rating_value__sum'] or 0
+    rating_sum = ratings.aggregate(Sum('rating_value'))[
+        'rating_value__sum'] or 0
 
     if rating_count > 0:
         average_rating = rating_sum / rating_count
@@ -420,7 +420,7 @@ def calculate_average_rating(post_id):
     return average_rating
 
 
-@require_POST
+@csrf_exempt
 def write_rating(request, post_id):
     # Verificar se o usuário está autenticado
     if not request.user.is_authenticated:
@@ -442,7 +442,9 @@ def write_rating(request, post_id):
     except ValueError:
         return JsonResponse({'success': False, 'message': 'Por favor, insira uma nota válida entre 0 e 10.'})
 
-    # Salvar a avaliação no banco de dados ou fazer qualquer outra operação desejada
+    # Salvar a avaliação no banco de dados
+    rating = Rating.objects.create(
+        user=request.user, post_id=post_id, rating_value=rating_value)
 
     # Atualizar a média de avaliação para o post
     average_rating = calculate_average_rating(post_id)
