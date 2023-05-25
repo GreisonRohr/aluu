@@ -442,15 +442,25 @@ function show_comment(element) {
         });
 }
 
+function showRatingField(element) {
 
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
+        login_popup('rate');
+        return false;
+    }
+    let ratingField = element.nextElementSibling;
+    ratingField.style.display = 'block';
+}
 function submitRating(element) {
-    let post_id = element.getAttribute('data-post_id');
-    let ratingInput = document.getElementById('ratingInput_' + post_id);
-    let ratingField = document.getElementById('ratingField_' + post_id);
-    let ratingAverage = ratingField.parentElement.querySelector('.rating-average .average-value');
-    let userRated = ratingField.getAttribute('data-user_rated') === 'true';
+    let post_id = element.parentElement.id.split('_')[1];
+    let ratingInput = element.parentElement.querySelector('input[type="number"]');
+    let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
 
-    if (userRated) {
+    if (!isUserAuthenticated) {
+        alert("Você precisa estar logado para realizar uma avaliação.");
+        return false;
+    }
+    if (userHasRated) {
         alert("Você já fez uma avaliação nesta postagem.");
         return false;
     }
@@ -460,38 +470,33 @@ function submitRating(element) {
         alert("Por favor, insira uma nota válida entre 0 e 10.");
         return false;
     }
-    // Atualizar o estado de avaliação do usuário
-    ratingField.setAttribute('data-user_rated', 'true');
 
-    // Atualizar a média de avaliação para o post
-    let averageRating = calculateAverageRating(post_id);
-    ratingAverage.textContent = averageRating.toFixed(1);
+    fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
+        method: 'POST',
+        body: JSON.stringify({
+            rating_value: ratingValue
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                ratingInput.value = '';
+                ratingAverage.textContent = data.average_rating.toFixed(1);
+                userHasRated = true;
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Ocorreu um erro ao processar a avaliação.");
+        });
 
-    alert("Avaliação registrada com sucesso.");
+    return false;
 }
 
-function showRatingField(element) {
-    let ratingField = element.nextElementSibling;
-    let userRated = ratingField.getAttribute('data-user_rated') === 'true';
-
-    if (userRated) {
-        ratingField.style.display = 'none';
-    } else {
-        ratingField.style.display = 'block';
-    }
-}
-
-
-// Obtém todos os botões "Avaliar" pelo seletor de classe
-const ratingButtons = document.querySelectorAll('.rating-button');
-
-// Itera sobre os botões e adiciona o ouvinte de evento de clique a cada um
-ratingButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        submitRating(button);
-    });
-});
-/*
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
     eachRow.className = 'eachrow';
@@ -571,7 +576,6 @@ function write_rating(element) {
 
     return false;
 }
-*/
 
 
 
