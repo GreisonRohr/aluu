@@ -577,9 +577,32 @@ function write_rating(element) {
     return false;
 }
 
+function write_comment(element) {
+    let post_id = element.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.post_id;
+    let comment_text = element.querySelector('.comment-input').value;
+    let comment_comments = element.parentElement.parentElement.parentElement.parentElement.querySelector('.comment-comments');
+    let comment_count = comment_comments.parentElement.parentElement.parentElement.querySelector('.cmt-count');
+    if(comment_text.trim().length <= 0) {
+        return false;
+    }
+    fetch('/n/post/'+parseInt(post_id)+'/write_comment',{
+        method: 'POST',
+        body: JSON.stringify({
+            comment_text: comment_text
+        })
+    })
+    .then(response => response.json())
+    .then(comment => {
+        console.log(comment);
+        element.querySelector('input').value = '';
+        comment_count.innerHTML++;
+        display_comment(comment[0],comment_comments,true);
+        return false;
+    });
+    return false;
+}
 
-
-function display_comment(comment, container, new_comment = false) {
+function display_comment(comment, container, new_comment=false) {
     let writer = document.querySelector('#user_is_authenticated').dataset.username;
     let eachrow = document.createElement('div');
     eachrow.className = 'eachrow';
@@ -609,6 +632,7 @@ function display_comment(comment, container, new_comment = false) {
         container.append(eachrow);
     }
 }
+
 
 
 

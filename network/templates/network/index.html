@@ -111,6 +111,8 @@
                                                 &nbsp;
                                                 <div style="padding: 7px 0px;" class="cmt-count">{{post.comment_count}}</div>
                                             </div>
+
+                                    
                                         
                                             {% if user in post.savers.all %}
                                                 <div class="save" onclick="unsave_post(this)" data-post_id="{{post.id}}">
