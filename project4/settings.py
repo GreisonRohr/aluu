@@ -140,7 +140,7 @@ USE_TZ = True
 
 # Arquivos estáticos (CSS, JavaScript, Imagens)
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/network/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Define a URL base para os arquivos de mídia (upload de arquivos) e o diretório raiz onde os arquivos de mídia são armazenados.
