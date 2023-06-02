@@ -23,4 +23,3 @@ urlpatterns += [
 
 # Adiciona a configuração para servir arquivos estáticos (CSS, JS, imagens, etc.)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

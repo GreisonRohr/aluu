@@ -4,9 +4,9 @@
     <head>
         <title>{% block title %}Aluu{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
-        <link rel="shortcut icon" href="{% static 'network/Images/aluuicon.ico' %}">
-        <script type="text/javascript" src="{% static 'network/layout.js' %}"></script>
+        <link href="{% static 'aluu/styles.css' %}" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'aluu/Images/aluuicon.ico' %}">
+        <script type="text/javascript" src="{% static 'aluu/layout.js' %}"></script>
         {% block head %}
         {% endblock %}
     </head>
@@ -26,7 +26,7 @@
             <div class="large-popup">
                 <div>
                     <div>
-                        <div class="small-profilepic" style="background-image: url(/network/media/{{user.profile_pic}});"></div>
+                        <div class="small-profilepic" style="background-image: url(/aluu/media/{{user.profile_pic}});"></div>
                     </div>
                     <div class="form-area">
                         <form action="{% url 'createpost' %}" method="POST" class="newpost" enctype="multipart/form-data">
@@ -39,7 +39,7 @@
                                         <g><path d="M13.414 12l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L12 10.586 6.207 4.793c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L10.586 12l-5.793 5.793c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L12 13.414l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L13.414 12z"></path></g>
                                     </svg>
                                 </button>
-                                <img src="{% static 'network/Images/spinner.gif' %}" id='spinner' height="70px">
+                                <img src="{% static 'aluu/Images/spinner.gif' %}" id='spinner' height="70px">
                             </div>
                             <hr>
                             <div class="form-action-btns">
@@ -91,7 +91,7 @@
         <div class="body" data-page="{{page}}">
             <div class="sidenav">
                 <a href="{% url 'index' %}" class="navbar-brand">
-                    <img src="{% static 'network/Images/logo-aluu.png' %}" style="width: 100%">
+                    <img src="{% static 'aluu/Images/logo-aluu.png' %}" style="width: 100%">
                 </a>
                 <div style="width: 100%">
                     <div>
@@ -188,7 +188,7 @@
                             <li class="nav-item sidenav-user">
                                 <a href="{% url 'profile' user.username %}" class="nav-link">
                                     <div class="user_account">
-                                        <div class="small-profilepic" style="float: left; background-image: url(/network/media/{{user.profile_pic}})"></div>
+                                        <div class="small-profilepic" style="float: left; background-image: url(/aluu/media/{{user.profile_pic}})"></div>
                                         <div style="height: 2.7vw; margin: auto;">
                                             <div style="margin-top: 4px;"><strong>{{user.first_name}} {{user.last_name}}</strong></div>
                                             <div class="grey" style="margin-top: 4px;">@{{ user.username }}</div>
@@ -234,7 +234,7 @@
                                 <div class="suggestion-user">
                                     <div>
                                         <a href="{% url 'profile' suggestion.username %}">
-                                            <div class="small-profilepic" style="background-image: url(/network/media/{{suggestion.profile_pic}})"></div>
+                                            <div class="small-profilepic" style="background-image: url(/aluu/media/{{suggestion.profile_pic}})"></div>
                                         </a>
                                     </div>
                                     <div class="user-details">

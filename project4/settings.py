@@ -140,12 +140,12 @@ USE_TZ = True
 
 # Arquivos estáticos (CSS, JavaScript, Imagens)
 
-MEDIA_URL = '/network/media/'
+MEDIA_URL = '/aluu/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Define a URL base para os arquivos de mídia (upload de arquivos) e o diretório raiz onde os arquivos de mídia são armazenados.
 
-STATIC_URL = '/network/static/'
+STATIC_URL = '/aluu/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Define a URL base para os arquivos estáticos (CSS, JavaScript, imagens) e o diretório raiz onde os arquivos estáticos são armazenados.
