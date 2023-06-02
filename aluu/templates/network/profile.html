@@ -1,11 +1,11 @@
-{% extends 'aluu/index.html' %}
+{% extends 'network/index.html' %}
 
 {% load static %}
 
 {% block profile %}
     <div class="profile-view" data-user="{{username.username}}">
-        <div class="cover-image" style="background-image: url(/aluu/media/{{username.cover}})"></div>
-        <div class="profile-image" style="background-image: url(/aluu/media/{{username.profile_pic}})"></div>
+        <div class="cover-image" style="background-image: url(/network/media/{{username.cover}})"></div>
+        <div class="profile-image" style="background-image: url(/network/media/{{username.profile_pic}})"></div>
         <div class="profile-details">
             <div>
                 {% if user.username == username.username %}

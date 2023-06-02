@@ -1,4 +1,4 @@
-{% extends "aluu/layout.html" %}
+{% extends "network/layout.html" %}
 
 {% load static %}
 
@@ -28,7 +28,7 @@
                                 <div>
                                     <div>
                                         <a href="{% url 'profile' post.creater.username %}">
-                                            <div class="small-profilepic" style="background-image: url(/aluu/media/{{post.creater.profile_pic}})"></div>
+                                            <div class="small-profilepic" style="background-image: url(/network/media/{{post.creater.profile_pic}})"></div>
                                         </a>
                                     </div>
                                     <div style="flex: 1">
@@ -151,14 +151,14 @@
                                 </div>
                                 <div class="comment-div" style="display: none;" data-post_id="{{post.id}}">
                                     <div class="spinner-div">
-                                        <img src="{% static 'aluu/Images/spinner.gif' %}" id="spinner" height="65px">
+                                        <img src="{% static 'network/Images/spinner.gif' %}" id="spinner" height="65px">
                                     </div>
                                     {% if user.is_authenticated %}
                                         <div class="comment-div-data" style="display: none;">
                                             <div class="head-comment-input">
                                                 <div>
                                                     <a href="{% url 'profile' user.username %}">
-                                                        <div class="small-profilepic" style="background-image: url(/aluu/media/{{user.profile_pic}})"></div>
+                                                        <div class="small-profilepic" style="background-image: url(/network/media/{{user.profile_pic}})"></div>
                                                     </a>
                                                 </div>
                                                 <div style="flex: 1;">

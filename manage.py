@@ -5,7 +5,7 @@ import sys
 
 def main():
     # Define a variável de ambiente DJANGO_SETTINGS_MODULE para especificar o arquivo de configurações do projeto Django.
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project4.settings')
     try:
         # Tenta importar a função execute_from_command_line do módulo django.core.management
         from django.core.management import execute_from_command_line

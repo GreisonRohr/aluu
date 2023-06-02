@@ -1,10 +1,10 @@
 
 import os
 
-# Define o diretório base do projeto usando o caminho absoluto do arquivo atual
+# Define o diretório base do project4 usando o caminho absoluto do arquivo atual
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Define a chave secreta usada para criptografia e segurança do projeto Django
+# Define a chave secreta usada para criptografia e segurança do project4 Django
 SECRET_KEY = '13kl@xtukpwe&xj2xoysxe9_6=tf@f8ewxer5n&ifnd46+6$%8'
 
 DEBUG = True
@@ -13,7 +13,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['aluu.azurewebsites.net']
 
-# Define uma lista de nomes de host válidos para este projeto Django
+# Define uma lista de nomes de host válidos para este project4 Django
 # A configuração atual permite apenas o host 'aluu.azurewebsites.net'
 
 
@@ -39,10 +39,10 @@ MIDDLEWARE = [  # Configuração dos middlewares
 ]
 
 
-ROOT_URLCONF = 'projeto.urls'
+ROOT_URLCONF = 'project4.urls'
 
-# Define o módulo de configuração de URL raiz do projeto como 'projeto.urls'.
-# Esse módulo contém as definições de URLs principais do projeto.
+# Define o módulo de configuração de URL raiz do project4 como 'project4.urls'.
+# Esse módulo contém as definições de URLs principais do project4.
 
 TEMPLATES = [
     {
@@ -67,9 +67,9 @@ TEMPLATES = [
 # 'APP_DIRS' define se os diretórios de templates dos aplicativos devem ser incluídos
 # 'OPTIONS' contém opções adicionais, como context_processors
 
-WSGI_APPLICATION = 'projeto.wsgi.application'
+WSGI_APPLICATION = 'project4.wsgi.application'
 
-# Define o módulo de aplicação WSGI do projeto como 'projeto.wsgi.application'.
+# Define o módulo de aplicação WSGI do project4 como 'project4.wsgi.application'.
 # Esse módulo contém a aplicação WSGI do Django que será usada pelo servidor web.
 
 
@@ -114,12 +114,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internacionalização
 
 LANGUAGE_CODE = 'pt-br'
-# Define o código do idioma usado no projeto.
+# Define o código do idioma usado no project4.
 # No exemplo fornecido, é usado o código 'pt-br' para portugues Brasil.
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-# Define a zona de tempo usada no projeto.
+# Define a zona de tempo usada no project4.
 # No exemplo fornecido, é usada a zona de tempo 'America/Sao_Paulo' para o Brasil.
 
 USE_I18N = True
@@ -140,12 +140,12 @@ USE_TZ = True
 
 # Arquivos estáticos (CSS, JavaScript, Imagens)
 
-MEDIA_URL = '/aluu/media/'
+MEDIA_URL = '/network/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Define a URL base para os arquivos de mídia (upload de arquivos) e o diretório raiz onde os arquivos de mídia são armazenados.
 
-STATIC_URL = '/aluu/static/'
+STATIC_URL = '/network/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Define a URL base para os arquivos estáticos (CSS, JavaScript, imagens) e o diretório raiz onde os arquivos estáticos são armazenados.
