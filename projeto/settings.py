@@ -39,9 +39,9 @@ MIDDLEWARE = [  # Configuração dos middlewares
 ]
 
 
-ROOT_URLCONF = 'project4.urls'
+ROOT_URLCONF = 'projeto.urls'
 
-# Define o módulo de configuração de URL raiz do projeto como 'project4.urls'.
+# Define o módulo de configuração de URL raiz do projeto como 'projeto.urls'.
 # Esse módulo contém as definições de URLs principais do projeto.
 
 TEMPLATES = [
@@ -67,9 +67,9 @@ TEMPLATES = [
 # 'APP_DIRS' define se os diretórios de templates dos aplicativos devem ser incluídos
 # 'OPTIONS' contém opções adicionais, como context_processors
 
-WSGI_APPLICATION = 'project4.wsgi.application'
+WSGI_APPLICATION = 'projeto.wsgi.application'
 
-# Define o módulo de aplicação WSGI do projeto como 'project4.wsgi.application'.
+# Define o módulo de aplicação WSGI do projeto como 'projeto.wsgi.application'.
 # Esse módulo contém a aplicação WSGI do Django que será usada pelo servidor web.
 
 
