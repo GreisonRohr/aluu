@@ -36,7 +36,9 @@ function remove_drop_down(event) {
         // Finalmente, define o estilo do elemento HTML filho como `display:none` para ocultar o menu suspenso.
     }, 250);
 }
-
+//createpost(): Esta função é chamada para criar um novo post. Ele seleciona o elemento pop-up, define seu estilo de exibição para 'bloquear' 
+//e executa várias manipulações do DOM para manipular a entrada do usuário e a visualização da imagem.
+//
 function createpost() {
     let popup = document.querySelector(".popup");
     popup.style.display = 'block';
@@ -57,7 +59,9 @@ function createpost() {
         }
     });
 }
-
+//confirm_delete(id): Esta função é chamada para confirmar a exclusão de uma postagem. Ele seleciona o elemento pop-up, define seu estilo de exibição como 'block'
+// e define o atributo onclick do botão delete para chamar a delete_postfunção com o ID de postagem especificado.
+//
 function confirm_delete(id) {
     let popup = document.querySelector('.popup');
     popup.style.display = 'block';
@@ -67,7 +71,8 @@ function confirm_delete(id) {
     document.querySelector('body').style.overflow = "hidden";
     small_popup.querySelector('#delete_post_btn').setAttribute('onclick', `delete_post(${id})`);
 }
-
+//delete_post(id): Esta função é chamada para excluir uma postagem. Ele remove o pop-up após um pequeno atraso e anima a remoção da postagem da página. 
+//Ele também envia uma solicitação PUT ao servidor para excluir a postagem.
 function delete_post(id) {
     remove_popup();
     setTimeout(() => {
@@ -86,6 +91,8 @@ function delete_post(id) {
         });
     }, 200);
 }
+//edit_post(element): Esta função é chamada para editar um post. Ele extrai as informações relevantes do elemento post e preenche o pop-up de edição com o texto e a imagem do post. 
+//Em seguida, ele chama a createpostfunção para exibir o pop-up e define o atributo onsubmit do formulário para chamar a edit_post_submitfunção com o ID do post.
 
 function edit_post(element) {
     let post = element.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
@@ -111,6 +118,9 @@ function edit_post(element) {
         popup.querySelector('.submit-btn').disabled = false;
     });
 }
+
+//edit_post_submit(post_id): esta função é chamada quando o usuário envia o formulário de postagem editado. Ele recupera o texto e a imagem editados do formulário, 
+//envia uma solicitação POST ao servidor para atualizar a postagem e atualiza o elemento de postagem correspondente na página com o conteúdo editado.
 function edit_post_submit(post_id) {
     let popup = document.querySelector('.large-popup');
     let text = popup.querySelector('#post-text').value;

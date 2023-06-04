@@ -73,3 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+//O código configura ouvintes de eventos para entrada e elementos de entrada de arquivo, valida os valores de entrada e habilita ou desabilita o botão enviar com base no status de validação. 
+//Ele também atualiza os rótulos dos elementos de entrada do arquivo com os nomes dos arquivos selecionados
