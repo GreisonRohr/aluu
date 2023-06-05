@@ -480,26 +480,28 @@ function submitRating(element) {
 }
 
 
+
+
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
     eachRow.className = 'eachrow';
     eachRow.setAttribute('data-id', rating.id);
     eachRow.innerHTML = `
-        <div>
-            <a href='/${rating.rater.username}'>
-                <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
+      <div>
+        <a href='/${rating.rater.username}'>
+          <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
+        </a>
+      </div>
+      <div style="flex: 1;">
+        <div class="rating-text-div">
+          <div class="rating-user">
+            <a href="/${rating.rater.username}">
+              ${rating.rater.first_name} ${rating.rater.last_name}
             </a>
+          </div>
+          ${rating.value}
         </div>
-        <div style="flex: 1;">
-            <div class="rating-text-div">
-                <div class="rating-user">
-                    <a href="/${rating.rater.username}">
-                        ${rating.rater.first_name} ${rating.rater.last_name}
-                    </a>
-                </div>
-                ${rating.value}
-            </div>
-        </div>`;
+      </div>`;
 
     if (newRating) {
         eachRow.classList.add('godown');
@@ -507,7 +509,22 @@ function displayRating(rating, container, newRating = false) {
     } else {
         container.append(eachRow);
     }
+
+    // Update average rating value
+    let ratings = container.querySelectorAll('.rating-text-div');
+    let totalRatings = ratings.length;
+    let sumRatings = 0;
+    ratings.forEach((rating) => {
+        sumRatings += parseFloat(rating.innerText.trim());
+    });
+    let averageRating = sumRatings / totalRatings;
+    let averageValueElement = document.getElementById('average-rating');
+    averageValueElement.textContent = averageRating.toFixed(1);
 }
+
+
+
+
 
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
@@ -563,7 +580,7 @@ function write_rating(element) {
 //FUNÇOES Comentário
 
 function show_comment(element) {
-    if(document.querySelector('#user_is_authenticated').value === 'False') {
+    if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('comment');
         return;
     }
@@ -572,26 +589,26 @@ function show_comment(element) {
     let comment_div = post_div.querySelector('.comment-div');
     let comment_div_data = comment_div.querySelector('.comment-div-data');
     let comment_comments = comment_div_data.querySelector('.comment-comments');
-    if(comment_div.style.display === 'block') {
+    if (comment_div.style.display === 'block') {
         comment_div.querySelector('input').focus()
         return;
     }
     comment_div.querySelector('#spinner').style.display = 'block';
     comment_div.style.display = 'block';
-    fetch('/n/post/'+parseInt(post_id)+'/comments')
-    .then(response => response.json())
-    .then(comments => {
-        comments.forEach(comment => {
-            display_comment(comment,comment_comments);
+    fetch('/n/post/' + parseInt(post_id) + '/comments')
+        .then(response => response.json())
+        .then(comments => {
+            comments.forEach(comment => {
+                display_comment(comment, comment_comments);
+            });
+        })
+        .then(() => {
+            setTimeout(() => {
+                comment_div.querySelector('.spinner-div').style.display = 'none';
+                comment_div.querySelector('.comment-div-data').style.display = 'block';
+                comment_div.style.overflow = 'auto';
+            }, 500);
         });
-    })
-    .then(() => {
-        setTimeout(() => {
-            comment_div.querySelector('.spinner-div').style.display = 'none';
-            comment_div.querySelector('.comment-div-data').style.display = 'block';
-            comment_div.style.overflow = 'auto';
-        }, 500);
-    });
 }
 
 function write_comment(element) {
@@ -599,27 +616,27 @@ function write_comment(element) {
     let comment_text = element.querySelector('.comment-input').value;
     let comment_comments = element.parentElement.parentElement.parentElement.parentElement.querySelector('.comment-comments');
     let comment_count = comment_comments.parentElement.parentElement.parentElement.querySelector('.cmt-count');
-    if(comment_text.trim().length <= 0) {
+    if (comment_text.trim().length <= 0) {
         return false;
     }
-    fetch('/n/post/'+parseInt(post_id)+'/write_comment',{
+    fetch('/n/post/' + parseInt(post_id) + '/write_comment', {
         method: 'POST',
         body: JSON.stringify({
             comment_text: comment_text
         })
     })
-    .then(response => response.json())
-    .then(comment => {
-        console.log(comment);
-        element.querySelector('input').value = '';
-        comment_count.innerHTML++;
-        display_comment(comment[0],comment_comments,true);
-        return false;
-    });
+        .then(response => response.json())
+        .then(comment => {
+            console.log(comment);
+            element.querySelector('input').value = '';
+            comment_count.innerHTML++;
+            display_comment(comment[0], comment_comments, true);
+            return false;
+        });
     return false;
 }
 
-function display_comment(comment, container, new_comment=false) {
+function display_comment(comment, container, new_comment = false) {
     let writer = document.querySelector('#user_is_authenticated').dataset.username;
     let eachrow = document.createElement('div');
     eachrow.className = 'eachrow';
