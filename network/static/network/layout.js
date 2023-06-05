@@ -435,6 +435,7 @@ function submitRating(element) {
     let post_id = element.parentElement.id.split('_')[1];
     let ratingInput = element.parentElement.querySelector('input[type="number"]');
     let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
+    let ratingContainer = element.parentElement.parentElement.querySelector('.rating-container');
 
     if (!isUserAuthenticated) {
         alert("Você precisa estar logado para realizar uma avaliação.");
@@ -464,7 +465,8 @@ function submitRating(element) {
                 ratingAverage.textContent = data.average_rating.toFixed(1);
                 userHasRated = true;
                 alert(data.message);
-                location.reload();
+                // Display the new rating on the page
+                displayRating(data.rating, ratingContainer, true);
             } else {
                 alert(data.message);
             }
@@ -476,6 +478,7 @@ function submitRating(element) {
 
     return false;
 }
+
 
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
