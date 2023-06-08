@@ -45,6 +45,13 @@
                         <strong id="follower__count">{{follower_count | default:0}}</strong>&nbsp;<span class="grey">Seguidores</span>
                     </a>
                 </div>
+                <div>
+                    {% if username.role == "student" %}
+                        Sou aluno
+                    {% elif username.role == "teacher" %}
+                        Sou professor
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
