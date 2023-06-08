@@ -576,6 +576,62 @@ function write_rating(element) {
 
     return false;
 }
+///////////////////////////////////////////////////////////////////////
+
+// Função para calcular a média das avaliações
+function calculateAverageRating(postId) {
+    // Obtenha todas as avaliações para a postagem específica
+    const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
+  
+    let totalRatings = ratings.length;
+    let sumRatings = 0;
+  
+    // Calcule a soma de todas as avaliações
+    ratings.forEach((rating) => {
+      sumRatings += parseFloat(rating.textContent);
+    });
+  
+    // Calcule a média das avaliações
+    let averageRating = sumRatings / totalRatings;
+  
+    // Atualize o elemento de exibição da média
+    const averageValueElement = document.getElementById(`average-rating-${postId}`);
+    averageValueElement.textContent = averageRating.toFixed(1);
+  }
+  
+  // Função para enviar uma nova avaliação
+  function submitRating(button) {
+    // Obtenha o ID da postagem
+    const postId = button.getAttribute("data-post-id");
+  
+    // Obtenha o valor da avaliação do input correspondente
+    const ratingInput = document.getElementById(`ratingInput_${postId}`);
+    const ratingValue = parseFloat(ratingInput.value);
+  
+    // Verifique se o valor é válido
+    if (!isNaN(ratingValue) && ratingValue >= 0 && ratingValue <= 10) {
+      // Crie um novo elemento para exibir a avaliação
+      const ratingDiv = document.createElement("div");
+      ratingDiv.classList.add("rating-value");
+      ratingDiv.textContent = ratingValue;
+  
+      // Adicione o novo elemento à div de avaliações
+      const ratingContainer = document.querySelector(`.rating[data-post-id="${postId}"]`);
+      ratingContainer.appendChild(ratingDiv);
+  
+      // Atualize a média das avaliações
+      calculateAverageRating(postId);
+    }
+  
+    // Limpe o campo de entrada de avaliação
+    ratingInput.value = "";
+  }
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////
 
 //FUNÇOES Comentário
 
