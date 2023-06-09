@@ -72,6 +72,7 @@ def register(request):
         fname = request.POST["firstname"]
         lname = request.POST["lastname"]
         role = request.POST["role"]  # Novo campo "role"
+        user.role = role  # Salvar o valor selecionado no campo "role"
         profile = request.FILES.get("profile")
         cover = request.FILES.get('cover')
         print(
@@ -80,7 +81,7 @@ def register(request):
         print(
             f"--------------------------Cover: {cover}----------------------------")
 
-       # Verifique se a senha corresponde à confirmação
+        # Verifique se a senha corresponde à confirmação
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
@@ -435,7 +436,7 @@ def write_rating(request, post_id):
     if Rating.objects.filter(user=request.user, post_id=post_id).exists():
         return JsonResponse({'success': False, 'message': 'Você já fez uma avaliação nesta postagem.'})
 
-    rating_value = request.POST.get('rating_value')
+    rating_value = request.POST.get('rating')
 
     if not rating_value:
         return JsonResponse({'success': False, 'message': 'Valor de avaliação inválido.'})

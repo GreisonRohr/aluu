@@ -72,6 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Atualiza a div com a classe "bio" com base na opção selecionada
+    if (input.classList.contains('role')) {
+        let bioDiv = document.querySelector('.bio');
+        if (input.value === "student") {
+            bioDiv.innerText = "Sou aluno";
+        } else if (input.value === "teacher") {
+            bioDiv.innerText = "Sou professor";
+        } else {
+            bioDiv.innerText = "";
+        }
+    }
+
 });
 
 //O código configura ouvintes de eventos para entrada e elementos de entrada de arquivo, valida os valores de entrada e habilita ou desabilita o botão enviar com base no status de validação. 
