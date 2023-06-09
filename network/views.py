@@ -66,18 +66,21 @@ def logout_view(request):
 
 def register(request):
     if request.method == "POST":
+        # Obtenha os valores dos campos do formulário
         username = request.POST["username"]
         email = request.POST["email"]
         fname = request.POST["firstname"]
         lname = request.POST["lastname"]
+        role = request.POST["role"]  # Novo campo "role"
         profile = request.FILES.get("profile")
+        cover = request.FILES.get('cover')
         print(
             f"--------------------------Profile: {profile}----------------------------")
         cover = request.FILES.get('cover')
         print(
             f"--------------------------Cover: {cover}----------------------------")
 
-        # Ensure password matches confirmation
+       # Verifique se a senha corresponde à confirmação
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
@@ -85,11 +88,13 @@ def register(request):
                 "message": "As senhas devem corresponder."
             })
 
-        # Attempt to create new user
+        # Tente criar um novo usuário com os valores fornecidos
         try:
             user = User.objects.create_user(username, email, password)
             user.first_name = fname
             user.last_name = lname
+            user.role = role  # Salvar o valor selecionado no campo "role"
+
             if profile is not None:
                 user.profile_pic = profile
             else:
