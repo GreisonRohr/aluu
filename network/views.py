@@ -72,7 +72,6 @@ def register(request):
         fname = request.POST["firstname"]
         lname = request.POST["lastname"]
         role = request.POST["role"]  # Novo campo "role"
-        user.role = role  # Salvar o valor selecionado no campo "role"
         profile = request.FILES.get("profile")
         cover = request.FILES.get('cover')
         print(
