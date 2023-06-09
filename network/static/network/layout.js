@@ -445,7 +445,7 @@ function submitRating(element) {
         alert("Você precisa estar logado para realizar uma avaliação.");
         return false;
     }
-    if (userHasRated) {
+    if (userHasRated || postHasRated) {
         alert("Você já fez uma avaliação nesta postagem.");
         return false;
     }
@@ -466,7 +466,6 @@ function submitRating(element) {
         .then(data => {
             if (data.success) {
                 ratingInput.value = '';
-                ratingAverage.textContent = data.average_rating.toFixed(1);
                 userHasRated = true;
                 postHasRated = true;
                 alert(data.message);
@@ -515,12 +514,13 @@ function displayRating(rating, container, newRating = false) {
     let totalRatings = ratings.length;
     let sumRatings = 0;
     ratings.forEach((rating) => {
-        sumRatings += parseFloat(rating.innerText.trim());
+        sumRatings += parseFloat(rating.textContent.trim());
     });
     let averageRating = sumRatings / totalRatings;
-    let averageValueElement = document.getElementById('average-rating');
+    let averageValueElement = container.parentElement.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
 }
+
 
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
@@ -581,50 +581,50 @@ function write_rating(element) {
 function calculateAverageRating(postId) {
     // Obtenha todas as avaliações para a postagem específica
     const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
-  
+
     let totalRatings = ratings.length;
     let sumRatings = 0;
-  
+
     // Calcule a soma de todas as avaliações
     ratings.forEach((rating) => {
-      sumRatings += parseFloat(rating.textContent);
+        sumRatings += parseFloat(rating.textContent);
     });
-  
+
     // Calcule a média das avaliações
     let averageRating = sumRatings / totalRatings;
-  
+
     // Atualize o elemento de exibição da média
     const averageValueElement = document.getElementById(`average-rating-${postId}`);
     averageValueElement.textContent = averageRating.toFixed(1);
-  }
-  
-  // Função para enviar uma nova avaliação
-  function submitRating(button) {
+}
+
+// Função para enviar uma nova avaliação
+function submitRating(button) {
     // Obtenha o ID da postagem
     const postId = button.getAttribute("data-post-id");
-  
+
     // Obtenha o valor da avaliação do input correspondente
     const ratingInput = document.getElementById(`ratingInput_${postId}`);
     const ratingValue = parseFloat(ratingInput.value);
-  
+
     // Verifique se o valor é válido
     if (!isNaN(ratingValue) && ratingValue >= 0 && ratingValue <= 10) {
-      // Crie um novo elemento para exibir a avaliação
-      const ratingDiv = document.createElement("div");
-      ratingDiv.classList.add("rating-value");
-      ratingDiv.textContent = ratingValue;
-  
-      // Adicione o novo elemento à div de avaliações
-      const ratingContainer = document.querySelector(`.rating[data-post-id="${postId}"]`);
-      ratingContainer.appendChild(ratingDiv);
-  
-      // Atualize a média das avaliações
-      calculateAverageRating(postId);
+        // Crie um novo elemento para exibir a avaliação
+        const ratingDiv = document.createElement("div");
+        ratingDiv.classList.add("rating-value");
+        ratingDiv.textContent = ratingValue;
+
+        // Adicione o novo elemento à div de avaliações
+        const ratingContainer = document.querySelector(`.rating[data-post-id="${postId}"]`);
+        ratingContainer.appendChild(ratingDiv);
+
+        // Atualize a média das avaliações
+        calculateAverageRating(postId);
     }
-  
+
     // Limpe o campo de entrada de avaliação
     ratingInput.value = "";
-  }
+}
 
 
 
