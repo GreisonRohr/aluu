@@ -420,10 +420,13 @@ function unfollow_user(element, username, origin) {
 }
 
 
+// Variáveis globais
+let userHasRated = false;
+let postHasRated = false;
+
 // FUNÇÔES Rating
 
 function showRatingField(element) {
-
     if (document.querySelector('#user_is_authenticated').value === 'False') {
         login_popup('rate');
         return false;
@@ -431,6 +434,7 @@ function showRatingField(element) {
     let ratingField = element.nextElementSibling;
     ratingField.style.display = 'block';
 }
+
 function submitRating(element) {
     let post_id = element.parentElement.id.split('_')[1];
     let ratingInput = element.parentElement.querySelector('input[type="number"]');
@@ -464,8 +468,8 @@ function submitRating(element) {
                 ratingInput.value = '';
                 ratingAverage.textContent = data.average_rating.toFixed(1);
                 userHasRated = true;
+                postHasRated = true;
                 alert(data.message);
-                // Display the new rating on the page
                 displayRating(data.rating, ratingContainer, true);
             } else {
                 alert(data.message);
@@ -478,9 +482,6 @@ function submitRating(element) {
 
     return false;
 }
-
-
-
 
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
@@ -510,7 +511,6 @@ function displayRating(rating, container, newRating = false) {
         container.append(eachRow);
     }
 
-    // Update average rating value
     let ratings = container.querySelectorAll('.rating-text-div');
     let totalRatings = ratings.length;
     let sumRatings = 0;
@@ -521,10 +521,6 @@ function displayRating(rating, container, newRating = false) {
     let averageValueElement = document.getElementById('average-rating');
     averageValueElement.textContent = averageRating.toFixed(1);
 }
-
-
-
-
 
 function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.post_id;
@@ -562,8 +558,8 @@ function write_rating(element) {
                 ratingInput.value = '';
                 ratingAverage.textContent = data.average_rating.toFixed(1);
                 userHasRated = true;
+                postHasRated = true;
                 alert(data.message);
-                // Exiba a avaliação na página, se necessário
                 displayRating(data.rating, rating_ratings, true);
             } else {
                 alert(data.message);
@@ -576,6 +572,9 @@ function write_rating(element) {
 
     return false;
 }
+
+
+
 ///////////////////////////////////////////////////////////////////////
 
 // Função para calcular a média das avaliações
