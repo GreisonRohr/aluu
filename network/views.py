@@ -11,6 +11,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.db.models import Sum
 from django.db.models import Avg
+from .models import Post, Rating
+
 import json
 
 from .models import *
@@ -407,12 +409,12 @@ def delete_post(request, post_id):
         return HttpResponseRedirect(reverse('login'))
 
 
+
 def calculate_average_rating(post_id):
     post = Post.objects.get(id=post_id)
     ratings = Rating.objects.filter(post=post)
     rating_count = ratings.count()
-    rating_sum = ratings.aggregate(Sum('rating_value'))[
-        'rating_value__sum'] or 0
+    rating_sum = ratings.aggregate(Sum('rating_value'))['rating_value__sum'] or 0
 
     if rating_count > 0:
         average_rating = rating_sum / rating_count
@@ -435,7 +437,7 @@ def write_rating(request, post_id):
     if Rating.objects.filter(user=request.user, post_id=post_id).exists():
         return JsonResponse({'success': False, 'message': 'Você já fez uma avaliação nesta postagem.'})
 
-    rating_value = request.POST.get('rating')
+    rating_value = request.POST.get('rating_value')
 
     if not rating_value:
         return JsonResponse({'success': False, 'message': 'Valor de avaliação inválido.'})
@@ -449,7 +451,7 @@ def write_rating(request, post_id):
 
     # Salvar a avaliação no banco de dados
     rating = Rating.objects.create(
-        user=request.user, post_id=post_id, rating_value=rating_value)
+        user=request.user, post_id=post_id, rating_value=float(rating_value))
 
     # Atualizar a média de avaliação para o post
     average_rating = calculate_average_rating(post_id)
