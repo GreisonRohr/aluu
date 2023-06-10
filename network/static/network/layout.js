@@ -436,6 +436,11 @@ function showRatingField(element) {
 }
 function submitRating(button) {
     let ratingInput = button.parentElement.querySelector('input[type="number"]');
+    if (!ratingInput) {
+        console.error('Input de avaliação não encontrado.');
+        return false;
+    }
+
     let ratingValue = parseFloat(ratingInput.value);
 
     let ratingContainer = button.closest('.rating');
@@ -481,6 +486,7 @@ function submitRating(button) {
 
     return false;
 }
+
 
 
 function displayRating(rating, container, newRating = false) {
