@@ -437,6 +437,10 @@ def calculate_average_rating(post_id):
 
 from django.views.decorators.csrf import csrf_exempt
 
+
+
+from django.http import JsonResponse
+
 @csrf_exempt
 def write_rating(request, post_id):
     # Verificar se o usuário está autenticado
@@ -444,7 +448,7 @@ def write_rating(request, post_id):
         return JsonResponse({'success': False, 'message': 'Você precisa estar logado para realizar uma avaliação.'})
 
     # Verificar se o usuário já fez uma avaliação
-    if Rating.objects.filter(user=request.user, post_id=post_id).exists():
+    if Rating.objects.filter(rater=request.user, post_id=post_id).exists():
         return JsonResponse({'success': False, 'message': 'Você já fez uma avaliação nesta postagem.'})
 
     rating_value = request.POST.get('rating_value')
@@ -461,7 +465,7 @@ def write_rating(request, post_id):
 
     # Salvar a avaliação no banco de dados
     rating = Rating.objects.create(
-        user=request.user, post_id=post_id, rating_value=float(rating_value))
+        rater=request.user, post_id=post_id, value=float(rating_value))
 
     # Atualizar a média de avaliação para o post
     average_rating = calculate_average_rating(post_id)
