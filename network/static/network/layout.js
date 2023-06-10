@@ -434,14 +434,11 @@ function showRatingField(element) {
     let ratingField = element.nextElementSibling;
     ratingField.style.display = 'block';
 }
-
-function submitRating(element) {
-    let post_id = element.parentElement.id.split('_')[1];
+function submitRating(button) {
     let ratingInput = button.parentElement.querySelector('input[type="number"]');
     let ratingValue = parseFloat(ratingInput.value);
 
-    let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
-    let ratingContainer = element.parentElement.parentElement.querySelector('.rating-container');
+    let ratingContainer = button.closest('.rating');
 
     if (!isUserAuthenticated) {
         alert("Você precisa estar logado para realizar uma avaliação.");
@@ -452,13 +449,12 @@ function submitRating(element) {
         return false;
     }
 
-    let ratingValue = parseFloat(ratingInput.value);
     if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
         alert("Por favor, insira uma nota válida entre 0 e 10.");
         return false;
     }
-    let post_id = button.closest('.rating').dataset.postId;
-    let ratingContainer = button.closest('.rating');
+
+    let post_id = ratingContainer.dataset.postId;
 
     fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
         method: 'POST',
@@ -485,6 +481,7 @@ function submitRating(element) {
 
     return false;
 }
+
 
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
