@@ -411,8 +411,15 @@ def delete_post(request, post_id):
 
 
 
+from django.core.exceptions import ObjectDoesNotExist
+
 def calculate_average_rating(post_id):
-    post = Post.objects.get(id=post_id)
+    try:
+        post = Post.objects.get(id=post_id)
+    except ObjectDoesNotExist:
+        # O post não existe, retorne um valor padrão ou lance uma exceção
+        return None
+
     ratings = Rating.objects.filter(post=post)
     rating_count = ratings.count()
     rating_sum = ratings.aggregate(Sum('rating_value'))['rating_value__sum'] or 0
@@ -426,6 +433,7 @@ def calculate_average_rating(post_id):
     post.save()
 
     return average_rating
+
 
 
 @csrf_exempt
