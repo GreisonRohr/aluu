@@ -425,17 +425,17 @@ let userHasRated = false;
 let postHasRated = false;
 
 // FUNÇÔES Rating
-
 function showRatingField(element) {
-    if (document.querySelector('#user_is_authenticated').value === 'False') {
-      login_popup('rate');
-      return false;
+    if (document.querySelector('#user_is_authenticated').value !== 'True') {
+        login_popup('rate');
+        return false;
     }
+
     let ratingField = element.nextElementSibling;
     ratingField.style.display = 'block';
-  }
-  
-  function submitRating(button) {
+}
+
+function submitRating(button) {
     let ratingInput = button.parentElement.querySelector('input[type="number"]');
     if (!ratingInput) {
         console.error('Input de avaliação não encontrado.');
@@ -446,10 +446,11 @@ function showRatingField(element) {
 
     let ratingContainer = button.closest('.rating');
 
-    if (!isUserAuthenticated) {
+    if (document.querySelector('#user_is_authenticated').value !== 'True') {
         alert("Você precisa estar logado para realizar uma avaliação.");
         return false;
     }
+
     if (userHasRated || postHasRated) {
         alert("Você já fez uma avaliação nesta postagem.");
         return false;
@@ -487,6 +488,7 @@ function showRatingField(element) {
 
     return false;
 }
+
   
   function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
@@ -527,57 +529,58 @@ function showRatingField(element) {
     averageValueElement.textContent = averageRating.toFixed(1);
 }
   
-  function write_rating(element) {
+function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.postId;
     let ratingInput = element.parentElement.querySelector('input[type="number"]');
     let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
-  
-    if (!isUserAuthenticated) {
-      alert("Você precisa estar logado para realizar uma avaliação.");
-      return false;
+
+    if (document.querySelector('#user_is_authenticated').value !== 'True') {
+        alert("Você precisa estar logado para realizar uma avaliação.");
+        return false;
     }
-  
+
     if (userHasRated) {
-      alert("Você já fez uma avaliação nesta postagem.");
-      return false;
+        alert("Você já fez uma avaliação nesta postagem.");
+        return false;
     }
-  
+
     let ratingValue = parseFloat(ratingInput.value);
     if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
-      alert("Por favor, insira uma nota válida entre 0 e 10.");
-      return false;
+        alert("Por favor, insira uma nota válida entre 0 e 10.");
+        return false;
     }
-  
+
     fetch(`/n/post/${post_id}/write_rating`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken')
-      },
-      body: JSON.stringify({
-        rating_value: ratingValue
-      })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            rating_value: ratingValue
+        })
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          ratingInput.value = '';
-          ratingAverage.textContent = data.average_rating.toFixed(1);
-          userHasRated = true;
-          postHasRated = true;
-          alert(data.message);
-          displayRating(data.rating, rating_ratings, true);
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert("Ocorreu um erro ao processar a avaliação.");
-      });
-  
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                ratingInput.value = '';
+                ratingAverage.textContent = data.average_rating.toFixed(1);
+                userHasRated = true;
+                postHasRated = true;
+                alert(data.message);
+                displayRating(data.rating, rating_ratings, true);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Ocorreu um erro ao processar a avaliação.");
+        });
+
     return false;
-  }
+}
+
   
   function calculateAverageRating(postId) {
     const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
