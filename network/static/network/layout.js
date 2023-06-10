@@ -605,6 +605,8 @@ function submitRating(button) {
 
     // Obtenha o valor da avaliação do input correspondente
     const ratingInput = document.getElementById(`ratingInput_${postId}`);
+    console.log(ratingInput); // Verifique se o elemento está sendo retornado corretamente
+
     const ratingValue = parseFloat(ratingInput.value);
 
     // Verifique se o valor é válido
