@@ -438,56 +438,61 @@ function showRatingField(element) {
 function submitRating(button) {
     let ratingInput = button.parentElement.querySelector('input[type="number"]');
     if (!ratingInput) {
-        console.error('Input de avaliação não encontrado.');
-        return false;
+      console.error('Input de avaliação não encontrado.');
+      return false;
     }
-
+  
     let ratingValue = parseFloat(ratingInput.value);
-
+  
     let ratingContainer = button.closest('.rating');
-
+  
     if (document.querySelector('#user_is_authenticated').value !== 'True') {
-        alert("Você precisa estar logado para realizar uma avaliação.");
-        return false;
+      alert("Você precisa estar logado para realizar uma avaliação.");
+      return false;
     }
-
+  
     if (userHasRated || postHasRated) {
-        alert("Você já fez uma avaliação nesta postagem.");
-        return false;
+      alert("Você já fez uma avaliação nesta postagem.");
+      return false;
     }
-
+  
     if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
-        alert("Por favor, insira uma nota válida entre 0 e 10.");
-        return false;
+      alert("Por favor, insira uma nota válida entre 0 e 10.");
+      return false;
     }
-
+  
     let post_id = ratingContainer.dataset.postId;
-
-    fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
-        method: 'POST',
-        body: JSON.stringify({
-            rating_value: ratingValue
-        })
+  
+    fetch(`/n/post/${post_id}/write_rating`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      body: JSON.stringify({
+        rating_value: ratingValue
+      })
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                ratingInput.value = '';
-                userHasRated = true;
-                postHasRated = true;
-                alert(data.message);
-                displayRating(data.rating, ratingContainer, true);
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            alert("Ocorreu um erro ao processar a avaliação.");
-        });
-
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          ratingInput.value = '';
+          userHasRated = true;
+          postHasRated = true;
+          alert(data.message);
+          displayRating(data.rating, ratingContainer, true);
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        alert("Ocorreu um erro ao processar a avaliação.");
+      });
+  
     return false;
-}
+  }
+  
 
   
   function displayRating(rating, container, newRating = false) {
