@@ -438,99 +438,94 @@ function showRatingField(element) {
   function submitRating(button) {
     let ratingInput = button.parentElement.querySelector('input[type="number"]');
     if (!ratingInput) {
-      console.error('Input de avaliação não encontrado.');
-      return false;
+        console.error('Input de avaliação não encontrado.');
+        return false;
     }
-  
+
     let ratingValue = parseFloat(ratingInput.value);
-  
+
     let ratingContainer = button.closest('.rating');
-  
+
     if (!isUserAuthenticated) {
-      alert("Você precisa estar logado para realizar uma avaliação.");
-      return false;
+        alert("Você precisa estar logado para realizar uma avaliação.");
+        return false;
     }
-  
     if (userHasRated || postHasRated) {
-      alert("Você já fez uma avaliação nesta postagem.");
-      return false;
+        alert("Você já fez uma avaliação nesta postagem.");
+        return false;
     }
-  
+
     if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
-      alert("Por favor, insira uma nota válida entre 0 e 10.");
-      return false;
+        alert("Por favor, insira uma nota válida entre 0 e 10.");
+        return false;
     }
-  
+
     let post_id = ratingContainer.dataset.postId;
-  
-    fetch(`/n/post/${post_id}/write_rating`, {
-      method: 'POST',
-      body: JSON.stringify({
-        rating_value: ratingValue
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken')
-      }
+
+    fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
+        method: 'POST',
+        body: JSON.stringify({
+            rating_value: ratingValue
+        })
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          ratingInput.value = '';
-          userHasRated = true;
-          postHasRated = true;
-          alert(data.message);
-          displayRating(data.rating, ratingContainer, true);
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert("Ocorreu um erro ao processar a avaliação.");
-      });
-  
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                ratingInput.value = '';
+                userHasRated = true;
+                postHasRated = true;
+                alert(data.message);
+                displayRating(data.rating, ratingContainer, true);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Ocorreu um erro ao processar a avaliação.");
+        });
+
     return false;
-  }
+}
   
   function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
     eachRow.className = 'eachrow';
     eachRow.setAttribute('data-id', rating.id);
     eachRow.innerHTML = `
-      <div>
-        <a href='/${rating.rater.username}'>
-          <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
-        </a>
-      </div>
-      <div style="flex: 1;">
-        <div class="rating-text-div">
-          <div class="rating-user">
-            <a href="/${rating.rater.username}">
-              ${rating.rater.first_name} ${rating.rater.last_name}
+        <div>
+            <a href='/${rating.rater.username}'>
+                <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
             </a>
-          </div>
-          ${rating.value}
         </div>
-      </div>`;
-  
+        <div style="flex: 1;">
+            <div class="rating-text-div">
+                <div class="rating-user">
+                    <a href="/${rating.rater.username}">
+                        ${rating.rater.first_name} ${rating.rater.last_name}
+                    </a>
+                </div>
+                ${rating.value}
+            </div>
+        </div>`;
+
     if (newRating) {
-      eachRow.classList.add('godown');
-      container.prepend(eachRow);
+        eachRow.classList.add('godown');
+        container.prepend(eachRow);
     } else {
-      container.append(eachRow);
+        container.append(eachRow);
     }
-  
+
     let ratings = container.querySelectorAll('.rating-text-div');
     let totalRatings = ratings.length;
     let sumRatings = 0;
     ratings.forEach((rating) => {
-      sumRatings += parseFloat(rating.textContent.trim());
+        sumRatings += parseFloat(rating.textContent.trim());
     });
     let averageRating = sumRatings / totalRatings;
-    let averageValueElement = container.parentElement.querySelector('.rating-average .average-value');
+    let averageValueElement = container.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
-  }
+}
   
   function write_rating(element) {
     let post_id = element.parentElement.parentElement.parentElement.dataset.postId;
@@ -600,39 +595,6 @@ function showRatingField(element) {
     averageValueElement.textContent = averageRating.toFixed(1);
   }
   
-  function submitRating(button) {
-    const postId = button.getAttribute("data-post-id");
-    const ratingInput = document.getElementById(`ratingInput_${postId}`);
-    
-    if (!ratingInput) {
-      console.error('Input de avaliação não encontrado.');
-      return false;
-    }
-    
-    const ratingValue = parseFloat(ratingInput.value);
-  
-    if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
-      alert("Por favor, insira uma nota válida entre 0 e 10.");
-      return false;
-    }
-  
-    const ratingContainer = document.querySelector(`.rating[data-post-id="${postId}"]`);
-  
-    const ratingDiv = document.createElement("div");
-    ratingDiv.classList.add("rating-value");
-    ratingDiv.textContent = ratingValue;
-  
-    ratingContainer.appendChild(ratingDiv);
-  
-    calculateAverageRating(postId);
-  
-    ratingInput.value = "";
-  
-    return false;
-  }
-  
-
-
 
 ///////////////////////////////////////////////////////////////////////
 
