@@ -437,7 +437,9 @@ function showRatingField(element) {
 
 function submitRating(element) {
     let post_id = element.parentElement.id.split('_')[1];
-    let ratingInput = element.parentElement.querySelector('input[type="number"]');
+    let ratingInput = button.parentElement.querySelector('input[type="number"]');
+    let ratingValue = parseFloat(ratingInput.value);
+
     let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
     let ratingContainer = element.parentElement.parentElement.querySelector('.rating-container');
 
@@ -455,6 +457,8 @@ function submitRating(element) {
         alert("Por favor, insira uma nota válida entre 0 e 10.");
         return false;
     }
+    let post_id = button.closest('.rating').dataset.postId;
+    let ratingContainer = button.closest('.rating');
 
     fetch('/n/post/' + parseInt(post_id) + '/write_rating', {
         method: 'POST',
