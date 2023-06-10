@@ -435,6 +435,7 @@ def calculate_average_rating(post_id):
     return average_rating
 
 
+from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def write_rating(request, post_id):
