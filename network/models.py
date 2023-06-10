@@ -1,4 +1,5 @@
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -8,7 +9,7 @@ class User(AbstractUser):
     profile_pic = models.ImageField(upload_to='profile_pic/')
     bio = models.TextField(max_length=160, blank=True, null=True)
     cover = models.ImageField(upload_to='covers/', blank=True)
-    role = models.CharField(max_length=20, blank=True)  
+    role = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return self.username
@@ -73,15 +74,13 @@ class Follower(models.Model):
         return f"User: {self.user}"
 
 
-class Rating(models.Model):
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name='ratings')
-    rater = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='ratings')
-    value = models.IntegerField()
+User = get_user_model()
 
-    class Meta:
-        unique_together = ('post', 'rater')
+
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    rating_value = models.FloatField()
 
     def __str__(self):
-        return f"Rating ID: {self.id} (rater: {self.rater}, post: {self.post})"
+        return f"Rating for post {self.post_id} by user {self.user_id}"
