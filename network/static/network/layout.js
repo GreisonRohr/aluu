@@ -533,56 +533,39 @@ function submitRating(button) {
     let averageValueElement = container.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
 }
-function write_rating(post_id) {
-    let ratingInput = document.getElementById(`ratingInput_${post_id}`);
-    let ratingAverage = document.getElementById(`average-rating-${post_id}`);
 
-    if (document.querySelector('#user_is_authenticated').value !== 'True') {
-        alert("Você precisa estar logado para realizar uma avaliação.");
-        return false;
+
+// Função para enviar uma nova avaliação
+function write_rating(postId) {
+    // Obtenha o valor da avaliação do input correspondente
+    const ratingInput = document.getElementById(`ratingInput_${postId}`);
+    const ratingValue = parseFloat(ratingInput.value);
+  
+    // Verifique se o valor é válido
+    if (!isNaN(ratingValue) && ratingValue >= 0 && ratingValue <= 10) {
+      // Obtenha o elemento da média das avaliações
+      const averageValueElement = document.getElementById(`average-rating-${postId}`);
+  
+      // Obtenha o valor atual da média das avaliações
+      let averageRating = parseFloat(averageValueElement.textContent);
+  
+      // Obtenha o número total de avaliações
+      let totalRatings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`).length;
+  
+      // Calcule a soma das avaliações existentes e a nova avaliação
+      let sumRatings = averageRating * totalRatings + ratingValue;
+  
+      // Calcule a nova média das avaliações
+      averageRating = sumRatings / (totalRatings + 1);
+  
+      // Atualize o elemento de exibição da média das avaliações
+      averageValueElement.textContent = averageRating.toFixed(1);
     }
-
-    if (userHasRated) {
-        alert("Você já fez uma avaliação nesta postagem.");
-        return false;
-    }
-
-    let ratingValue = parseFloat(ratingInput.value);
-    if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
-        alert("Por favor, insira uma nota válida entre 0 e 10.");
-        return false;
-    }
-
-    fetch(`/n/post/${post_id}/write_rating`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify({
-            rating_value: ratingValue
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                ratingInput.value = '';
-                ratingAverage.textContent = data.average_rating.toFixed(1);
-                userHasRated = true;
-                postHasRated = true;
-                alert(data.message);
-                displayRating(data.rating, rating_ratings, true);
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            alert("Ocorreu um erro ao processar a avaliação.");
-        });
-
-    return false;
-}
+  
+    // Limpe o campo de entrada de avaliação
+    ratingInput.value = "";
+  }
+  
 
   
   function calculateAverageRating(postId) {
