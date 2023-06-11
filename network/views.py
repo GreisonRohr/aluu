@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -11,7 +13,6 @@ from django.views.decorators.http import require_POST
 from django.db.models import Sum
 from django.db.models import Avg
 from .models import Post, Rating
-
 
 
 import json
@@ -410,9 +411,6 @@ def delete_post(request, post_id):
         return HttpResponseRedirect(reverse('login'))
 
 
-
-from django.core.exceptions import ObjectDoesNotExist
-
 def calculate_average_rating(post_id):
     try:
         post = Post.objects.get(id=post_id)
@@ -422,7 +420,8 @@ def calculate_average_rating(post_id):
 
     ratings = Rating.objects.filter(post=post)
     rating_count = ratings.count()
-    rating_sum = ratings.aggregate(Sum('rating_value'))['rating_value__sum'] or 0
+    rating_sum = ratings.aggregate(Sum('rating_value'))[
+        'rating_value__sum'] or 0
 
     if rating_count > 0:
         average_rating = rating_sum / rating_count
@@ -435,12 +434,6 @@ def calculate_average_rating(post_id):
     return average_rating
 
 
-from django.views.decorators.csrf import csrf_exempt
-
-
-
-from django.http import JsonResponse
-
 @csrf_exempt
 def write_rating(request, post_id):
     # Verificar se o usuário está autenticado
@@ -451,16 +444,18 @@ def write_rating(request, post_id):
     if Rating.objects.filter(rater=request.user, post_id=post_id).exists():
         return JsonResponse({'success': False, 'message': 'Você já fez uma avaliação nesta postagem.'})
 
-    rating_value = request.POST.get('rating_value')
-
-    if not rating_value:
-        return JsonResponse({'success': False, 'message': 'Valor de avaliação inválido.'})
-
     try:
+        data = json.loads(request.body)
+        rating_value = data.get('rating_value')
+
+        if not rating_value:
+            return JsonResponse({'success': False, 'message': 'Valor de avaliação inválido.'})
+
         rating_value = float(rating_value)
         if rating_value < 0 or rating_value > 10:
             raise ValueError()
-    except ValueError:
+
+    except (ValueError, json.JSONDecodeError):
         return JsonResponse({'success': False, 'message': 'Por favor, insira uma nota válida entre 0 e 10.'})
 
     # Salvar a avaliação no banco de dados

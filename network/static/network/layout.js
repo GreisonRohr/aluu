@@ -533,11 +533,9 @@ function submitRating(button) {
     let averageValueElement = container.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
 }
-  
-function write_rating(element) {
-    let post_id = element.parentElement.parentElement.parentElement.dataset.postId;
-    let ratingInput = element.parentElement.querySelector('input[type="number"]');
-    let ratingAverage = element.parentElement.parentElement.querySelector('.rating-average .average-value');
+function write_rating(post_id) {
+    let ratingInput = document.getElementById(`ratingInput_${post_id}`);
+    let ratingAverage = document.getElementById(`average-rating-${post_id}`);
 
     if (document.querySelector('#user_is_authenticated').value !== 'True') {
         alert("Você precisa estar logado para realizar uma avaliação.");
