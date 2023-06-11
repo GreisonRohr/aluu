@@ -534,7 +534,10 @@ function submitRating(button) {
     averageValueElement.textContent = averageRating.toFixed(1);
 }
 
-
+function getCookie(name) {
+    const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
+    return cookieValue ? cookieValue.pop() : '';
+}
 // Função para enviar uma nova avaliação
 function write_rating(postId) {
     // Obtenha o valor da avaliação do input correspondente
