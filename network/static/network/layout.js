@@ -553,10 +553,10 @@ function getCookie(name) {
   
     return null;
   }
-
-function write_rating(post_id) {
+  function write_rating(post_id) {
     let ratingInput = document.getElementById(`ratingInput_${post_id}`);
     let ratingAverage = document.getElementById(`average-rating-${post_id}`);
+    let ratingField = document.getElementById(`ratingField_${post_id}`);
   
     if (document.querySelector('#user_is_authenticated').value !== 'True') {
       alert("Você precisa estar logado para realizar uma avaliação.");
@@ -594,18 +594,16 @@ function write_rating(post_id) {
           // Atualizar a média das avaliações
           let averageRating = parseFloat(ratingAverage.textContent);
           let totalRatings = data.total_ratings; // Obter o total de avaliações do servidor
-          let sumRatings = averageRating * totalRatings + ratingValue;
-          let newAverageRating = sumRatings / (totalRatings + 1);
+          let sumRatings = averageRating * (totalRatings - 1) + ratingValue;
+          let newAverageRating = sumRatings / totalRatings;
           ratingAverage.textContent = newAverageRating.toFixed(1);
   
           userHasRated = true;
           postHasRated = true;
           alert(data.message);
   
-          // Carregar novamente as notas de avaliação
-          let ratingContainer = document.querySelector(`.rating[data-post-id="${post_id}"]`);
-          ratingContainer.innerHTML = '';
-          loadRatings();
+          // Esconder o campo de avaliação e o botão
+          ratingField.style.display = 'none';
         } else {
           alert(data.message);
         }
