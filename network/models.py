@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
+from django.db.models import Sum
+
 
 
 class User(AbstractUser):
@@ -84,3 +86,16 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"Rating for post {self.post_id} by user {self.user_id}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        # Recalculate average rating for the post
+        total_ratings = Rating.objects.filter(post=self.post).count()
+        sum_ratings = Rating.objects.filter(post=self.post).aggregate(Sum('rating_value'))
+        average_rating = sum_ratings['rating_value__sum'] / total_ratings if total_ratings else 0
+
+        # Update the average_rating field in the related Post model
+        self.post.average_rating = average_rating
+        self.post.total_ratings = total_ratings
+        self.post.save()

@@ -547,6 +547,7 @@ function write_rating(post_id) {
         return false;
     }
 
+    // Verificar se o usuário já fez uma avaliação nesta postagem
     if (userHasRated) {
         alert("Você já fez uma avaliação nesta postagem.");
         return false;
@@ -558,6 +559,7 @@ function write_rating(post_id) {
         return false;
     }
 
+    // Enviar a avaliação para o servidor
     fetch(`/n/post/${post_id}/write_rating`, {
         method: 'POST',
         headers: {
@@ -573,12 +575,12 @@ function write_rating(post_id) {
             if (data.success) {
                 ratingInput.value = '';
 
-                // Atualize a média das avaliações
-                let totalRatings = document.querySelectorAll(`.rating[data-post-id="${post_id}"] .rating-value`).length;
+                // Atualizar a média das avaliações
                 let averageRating = parseFloat(ratingAverage.textContent);
-                let sumRatings = averageRating * totalRatings + ratingValue;
-                averageRating = sumRatings / (totalRatings + 1);
-                ratingAverage.textContent = averageRating.toFixed(1);
+                let totalRatings = data.total_ratings; // Obter o total de avaliações do servidor
+                let sumRatings = averageRating * (totalRatings - 1) + ratingValue;
+                let newAverageRating = sumRatings / totalRatings;
+                ratingAverage.textContent = newAverageRating.toFixed(1);
 
                 userHasRated = true;
                 postHasRated = true;
@@ -595,6 +597,7 @@ function write_rating(post_id) {
 
     return false;
 }
+
 
 
 

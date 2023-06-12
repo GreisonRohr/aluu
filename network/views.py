@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
@@ -10,12 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
-from django.db.models import Sum
-from django.db.models import Avg
 from .models import Post, Rating
-
-
+from django.db.models import Avg, Count, Sum
 import json
+
 
 from .models import *
 
@@ -415,20 +412,19 @@ def calculate_average_rating(post_id):
     try:
         post = Post.objects.get(id=post_id)
     except ObjectDoesNotExist:
-        # O post não existe, retorne um valor padrão ou lance uma exceção
+        # The post doesn't exist, return a default value or raise an exception
         return None
 
-    ratings = Rating.objects.filter(post=post)
-    rating_count = ratings.count()
-    rating_sum = ratings.aggregate(Sum('rating_value'))[
-        'rating_value__sum'] or 0
+    rating_stats = Rating.objects.filter(post=post).aggregate(
+        average_rating=Avg('rating_value'),
+        total_ratings=Count('id')
+    )
 
-    if rating_count > 0:
-        average_rating = rating_sum / rating_count
-    else:
-        average_rating = 0
+    average_rating = rating_stats['average_rating'] or 0
+    total_ratings = rating_stats['total_ratings']
 
     post.average_rating = average_rating
+    post.total_ratings = total_ratings
     post.save()
 
     return average_rating
@@ -436,12 +432,12 @@ def calculate_average_rating(post_id):
 
 @csrf_exempt
 def write_rating(request, post_id):
-    # Verificar se o usuário está autenticado
+    # Check if the user is authenticated
     if not request.user.is_authenticated:
         return JsonResponse({'success': False, 'message': 'Você precisa estar logado para realizar uma avaliação.'})
 
-    # Verificar se o usuário já fez uma avaliação
-    if Rating.objects.filter(rater=request.user, post_id=post_id).exists():
+    # Check if the user has already rated
+    if Rating.objects.filter(user=request.user, post_id=post_id).exists():
         return JsonResponse({'success': False, 'message': 'Você já fez uma avaliação nesta postagem.'})
 
     try:
@@ -458,12 +454,11 @@ def write_rating(request, post_id):
     except (ValueError, json.JSONDecodeError):
         return JsonResponse({'success': False, 'message': 'Por favor, insira uma nota válida entre 0 e 10.'})
 
-    # Salvar a avaliação no banco de dados
-    rating = Rating.objects.create(
-        rater=request.user, post_id=post_id, value=float(rating_value))
+    # Save the rating in the database
+    rating = Rating.objects.create(user=request.user, post_id=post_id, rating_value=float(rating_value))
 
-    # Atualizar a média de avaliação para o post
+    # Calculate the average rating for the post
     average_rating = calculate_average_rating(post_id)
 
-    # Retornar uma resposta de sucesso com os dados atualizados
+    # Return a success response with the updated data
     return JsonResponse({'success': True, 'message': 'Avaliação registrada com sucesso.', 'average_rating': average_rating})
