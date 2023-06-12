@@ -493,28 +493,26 @@ function submitRating(button) {
     return false;
 }
 
-
-
 function displayRating(rating, container, newRating = false) {
     let eachRow = document.createElement('div');
     eachRow.className = 'eachrow';
     eachRow.setAttribute('data-id', rating.id);
     eachRow.innerHTML = `
-        <div>
-            <a href='/${rating.rater.username}'>
-                <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
+      <div>
+        <a href='/${rating.rater.username}'>
+          <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
+        </a>
+      </div>
+      <div style="flex: 1;">
+        <div class="rating-text-div">
+          <div class="rating-user">
+            <a href="/${rating.rater.username}">
+              ${rating.rater.first_name} ${rating.rater.last_name}
             </a>
+          </div>
+          ${rating.value}
         </div>
-        <div style="flex: 1;">
-            <div class="rating-text-div">
-                <div class="rating-user">
-                    <a href="/${rating.rater.username}">
-                        ${rating.rater.first_name} ${rating.rater.last_name}
-                    </a>
-                </div>
-                ${rating.value}
-            </div>
-        </div>`;
+      </div>`;
 
     if (newRating) {
         eachRow.classList.add('godown');
@@ -529,17 +527,16 @@ function displayRating(rating, container, newRating = false) {
     ratings.forEach((rating) => {
         sumRatings += parseFloat(rating.textContent.trim());
     });
-    let averageRating = sumRatings / totalRatings;
+    let averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
     let averageValueElement = container.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
 }
+
 
 function getCookie(name) {
     const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
     return cookieValue ? cookieValue.pop() : '';
 }
-
-
 function write_rating(post_id) {
     let ratingInput = document.getElementById(`ratingInput_${post_id}`);
     let ratingAverage = document.getElementById(`average-rating-${post_id}`);
@@ -580,16 +577,8 @@ function write_rating(post_id) {
                 // Atualizar a média das avaliações
                 let averageRating = parseFloat(ratingAverage.textContent);
                 let totalRatings = data.total_ratings; // Obter o total de avaliações do servidor
-
-                // Verificar se o total de avaliações é zero para evitar divisão por zero
-                let newAverageRating;
-                if (totalRatings === 0) {
-                    newAverageRating = ratingValue;
-                } else {
-                    let sumRatings = averageRating * (totalRatings - 1) + ratingValue;
-                    newAverageRating = sumRatings / totalRatings;
-                }
-
+                let sumRatings = averageRating * (totalRatings - 1) + ratingValue;
+                let newAverageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
                 let ratingContainer = document.querySelector(`.rating[data-post-id="${post_id}"]`);
                 ratingAverage.textContent = newAverageRating.toFixed(1);
 
