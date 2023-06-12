@@ -580,12 +580,13 @@ function write_rating(post_id) {
                 let totalRatings = data.total_ratings; // Obter o total de avaliações do servidor
                 let sumRatings = averageRating * (totalRatings - 1) + ratingValue;
                 let newAverageRating = sumRatings / totalRatings;
+                let ratingContainer = document.querySelector(`.rating[data-post-id="${post_id}"]`);
                 ratingAverage.textContent = newAverageRating.toFixed(1);
 
                 userHasRated = true;
                 postHasRated = true;
                 alert(data.message);
-                displayRating(data.rating, rating_ratings, true);
+                displayRating(data.rating, ratingContainer, true);
             } else {
                 alert(data.message);
             }
@@ -601,7 +602,6 @@ function write_rating(post_id) {
 
 
 
-
 function calculateAverageRating(postId) {
     const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
 
@@ -612,12 +612,11 @@ function calculateAverageRating(postId) {
         sumRatings += parseFloat(rating.textContent);
     });
 
-    let averageRating = sumRatings / totalRatings;
+    let averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
 
     const averageValueElement = document.getElementById(`average-rating-${postId}`);
     averageValueElement.textContent = averageRating.toFixed(1);
 }
-
 
 ///////////////////////////////////////////////////////////////////////
 
