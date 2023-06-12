@@ -541,7 +541,18 @@ function displayRating(rating, container, newRating = false) {
     averageValueElement.textContent = averageRating.toFixed(1);
 }
 
-
+function getCookie(name) {
+    const cookieValue = document.cookie
+      .split(';')
+      .map(cookie => cookie.trim())
+      .find(cookie => cookie.startsWith(name + '='));
+  
+    if (cookieValue) {
+      return cookieValue.split('=')[1];
+    }
+  
+    return null;
+  }
 
 function write_rating(post_id) {
     let ratingInput = document.getElementById(`ratingInput_${post_id}`);
