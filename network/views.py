@@ -409,6 +409,27 @@ def delete_post(request, post_id):
         return HttpResponseRedirect(reverse('login'))
 
 
+def calculate_average_rating(post_id):
+    try:
+        post = Post.objects.get(id=post_id)
+    except ObjectDoesNotExist:
+        # The post doesn't exist, return a default value or raise an exception
+        return None
+
+    rating_stats = Rating.objects.filter(post=post).aggregate(
+        average_rating=Avg('rating_value'),
+        total_ratings=Count('id')
+    )
+
+    average_rating = rating_stats['average_rating'] or 0
+    total_ratings = rating_stats['total_ratings']
+
+    post.average_rating = average_rating
+    post.total_ratings = total_ratings
+    post.save()
+
+    return average_rating
+
 @csrf_exempt
 def write_rating(request, post_id):
     # Check if the user is authenticated
