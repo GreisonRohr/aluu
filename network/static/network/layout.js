@@ -492,7 +492,6 @@ function submitRating(button) {
 
     return false;
 }
-
 function displayRating(rating, container, newRating = false) {
     if (!rating || !container) {
         console.error('Dados de avaliação ou contêiner ausentes.');
@@ -515,7 +514,7 @@ function displayRating(rating, container, newRating = false) {
               ${rating.rater.first_name} ${rating.rater.last_name}
             </a>
           </div>
-          ${rating.value}
+          ${rating.rating_value}
         </div>
       </div>`;
 
