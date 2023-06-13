@@ -14,6 +14,7 @@ from .models import Post, Rating
 from django.db.models import Avg, Count, Sum
 from django.shortcuts import get_object_or_404
 
+
 import json
 
 
@@ -467,6 +468,8 @@ def write_rating(request, post_id):
     return JsonResponse({'success': True, 'message': 'Avaliação registrada com sucesso.', 'average_rating': average_rating})
 
 
+
+
 def get_ratings(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     ratings = Rating.objects.filter(post=post)
@@ -479,14 +482,15 @@ def get_ratings(request, post_id):
     for rating in ratings:
         rating_data = {
             'id': rating.id,
-            'value': rating.value,
+            'value': rating.rating_value,  # Corrigido para acessar o campo rating_value
             'rater': {
-                'username': rating.rater.username,
-                'first_name': rating.rater.first_name,
-                'last_name': rating.rater.last_name,
-                'profile_pic': rating.rater.profile_pic.url if rating.rater.profile_pic else ''
+                'username': rating.user.username,  # Corrigido para acessar o usuário associado ao rating
+                'first_name': rating.user.first_name,
+                'last_name': rating.user.last_name,
+                'profile_pic': rating.user.profile_pic.url if rating.user.profile_pic else ''
             }
         }
         data['ratings'].append(rating_data)
 
     return JsonResponse(data)
+
