@@ -614,20 +614,25 @@ function write_rating(post_id) {
 
 function calculateAverageRating(postId) {
     const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
-
+  
     let totalRatings = ratings.length;
     let sumRatings = 0;
-
+  
     ratings.forEach((rating) => {
-        sumRatings += parseFloat(rating.textContent);
+      sumRatings += parseFloat(rating.textContent);
     });
-
+  
     let averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
-
+  
     const averageValueElement = document.getElementById(`average-rating-${postId}`);
     averageValueElement.textContent = averageRating.toFixed(1);
-}
-
+  
+    // Verificar se as avaliações estão sendo obtidas corretamente
+    console.log('Avaliações:', ratings);
+    console.log('Média das avaliações:', averageRating);
+    console.log('Total de avaliações:', totalRatings);
+  }
+  
 
 
 function loadRatings() {
