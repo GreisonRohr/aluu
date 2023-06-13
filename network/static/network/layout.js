@@ -645,13 +645,6 @@ function write_rating(post_id) {
 ///////
 
 
-
-
-
-
-
-
-
 function loadRatings() {
     let ratingContainers = document.querySelectorAll('.rating');
     ratingContainers.forEach((container) => {
@@ -664,6 +657,8 @@ function loadRatings() {
                     ratings.forEach((rating) => {
                         displayRating(rating, container);
                     });
+                    // Calcular a média das avaliações existentes
+                    calculateAverageRating(postId);
                 } else {
                     console.error(data.message);
                 }
@@ -673,6 +668,8 @@ function loadRatings() {
             });
     });
 }
+
+
 
 // Chame a função loadRatings ao carregar a página
 window.addEventListener('load', loadRatings);
