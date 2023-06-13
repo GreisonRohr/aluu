@@ -501,36 +501,17 @@ function displayRating(rating, container, newRating = false) {
       return;
     }
   
-    let eachRow = document.createElement('div');
-    eachRow.className = 'eachrow';
-    eachRow.setAttribute('data-id', rating.id);
-    eachRow.innerHTML = `
-      <div>
-        <a href='/${rating.rater.username}'>
-          <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
-        </a>
-      </div>
-      <div style="flex: 1;">
-        <div class="rating-text-div">
-          <div class="rating-user">
-            <a href="/${rating.rater.username}">
-              ${rating.rater.first_name} ${rating.rater.last_name}
-            </a>
-          </div>
-          ${rating.rating_value}
-        </div>
-      </div>`;
-  
     if (newRating) {
-      eachRow.classList.add('godown');
+      let eachRow = document.createElement('div');
+      eachRow.className = 'eachrow';
+      eachRow.setAttribute('data-id', rating.id);
       container.prepend(eachRow);
-    } else {
-      container.append(eachRow);
     }
   
     let ratings = container.querySelectorAll('.rating-text-div');
     let totalRatings = ratings.length;
     let sumRatings = 0;
+  
     ratings.forEach((rating) => {
       let ratingValue = parseFloat(rating.textContent.trim());
       if (!isNaN(ratingValue)) {
