@@ -492,34 +492,60 @@ function submitRating(button) {
 
     return false;
 }
+
+/////////////
+
 function displayRating(rating, container, newRating = false) {
     if (!rating || !container) {
-        console.error('Dados de avaliação ou contêiner ausentes.');
-        return;
+      console.error('Dados de avaliação ou contêiner ausentes.');
+      return;
     }
-
+  
+    let eachRow = document.createElement('div');
+    eachRow.className = 'eachrow';
+    eachRow.setAttribute('data-id', rating.id);
+    eachRow.innerHTML = `
+      <div>
+        <a href='/${rating.rater.username}'>
+          <div class="small-profilepic" style="background-image: url(${rating.rater.profile_pic})"></div>
+        </a>
+      </div>
+      <div style="flex: 1;">
+        <div class="rating-text-div">
+          <div class="rating-user">
+            <a href="/${rating.rater.username}">
+              ${rating.rater.first_name} ${rating.rater.last_name}
+            </a>
+          </div>
+          ${rating.rating_value}
+        </div>
+      </div>`;
+  
     if (newRating) {
-        // Atualizar a média das avaliações apenas se for uma nova avaliação
-        let ratings = container.querySelectorAll('.rating-text-div');
-        let totalRatings = ratings.length + 1;
-        let sumRatings = rating.value;
-        ratings.forEach((rating) => {
-            let ratingValue = parseFloat(rating.textContent.trim());
-            if (!isNaN(ratingValue)) {
-                sumRatings += ratingValue;
-            }
-        });
-
-        let averageRating = totalRatings !== 0 ? sumRatings / totalRatings : 0;
-        let averageValueElement = container.querySelector('.rating-average .average-value');
-        averageValueElement.textContent = averageRating.toFixed(1);
+      eachRow.classList.add('godown');
+      container.prepend(eachRow);
+    } else {
+      container.append(eachRow);
     }
-
-    // Remover as avaliações individuais anteriores
-    container.querySelectorAll('.eachrow').forEach((row) => {
-        row.remove();
+  
+    let ratings = container.querySelectorAll('.rating-text-div');
+    let totalRatings = ratings.length;
+    let sumRatings = 0;
+    ratings.forEach((rating) => {
+      let ratingValue = parseFloat(rating.textContent.trim());
+      if (!isNaN(ratingValue)) {
+        sumRatings += ratingValue;
+      }
     });
-}
+  
+    let averageRating = totalRatings !== 0 ? sumRatings / totalRatings : 0;
+    let averageValueElement = container.querySelector('.rating-average .average-value');
+    averageValueElement.textContent = averageRating.toFixed(1);
+  }
+  
+
+////////////
+
 
 
 function getCookie(name) {
