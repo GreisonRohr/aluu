@@ -545,6 +545,9 @@ function getCookie(name) {
 
     return null;
 }
+
+////////
+
 function write_rating(post_id) {
     let ratingInput = document.getElementById(`ratingInput_${post_id}`);
     let ratingAverage = document.getElementById(`average-rating-${post_id}`);
@@ -590,6 +593,9 @@ function write_rating(post_id) {
                 let newAverageRating = sumRatings / totalRatings;
                 ratingAverage.textContent = newAverageRating.toFixed(1);
 
+                // Chamar a função para calcular a média das avaliações
+                calculateAverageRating(post_id);
+
                 userHasRated = true;
                 postHasRated = true;
                 alert(data.message);
@@ -607,6 +613,12 @@ function write_rating(post_id) {
 
     return false;
 }
+
+
+
+
+///////
+
 
 
 
