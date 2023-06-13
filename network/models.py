@@ -100,3 +100,5 @@ class Rating(models.Model):
         self.post.average_rating = average_rating
         self.post.total_ratings = total_ratings
         self.post.save()
+
+
