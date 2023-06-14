@@ -493,26 +493,7 @@ function submitRating(button) {
     return false;
 }
 
-function calculateAverageRating(postId) {
-    const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
-  
-    let totalRatings = ratings.length;
-    let sumRatings = 0;
-  
-    ratings.forEach((rating) => {
-      sumRatings += parseFloat(rating.textContent);
-    });
-  
-    let averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
-  
-    const averageValueElement = document.getElementById(`average-rating-${postId}`);
-    averageValueElement.textContent = averageRating.toFixed(1);
-  
-    // Verificar se as avaliações estão sendo obtidas corretamente
-    console.log('Avaliações:', ratings);
-    console.log('Média das avaliações:', averageRating);
-    console.log('Total de avaliações:', totalRatings);
-  }
+
   
 /////////////
 function displayRating(rating, container, newRating = false) {
@@ -567,6 +548,34 @@ function getCookie(name) {
     return null;
 }
 
+
+function calculateAverageRating(postId) {
+    const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
+  
+    let totalRatings = ratings.length;
+    let sumRatings = 0;
+  
+    ratings.forEach((rating) => {
+      sumRatings += parseFloat(rating.textContent);
+    });
+  
+    let averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
+  
+    const averageValueElement = document.getElementById(`average-rating-${postId}`);
+    averageValueElement.textContent = averageRating.toFixed(1);
+  
+    // Verificar se as avaliações estão sendo obtidas corretamente
+    console.log('Avaliações:', ratings);
+    console.log('Média das avaliações:', averageRating);
+    console.log('Total de avaliações:', totalRatings);
+    console.log('Total de avaliações:', rating-value);
+
+    console.log("ID da Avaliação:", rating.id)
+    console.log("Valor da Avaliação:", rating.rating_value)
+    console.log("Usuário:", rating.user.username)
+
+  }
+
 ////////
 
 function write_rating(post_id) {
@@ -616,6 +625,9 @@ function write_rating(post_id) {
 
                 // Chamar a função para calcular a média das avaliações
                 calculateAverageRating(post_id);
+
+
+                
 
                 userHasRated = true;
                 postHasRated = true;
@@ -668,7 +680,7 @@ function loadRatings() {
 
 
 
-// Chame a função loadRatings ao carregar a página
+//Chame a função loadRatings ao carregar a página
 window.addEventListener('load', loadRatings);
 
 ///////////////////////////////////////////////////////////////////////
