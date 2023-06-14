@@ -433,7 +433,6 @@ def calculate_average_rating(post_id):
 
     return average_rating
 
-
 @csrf_exempt
 def write_rating(request, post_id):
     # Check if the user is authenticated
@@ -461,7 +460,7 @@ def write_rating(request, post_id):
     # Save the rating in the database
     rating = Rating.objects.create(
         user=request.user, post_id=post_id, rating_value=float(rating_value))
-
+    rating.save()
     # Calculate the average rating for the post
     average_rating = calculate_average_rating(post_id)
 
