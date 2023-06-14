@@ -550,8 +550,9 @@ function getCookie(name) {
 
 
 function calculateAverageRating(postId) {
-    const ratings = document.querySelectorAll(`.rating[data-post-id="${postId}"] .rating-value`);
+    const container = document.querySelector(`.rating[data-post-id="${postId}"]`);
   
+    const ratings = container.querySelectorAll('.rating-value');
     let totalRatings = ratings.length;
     let sumRatings = 0;
   
@@ -561,20 +562,15 @@ function calculateAverageRating(postId) {
   
     let averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
   
-    const averageValueElement = document.getElementById(`average-rating-${postId}`);
+    const averageValueElement = container.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
   
     // Verificar se as avaliações estão sendo obtidas corretamente
     console.log('Avaliações:', ratings);
     console.log('Média das avaliações:', averageRating);
     console.log('Total de avaliações:', totalRatings);
-    console.log('Total de avaliações:', rating-value);
-
-    console.log("ID da Avaliação:", rating.id);
-    console.log("Valor da Avaliação:", rating.rating_value);
-    console.log("Usuário:", rating.user.username);
-
   }
+  
 
 ////////
 
