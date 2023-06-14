@@ -515,42 +515,39 @@ function calculateAverageRating(postId) {
   }
   
 /////////////
-
 function displayRating(rating, container, newRating = false) {
     if (!rating || !container) {
-        console.error('Dados de avaliação ou contêiner ausentes.');
-        return;
+      console.error('Dados de avaliação ou contêiner ausentes.');
+      return;
     }
-
+  
     if (newRating) {
-        let eachRow = document.createElement('div');
-        eachRow.className = 'eachrow';
-        eachRow.setAttribute('data-id', rating.id);
-        container.prepend(eachRow);
+      let eachRow = document.createElement('div');
+      eachRow.className = 'eachrow';
+      eachRow.setAttribute('data-id', rating.id);
+      container.prepend(eachRow);
     }
-
+  
     let ratings = container.querySelectorAll('.rating-text-div');
     let totalRatings = ratings.length;
     let sumRatings = 0;
-
+  
     ratings.forEach((rating) => {
-        let ratingValue = parseFloat(rating.textContent.trim());
-        if (!isNaN(ratingValue)) {
-            sumRatings += ratingValue;
-        }
+      let ratingValue = parseFloat(rating.textContent.trim());
+      if (!isNaN(ratingValue)) {
+        sumRatings += ratingValue;
+      }
     });
-
+  
     let averageRating = totalRatings !== 0 ? sumRatings / totalRatings : 0;
     let averageValueElement = container.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
-
-     // Chamar a função para calcular a média das avaliações
-     calculateAverageRating(postId);
-
+  
     // Verificar se a média está sendo exibida corretamente
     console.log('Média das avaliações:', averageRating);
     console.log('Total de avaliações:', totalRatings);
-}
+  }
+  
 
 
 ////////////

@@ -433,6 +433,7 @@ def calculate_average_rating(post_id):
 
     return average_rating
 
+
 @csrf_exempt
 def write_rating(request, post_id):
     # Check if the user is authenticated
