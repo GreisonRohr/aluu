@@ -557,14 +557,8 @@ function write_rating(post_id) {
           ratingInput.value = '';
   
           // Atualizar a média das avaliações
-          let averageRating = parseFloat(ratingAverage.textContent);
-          let totalRatings = data.total_ratings; // Obter o total de avaliações do servidor
-          let sumRatings = averageRating * (totalRatings - 1) + ratingValue;
-          let newAverageRating = sumRatings / totalRatings;
+          let newAverageRating = parseFloat(data.average_rating);
           ratingAverage.textContent = newAverageRating.toFixed(1);
-  
-          // Chamar a função para calcular a média das avaliações
-          calculateAverageRating(post_id);
   
           userHasRated = true;
           postHasRated = true;
@@ -583,6 +577,7 @@ function write_rating(post_id) {
   
     return false;
   }
+  
   
 
 
