@@ -493,28 +493,6 @@ function getCookie(name) {
 }
 
 
-function calculateAverageRating(postId) {
-    const container = document.querySelector(`.rating[data-post-id="${postId}"]`);
-  
-    const ratings = container.querySelectorAll('.rating-value');
-    let totalRatings = ratings.length;
-    let sumRatings = 0;
-  
-    ratings.forEach((rating) => {
-      sumRatings += parseFloat(rating.textContent);
-    });
-  
-    let averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
-  
-    const averageValueElement = container.querySelector('.rating-average .average-value');
-    averageValueElement.textContent = averageRating.toFixed(1);
-  
-    // Verificar se as avaliações estão sendo obtidas corretamente
-    console.log('Avaliações:', ratings);
-    console.log('Média das avaliações:', averageRating);
-    console.log('Total de avaliações:', totalRatings);
-  }
-  
 
 ////////
 
@@ -584,34 +562,6 @@ function write_rating(post_id) {
 ///////
 
 
-function loadRatings() {
-    let ratingContainers = document.querySelectorAll('.rating');
-    ratingContainers.forEach((container) => {
-        let postId = container.dataset.postId;
-        fetch(`/n/post/${postId}/get_ratings`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    let ratings = data.ratings;
-                    ratings.forEach((rating) => {
-                        displayRating(rating, container);
-                    });
-                    // Calcular a média das avaliações existentes
-                    calculateAverageRating(postId);
-                } else {
-                    console.error(data.message);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    });
-}
-
-
-
-//Chame a função loadRatings ao carregar a página
-window.addEventListener('load', loadRatings);
 
 ///////////////////////////////////////////////////////////////////////
 
