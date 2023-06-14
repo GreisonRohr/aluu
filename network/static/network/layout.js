@@ -472,6 +472,40 @@ function displayRating(rating, container, newRating = false) {
     console.log('Média das avaliações:', averageRating);
     console.log('Total de avaliações:', totalRatings);
   }
+
+
+  function loadRatings() {
+    let ratingContainers = document.querySelectorAll('.rating');
+    ratingContainers.forEach((container) => {
+      let postId = container.dataset.postId;
+      fetch(`/n/post/${postId}/get_ratings`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            let ratings = data.ratings;
+            ratings.forEach((rating) => {
+              displayRating(rating, container);
+            });
+            // Exibir a média das avaliações
+            displayAverageRating(postId, data.average_rating);
+          } else {
+            console.error(data.message);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  }
+  
+  function displayAverageRating(postId, averageRating) {
+    let ratingAverage = document.getElementById(`average-rating-${postId}`);
+    ratingAverage.textContent = averageRating.toFixed(1);
+  }
+  
+  // Chame a função loadRatings ao carregar a página
+  window.addEventListener('load', loadRatings);
+  
   
 
 
