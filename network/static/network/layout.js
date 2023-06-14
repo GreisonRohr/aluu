@@ -478,7 +478,7 @@ function displayRating(rating, container, newRating = false) {
     let ratingContainers = document.querySelectorAll('.rating');
     ratingContainers.forEach((container) => {
       let postId = container.dataset.postId;
-      fetch(`/n/post/${postId}/get_ratings`)
+      fetch(`/n/post/${postId}/average_rating`)
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {
