@@ -468,33 +468,8 @@ function displayRating(rating, container, newRating = false) {
     let averageValueElement = container.querySelector('.rating-average .average-value');
     averageValueElement.textContent = averageRating.toFixed(1);
   
-    // Verificar se a média está sendo exibida corretamente
-    console.log('Média das avaliações:', averageRating);
-    console.log('Total de avaliações:', totalRatings);
   }
   
-
-
-////////////
-
-
-
-function getCookie(name) {
-    const cookieValue = document.cookie
-        .split(';')
-        .map(cookie => cookie.trim())
-        .find(cookie => cookie.startsWith(name + '='));
-
-    if (cookieValue) {
-        return cookieValue.split('=')[1];
-    }
-
-    return null;
-}
-
-
-
-////////
 
 function write_rating(post_id) {
     let ratingInput = document.getElementById(`ratingInput_${post_id}`);
@@ -556,15 +531,6 @@ function write_rating(post_id) {
     return false;
   }
   
-  
-
-
-///////
-
-
-
-///////////////////////////////////////////////////////////////////////
-
 
 //FUNÇOES Comentário
 
