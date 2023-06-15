@@ -31,9 +31,7 @@ urlpatterns = [
          views.write_rating, name="writerating"),
     path("n/post/<int:post_id>/get_ratings",
          views.get_ratings, name="getratings"),
-    path("n/post/<int:post_id>/get_ratings",
-         views.get_ratings, name="averagerating"),
-path('n/post/<int:post_id>/average_rating', views.get_average_rating, name='get_average_rating'),
+    
 
 
 
