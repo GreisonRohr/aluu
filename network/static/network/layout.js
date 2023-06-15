@@ -517,6 +517,33 @@ function write_rating(post_id) {
   
     return false;
   }
+
+
+
+
+  // Função para buscar a média de avaliação do servidor
+function fetchAverageRating(postId) {
+    fetch(`/n/post/${postId}/average_rating`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          const averageRatingElement = document.getElementById(`average-rating-${postId}`);
+          averageRatingElement.textContent = data.average_rating.toFixed(1);
+        } else {
+          console.error(data.message);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+  
+  // Obter todos os elementos de class "rating" e buscar a média de avaliação para cada um
+  const ratingElements = document.getElementsByClassName("rating");
+  Array.from(ratingElements).forEach(element => {
+    const postId = element.getAttribute("data-post-id");
+    fetchAverageRating(postId);
+  });
   
 
 ///////////////////////////////////////////////////////////////////////
