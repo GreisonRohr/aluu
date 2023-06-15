@@ -11,7 +11,10 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
 from .models import Post, Rating
+
 from django.db.models import Avg, Count, Sum
+from django.shortcuts import render
+
 from django.shortcuts import get_object_or_404
 
 
@@ -416,7 +419,7 @@ def calculate_average_rating(post_id):
     try:
         post = Post.objects.get(id=post_id)
     except ObjectDoesNotExist:
-        # The post doesn't exist, return a default value or raise an exception
+        # O post não existe, retorne um valor padrão ou levante uma exceção
         return None
 
     rating_stats = Rating.objects.filter(post=post).aggregate(
@@ -432,6 +435,7 @@ def calculate_average_rating(post_id):
     post.save()
 
     return average_rating
+
 
 @csrf_exempt
 def write_rating(request, post_id):
@@ -466,10 +470,7 @@ def write_rating(request, post_id):
 
     # Return a success response with the updated data
     return JsonResponse({'success': True, 'message': 'Avaliação registrada com sucesso.', 'average_rating': average_rating})
-
-
-
-
+    
 def get_ratings(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     ratings = Rating.objects.filter(post=post)
@@ -484,7 +485,8 @@ def get_ratings(request, post_id):
             'id': rating.id,
             'value': rating.rating_value,  # Corrigido para acessar o campo rating_value
             'rater': {
-                'username': rating.user.username,  # Corrigido para acessar o usuário associado ao rating
+                # Corrigido para acessar o usuário associado ao rating
+                'username': rating.user.username,
                 'first_name': rating.user.first_name,
                 'last_name': rating.user.last_name,
                 'profile_pic': rating.user.profile_pic.url if rating.user.profile_pic else ''
@@ -493,4 +495,3 @@ def get_ratings(request, post_id):
         data['ratings'].append(rating_data)
 
     return JsonResponse(data)
-
