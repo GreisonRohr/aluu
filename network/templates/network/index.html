@@ -145,7 +145,8 @@
                                                   <button onclick="write_rating({{ post.id }})">Avaliar</button>
                                                 </div>
                                                 <div class="rating-average">
-                                                    Nota: <span id="average-rating-{{ post.id }}" class="average-value">{{ calculate_average_rating(post.id) }}</span>
+                                                    Nota: <span id="average-rating-{{ post.id }}" class="average-value">{% with average_rating=calculate_average_rating(post.id) %}{{ average_rating }}{% endwith %}</span>
+
                                                 </div>
                                               </div>
                                               
