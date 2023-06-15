@@ -467,9 +467,13 @@ def write_rating(request, post_id):
     rating.save()
     # Calculate the average rating for the post
     average_rating = calculate_average_rating(post_id)
-
+ # Pass the average rating as part of the context when rendering the page
+    context = {
+        'average_rating': average_rating,
+        # Rest of the context data...
+    }
     # Return a success response with the updated data
-    return JsonResponse({'success': True, 'message': 'Avaliação registrada com sucesso.', 'average_rating': average_rating})
+    return JsonResponse({'success': True, 'message': 'Avaliação registrada com sucesso.', 'average_rating': average_rating, 'context': context})
     
 def get_ratings(request, post_id):
     post = get_object_or_404(Post, id=post_id)

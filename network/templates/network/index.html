@@ -145,18 +145,10 @@
                                                   <button onclick="write_rating({{ post.id }})">Avaliar</button>
                                                 </div>
                                                 <div class="rating-average">
-                                                    Nota: <span id="average-rating-{{ post.id }}" class="average-value"></span>
+                                                    Nota: <span id="average-rating-{{ post.id }}" class="average-value">{{ average_rating }}</span>
 
                                                 </div>
-                                              </div>
-                                              
-                                              <script>
-                                                var averageRatingElement = document.getElementById("average-rating-{{ post.id }}");
-                                                averageRatingElement.textContent = averageRating.toFixed(1); // Ajuste o número de casas decimais conforme necessário
-                                              </script>
-
-
-
+                                            </div>
 
                                         </div>
                                     </div>
