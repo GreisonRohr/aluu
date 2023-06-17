@@ -272,6 +272,8 @@ function previewFile() {
     }
 }
 
+
+
 function del_image() {
     document.querySelector('input[type=file]').value = '';
     document.querySelector('#img-div').style.backgroundImage = '';
