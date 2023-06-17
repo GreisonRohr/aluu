@@ -598,6 +598,9 @@ function editarPerfil() {
       console.error('Erro na requisição AJAX', error);
     });
   }
+
+  
+
   
 
 
