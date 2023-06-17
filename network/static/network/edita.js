@@ -85,9 +85,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
-
- // Código JavaScript para redirecionar para a página de edição de perfil
- document.getElementById("edit-profile-btn").addEventListener("click", function() {
-    window.location.href = "{% url 'edit_profile' %}";
-});

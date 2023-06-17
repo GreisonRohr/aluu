@@ -551,6 +551,68 @@ function fetchAverageRating(postId) {
 ///////////////////////////////////////////////////////////////////////
 
 
+function editarPerfil() {
+    // Obtenha os valores dos campos do formulário
+    let username = document.querySelector('#username').value;
+    let email = document.querySelector('#email').value;
+    let firstname = document.querySelector('#firstname').value;
+    let lastname = document.querySelector('#lastname').value;
+    let role = document.querySelector('input[name="role"]:checked').value;
+    let profilePic = document.querySelector('#profile').files[0];
+    let coverPhoto = document.querySelector('#cover').files[0];
+  
+    // Crie um objeto FormData para enviar os dados do formulário
+    let formData = new FormData();
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('firstname', firstname);
+    formData.append('lastname', lastname);
+    formData.append('role', role);
+    if (profilePic) {
+      formData.append('profile', profilePic);
+    }
+    if (coverPhoto) {
+      formData.append('cover', coverPhoto);
+    }
+  
+    // Faça a requisição AJAX para enviar os dados do formulário
+    fetch('/edit_profile/', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'  // Certifique-se de substituir '{{ csrf_token }}' com o valor correto
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        // Redirecione para a página de perfil após a edição bem-sucedida
+        window.location.href = '/profile/';
+      } else {
+        // Lida com erros de resposta, se necessário
+        console.error('Erro ao editar perfil');
+      }
+    })
+    .catch(error => {
+      // Lida com erros de requisição, se necessário
+      console.error('Erro na requisição AJAX', error);
+    });
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////
+
 //FUNÇOES Comentário
 
 function show_comment(element) {
