@@ -580,8 +580,9 @@ function editarPerfil() {
       method: 'POST',
       body: formData,
       headers: {
-        'X-CSRFToken': '{{ csrf_token }}'  // Certifique-se de substituir '{{ csrf_token }}' com o valor correto
-      }
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')      }
+        
     })
     .then(response => {
       if (response.ok) {
