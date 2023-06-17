@@ -1,0 +1,85 @@
+{% extends "network/layout2.html" %}
+
+{% load static %}
+
+{% block title %}
+Editar Dados | Aluu
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'network/signup.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="user-box" style="width: 100%">
+        <div>
+            <center>
+                <img src="{% static 'network/Images/logo-aluu.png' %}" style="width: 50%">
+                <h3>Editar Dados</h3><br>
+            </center>
+        </div>
+
+        <form action="{% url 'edit_profile' %}" method="post" id="edit-form" style="width: 100%; margin-bottom: 5vh;" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="form-row align-items-center">
+                    <div class="col-sm-6 my-1">
+                        <input class="form-control inp fname" type="text" name="firstname" placeholder="Primeiro Nome *" value="{{ user.firstname }}" autocomplete="off" autofocus>
+                        <span class="star small"></span>
+                    </div>
+                    <div class="col-sm-6 my-1">
+                        <input class="form-control inp lname" type="text" name="lastname" placeholder="Sobrenome *" value="{{ user.lastname }}" autocomplete="off">
+                        <span class="star small"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp usrname" type="text" name="username" placeholder="Usuário *" value="{{ user.username }}" autocomplete="off">
+                <span class="star small">{{ message }}</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp email" type="email" name="email" placeholder="Email  *" value="{{ user.email }}" autocomplete="off">
+                <span class="star small"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp pswd" type="password" name="password" placeholder="Senha *" autocomplete="off">
+                <span class="star small"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp cpswd" type="password" name="confirmation" placeholder="Confirme sua Senha *" autocomplete="off">
+                <span class="star small"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" name="profile" class="form-control custom-file-input" id="profile" accept="image/jpeg,image/png,image/webp,image/gif" data-focusable="true" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="profile"><span style="color: #6c757d;">Escolha a foto do perfil</span></label>
+                    <span class="star small"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" name="cover" class="form-control custom-file-input" id="cover" accept="image/jpeg,image/png,image/webp,image/gif" data-focusable="true" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="cover"><span style="color: #6c757d;">Escolha a foto da capa</span></label>
+                    <span class="star small"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <select class="form-control inp" name="role">
+                    <option value="student" {% if user.role == 'student' %}selected{% endif %}>Aluno</option>
+                    <option value="teacher" {% if user.role == 'teacher' %}selected{% endif %}>Professor</option>
+                </select>
+                <span class="star small"></span>
+            </div>
+
+            <center>
+                <input class="btn btn-primary" type="submit" value="Salvar Alterações" style="margin-top: 10px; width: 95%;">
+            </center>
+        </form>
+
+        <div>
+            <center>
+                <a href="{% url 'profile' %}">Cancelar</a>
+            </center>
+        </div><br><br>
+    </div>
+{% endblock %}

@@ -153,6 +153,54 @@ def profile(request, username):
         "following_count": following_count
     })
 
+##########################################
+
+def edit_profile(request):
+    if request.method == "POST":
+        # Obtenha os valores dos campos do formulário
+        username = request.POST["username"]
+        email = request.POST["email"]
+        fname = request.POST["firstname"]
+        lname = request.POST["lastname"]
+        role = request.POST["role"]  # Novo campo "role"
+        profile = request.FILES.get("profile")
+        cover = request.FILES.get('cover')
+
+        # Verifique se o usuário está autenticado
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse("login"))
+
+        # Obtenha o usuário atual
+        user = request.user
+
+        # Atualize os valores dos campos do usuário
+        user.username = username
+        user.email = email
+        user.first_name = fname
+        user.last_name = lname
+        user.role = role
+
+        # Atualize a foto do perfil se fornecida
+        if profile is not None:
+            user.profile_pic = profile
+
+        # Atualize a foto da capa se fornecida
+        if cover is not None:
+            user.cover = cover
+
+        # Salve as alterações no usuário
+        user.save()
+
+        return HttpResponseRedirect(reverse("profile"))
+    else:
+        return render(request, "network/edit_profile.html")
+
+
+
+
+
+##########################################
+
 
 def following(request):
     if request.user.is_authenticated:
