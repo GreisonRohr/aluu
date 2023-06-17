@@ -193,7 +193,7 @@ def edit_profile(request):
 
         return HttpResponseRedirect(reverse("profile"))
     else:
-        return render(request, "network/edit_profile.html")
+        return render(request, "network/edita.html")
 
 
 
