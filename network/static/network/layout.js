@@ -551,7 +551,7 @@ function fetchAverageRating(postId) {
 ///////////////////////////////////////////////////////////////////////
 
 
-function editarPerfil() {
+  function editarPerfil() {
     // Obtenha os valores dos campos do formulário
     let username = document.querySelector('#username').value;
     let email = document.querySelector('#email').value;
@@ -580,14 +580,12 @@ function editarPerfil() {
       method: 'POST',
       body: formData,
       headers: {
-        'Content-Type': 'application/json',
         'X-CSRFToken': getCookie('csrftoken')      }
-        
     })
     .then(response => {
       if (response.ok) {
-        // Redirecione para a página de perfil após a edição bem-sucedida
-        window.location.href = '/profile/';
+        // Redirecione para a página de edição de perfil após a edição bem-sucedida
+        window.location.href = '{% url "edit_profile" %}';
       } else {
         // Lida com erros de resposta, se necessário
         console.error('Erro ao editar perfil');
@@ -597,9 +595,8 @@ function editarPerfil() {
       // Lida com erros de requisição, se necessário
       console.error('Erro na requisição AJAX', error);
     });
-  }
+}
 
-  
 
   
 
