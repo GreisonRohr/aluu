@@ -464,94 +464,94 @@ function write_rating(post_id) {
     let ratingInput = document.getElementById(`ratingInput_${post_id}`);
     let ratingAverage = document.getElementById(`average-rating-${post_id}`);
     let ratingField = document.getElementById(`ratingField_${post_id}`);
-  
+
     if (document.querySelector('#user_is_authenticated').value !== 'True') {
-      alert("Você precisa estar logado para realizar uma avaliação.");
-      return false;
+        alert("Você precisa estar logado para realizar uma avaliação.");
+        return false;
     }
-  
+
     // Verificar se o usuário já fez uma avaliação nesta postagem
     if (userHasRated) {
-      alert("Você já fez uma avaliação nesta postagem.");
-      return false;
+        alert("Você já fez uma avaliação nesta postagem.");
+        return false;
     }
-  
+
     let ratingValue = parseFloat(ratingInput.value);
     if (isNaN(ratingValue) || ratingValue < 0 || ratingValue > 10) {
-      alert("Por favor, insira uma nota válida entre 0 e 10.");
-      return false;
+        alert("Por favor, insira uma nota válida entre 0 e 10.");
+        return false;
     }
-  
+
     // Enviar a avaliação para o servidor
     fetch(`/n/post/${post_id}/write_rating`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken')
-      },
-      body: JSON.stringify({
-        rating_value: ratingValue
-      })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            rating_value: ratingValue
+        })
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          ratingInput.value = '';
-  
-          // Atualizar a média das avaliações
-          let newAverageRating = parseFloat(data.average_rating);
-          ratingAverage.textContent = newAverageRating.toFixed(1);
-  
-          userHasRated = true;
-          postHasRated = true;
-          alert(data.message);
-  
-          // Esconder o campo de avaliação e o botão
-          ratingField.style.display = 'none';
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert("Ocorreu um erro ao processar a avaliação.");
-      });
-  
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                ratingInput.value = '';
+
+                // Atualizar a média das avaliações
+                let newAverageRating = parseFloat(data.average_rating);
+                ratingAverage.textContent = newAverageRating.toFixed(1);
+
+                userHasRated = true;
+                postHasRated = true;
+                alert(data.message);
+
+                // Esconder o campo de avaliação e o botão
+                ratingField.style.display = 'none';
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Ocorreu um erro ao processar a avaliação.");
+        });
+
     return false;
-  }
+}
 
 
 
 
-  // Função para buscar a média de avaliação do servidor
+// Função para buscar a média de avaliação do servidor
 function fetchAverageRating(postId) {
     fetch(`/n/post/${postId}/average_rating`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          const averageRatingElement = document.getElementById(`average-rating-${postId}`);
-          averageRatingElement.textContent = data.average_rating.toFixed(1);
-        } else {
-          console.error(data.message);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-  
-  // Obter todos os elementos de class "rating" e buscar a média de avaliação para cada um
-  const ratingElements = document.getElementsByClassName("rating");
-  Array.from(ratingElements).forEach(element => {
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const averageRatingElement = document.getElementById(`average-rating-${postId}`);
+                averageRatingElement.textContent = data.average_rating.toFixed(1);
+            } else {
+                console.error(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+// Obter todos os elementos de class "rating" e buscar a média de avaliação para cada um
+const ratingElements = document.getElementsByClassName("rating");
+Array.from(ratingElements).forEach(element => {
     const postId = element.getAttribute("data-post-id");
     fetchAverageRating(postId);
-  });
-  
+});
+
 
 ///////////////////////////////////////////////////////////////////////
 
 
-  function editarPerfil() {
+function editarPerfil() {
     // Obtenha os valores dos campos do formulário
     let username = document.querySelector('#username').value;
     let email = document.querySelector('#email').value;
@@ -560,7 +560,7 @@ function fetchAverageRating(postId) {
     let role = document.querySelector('input[name="role"]:checked').value;
     let profilePic = document.querySelector('#profile').files[0];
     let coverPhoto = document.querySelector('#cover').files[0];
-  
+
     // Crie um objeto FormData para enviar os dados do formulário
     let formData = new FormData();
     formData.append('username', username);
@@ -569,36 +569,37 @@ function fetchAverageRating(postId) {
     formData.append('lastname', lastname);
     formData.append('role', role);
     if (profilePic) {
-      formData.append('profile', profilePic);
+        formData.append('profile', profilePic);
     }
     if (coverPhoto) {
-      formData.append('cover', coverPhoto);
+        formData.append('cover', coverPhoto);
     }
-  
+
     // Faça a requisição AJAX para enviar os dados do formulário
     fetch('/edit_profile/', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'X-CSRFToken': getCookie('csrftoken')      }
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
     })
-    .then(response => {
-      if (response.ok) {
-        // Redirecione para a página de edição de perfil após a edição bem-sucedida
-        window.location.href = '{% url "edit_profile" %}';
-      } else {
-        // Lida com erros de resposta, se necessário
-        console.error('Erro ao editar perfil');
-      }
-    })
-    .catch(error => {
-      // Lida com erros de requisição, se necessário
-      console.error('Erro na requisição AJAX', error);
-    });
+        .then(response => {
+            if (response.ok) {
+                // Redirecione para a página de edição de perfil após a edição bem-sucedida
+                window.location.href = '/n/edita';
+            } else {
+                // Lida com erros de resposta, se necessário
+                console.error('Erro ao editar perfil');
+            }
+        })
+        .catch(error => {
+            // Lida com erros de requisição, se necessário
+            console.error('Erro na requisição AJAX', error);
+        });
 }
 
 
-  
+
 
 
 
@@ -713,3 +714,5 @@ function goto_register() {
 function goto_login() {
     window.location.href = '/n/login';
 }
+
+
