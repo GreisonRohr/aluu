@@ -554,30 +554,22 @@ Array.from(ratingElements).forEach(element => {
 function editarPerfil() {
     console.log('Botão clicado'); // Verifique se essa mensagem é exibida no console
 
-    // Obtenha os valores dos campos do formulário
-    let username = document.querySelector('#username').value;
-    let email = document.querySelector('#email').value;
-    let firstname = document.querySelector('#firstname').value;
-    let lastname = document.querySelector('#lastname').value;
-    let role = document.querySelector('input[name="role"]:checked').value;
-    let profilePic = document.querySelector('#profile').files[0];
-    let coverPhoto = document.querySelector('#cover').files[0];
+    // Obtendo os dados do usuário atual
+    let username = '{{ user.username }}';
+    let email = '{{ user.email }}';
+    let firstname = '{{ user.firstname }}';
+    let lastname = '{{ user.lastname }}';
+    let role = '{{ user.role }}';
 
-    // Crie um objeto FormData para enviar os dados do formulário
+    // Criando um objeto FormData para enviar os dados do usuário atual
     let formData = new FormData();
     formData.append('username', username);
     formData.append('email', email);
     formData.append('firstname', firstname);
     formData.append('lastname', lastname);
     formData.append('role', role);
-    if (profilePic) {
-        formData.append('profile', profilePic);
-    }
-    if (coverPhoto) {
-        formData.append('cover', coverPhoto);
-    }
 
-    // Faça a requisição AJAX para enviar os dados do formulário
+    // Fazendo a requisição AJAX para enviar os dados do usuário atual
     fetch('/edit_profile/', {
         method: 'POST',
         body: formData,
@@ -587,18 +579,19 @@ function editarPerfil() {
     })
         .then(response => {
             if (response.ok) {
-                // Redirecione para a página de edição de perfil após a edição bem-sucedida
+                // Redirecionando para a página de edição de perfil após a edição bem-sucedida
                 window.location.href = '/n/edita';
             } else {
-                // Lida com erros de resposta, se necessário
+                // Lidando com erros de resposta, se necessário
                 console.error('Erro ao editar perfil');
             }
         })
         .catch(error => {
-            // Lida com erros de requisição, se necessário
+            // Lidando com erros de requisição, se necessário
             console.error('Erro na requisição AJAX', error);
         });
 }
+
 
 
 
