@@ -159,7 +159,7 @@ def profile(request, username):
 
 @login_required
 def edit_profile(request):
-    profile_url = reverse('profile', args=[request.user.username])
+    profile_url = reverse('edit_profile', args=[request.user.username])
     return redirect(profile_url)
 
 
