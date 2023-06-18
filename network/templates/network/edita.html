@@ -24,21 +24,21 @@ Editar Dados | Aluu
             <div class="form-group">
                 <div class="form-row align-items-center">
                     <div class="col-sm-6 my-1">
-                        <input class="form-control inp fname" type="text" name="firstname" placeholder="Primeiro Nome *" value="{{ firstname }}" autocomplete="off" autofocus>
+                        <input class="form-control inp fname" type="text" name="firstname" placeholder="Primeiro Nome *" value="{{ user.first_name }}" autocomplete="off" autofocus>
                         <span class="star small"></span>
                     </div>
                     <div class="col-sm-6 my-1">
-                        <input class="form-control inp lname" type="text" name="lastname" placeholder="Sobrenome *" value="{{ lastname }}" autocomplete="off">
+                        <input class="form-control inp lname" type="text" name="lastname" placeholder="Sobrenome *" value="{{ user.last_name }}" autocomplete="off">
                         <span class="star small"></span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <input class="form-control inp usrname" type="text" name="username" placeholder="Usuário *" value="{{ username }}" autocomplete="off">
+                <input class="form-control inp usrname" type="text" name="username" placeholder="Usuário *" value="{{ user.username  }}" autocomplete="off">
                 <span class="star small">{{ message }}</span>
             </div>
             <div class="form-group">
-                <input class="form-control inp email" type="email" name="email" placeholder="Email  *" value="{{ email }}" autocomplete="off">
+                <input class="form-control inp email" type="email" name="email" placeholder="Email  *" value="{{ user.email }}" autocomplete="off">
                 <span class="star small"></span>
             </div>
             <div class="form-group">

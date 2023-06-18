@@ -156,11 +156,17 @@ def profile(request, username):
 ##########################################
 
 
-
-
 @login_required
 def edit_profile(request):
-    return render(request, 'network/edita.html')
+    user = request.user
+    context = {
+        'username': user.username,
+        'email': user.email,
+        'firstname': user.first_name,
+        'lastname': user.last_name,
+        'role': user.role,
+    }
+    return render(request, 'edita.html', context)
 
 
 ##########################################
