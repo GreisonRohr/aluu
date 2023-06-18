@@ -235,15 +235,17 @@ def saved(request):
     else:
         return HttpResponseRedirect(reverse('login'))
 
-
+##################################################################
 @login_required
 def create_post(request):
     if request.method == 'POST':
         text = request.POST.get('text')
         pic = request.FILES.get('picture')
+        tag = request.POST.get('tag')  # Obtém o valor da tag relacionada
+
         try:
             post = Post.objects.create(
-                creater=request.user, content_text=text, content_image=pic)
+                creater=request.user, content_text=text, content_image=pic, tag=tag)  # Salva a tag relacionada no novo post
             return HttpResponseRedirect(reverse('index'))
         except Exception as e:
             return HttpResponse(e)
@@ -260,17 +262,21 @@ def edit_post(request, post_id):
         img_chg = request.POST.get('img_change')
         post_id = request.POST.get('id')
         post = Post.objects.get(id=post_id)
+
+        tag = request.POST.get('tag')  # Obtém o valor atualizado da tag relacionada
+
         try:
             post.content_text = text
             if img_chg != 'false':
                 post.content_image = pic
+            post.tag = tag  # Atualiza a tag relacionada do post
             post.save()
 
-            if (post.content_text):
+            if post.content_text:
                 post_text = post.content_text
             else:
                 post_text = False
-            if (post.content_image):
+            if post.content_image:
                 post_image = post.img_url()
             else:
                 post_image = False
@@ -289,6 +295,7 @@ def edit_post(request, post_id):
             })
     else:
         return HttpResponse("Method must be 'POST'")
+#################################################################################
 
 
 @csrf_exempt

@@ -42,6 +42,11 @@
                                                 </a>
                                                 <span class="grey">&nbsp;&middot;&nbsp;&nbsp;{{post.date_created | date:"P M d Y"}}</span>
                                             </div>
+                                            <div class="tags">
+                                                {% for tag in post.tags.all %}
+                                                    <span class="tag">#{{ tag.name }}</span>
+                                                {% endfor %}
+                                            </div>
                                             <div class="dropdown" style="height: 1em; margin-top: -3px; margin-right: -3px;">
                                                 <button class="icon-btn dropdown-toggle" type="button" id="dropdownMenuButton" onfocus="drop_down(event)" onblur="remove_drop_down(event)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <svg width="1em" height="1em" viewBox="0 -2 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -68,6 +73,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         {% if post.content_text is not None %}
                                             <div class="post-content">
                                                 {{post.content_text | linebreaksbr}}

@@ -38,6 +38,8 @@ class Post(models.Model):
     comment_count = models.IntegerField(default=0)
     average_rating = models.FloatField(default=0)  # Novo campo para a média das avaliações
 
+    
+
     def __str__(self):
         return f"Post ID: {self.id} (creater: {self.creater})"
 
