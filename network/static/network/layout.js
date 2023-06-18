@@ -550,29 +550,12 @@ Array.from(ratingElements).forEach(element => {
 
 ///////////////////////////////////////////////////////////////////////
 
-
 function editarPerfil() {
     console.log('Botão clicado'); // Verifique se essa mensagem é exibida no console
 
-    // Obtendo os dados do usuário atual
-    let username = '{{ user.username }}';
-    let email = '{{ user.email }}';
-    let firstname = '{{ user.firstname }}';
-    let lastname = '{{ user.lastname }}';
-    let role = '{{ user.role }}';
-
-    // Criando um objeto FormData para enviar os dados do usuário atual
-    let formData = new FormData();
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('firstname', firstname);
-    formData.append('lastname', lastname);
-    formData.append('role', role);
-
-    // Fazendo a requisição AJAX para enviar os dados do usuário atual
+    // Fazendo a requisição AJAX para redirecionar para a página de edição de perfil
     fetch('/edit_profile/', {
         method: 'POST',
-        body: formData,
         headers: {
             'X-CSRFToken': getCookie('csrftoken')
         }
@@ -591,6 +574,7 @@ function editarPerfil() {
             console.error('Erro na requisição AJAX', error);
         });
 }
+
 
 
 
