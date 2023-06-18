@@ -31,8 +31,8 @@
                     <div class="form-area">
                         <form action="{% url 'createpost' %}" method="POST" class="newpost" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <textarea name="text" autofocus placeholder="Alguma dúvida, ou novidade? " rows="5" id="post-text"></textarea>
-                            <input type="hidden" id="img-change" value="false"></input>
+                            <textarea name="text" autofocus placeholder="Alguma dúvida ou novidade?" rows="5" id="post-text"></textarea>
+                            <input type="hidden" id="img-change" value="false">
                             <div id='img-div'>
                                 <button id="del-img" type='button'>
                                     <svg width="1.55em" height="1.55em" viewBox="0 0 24 24" class="r-jwli3a r-4qtqp9 r-yyyyoo r-1q142lx r-50lct3 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue" fill="#fff">
@@ -54,6 +54,7 @@
                                     </label>
                                 </div>
                                 <div>
+                                    <input name="tag" type="text" placeholder="Digite uma tag relacionada" style="margin-right: 5px;">
                                     <button class="btn btn-light float-right cancel-post" type="button" onclick="remove_popup()">Cancelar</button>
                                     <input type="submit" class="btn btn-success float-right submit-btn" value="&nbsp;Postar&nbsp;" disabled>
                                 </div>
@@ -62,6 +63,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="login-popup">
                 <div onclick="remove_popup()" class="icon-btn">
                     <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
