@@ -160,7 +160,7 @@ def profile(request, username):
 
 @login_required
 def edit_profile(request):
-    return render(request, 'network/index.html')
+    return render(request, 'network/edita.html')
 
 
 ##########################################
