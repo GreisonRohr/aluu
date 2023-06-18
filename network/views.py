@@ -13,7 +13,6 @@ from django.views.decorators.http import require_POST
 from .models import Post, Rating
 
 from django.db.models import Avg, Count, Sum
-from django.shortcuts import render
 
 from django.shortcuts import get_object_or_404
 
