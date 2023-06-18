@@ -142,7 +142,6 @@ def profile(request, username):
     follower_count = Follower.objects.get(user=user).followers.all().count()
     following_count = Follower.objects.filter(followers=user).count()
 
-    
     return render(request, 'network/profile.html', {
         "username": user,
         "posts": posts,
@@ -157,7 +156,6 @@ def profile(request, username):
 ##########################################
 
 
-f
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
@@ -166,7 +164,6 @@ def edit_profile(request):
         return redirect(reverse('profile', args=[request.user.username]))
     else:
         return redirect('edit_profile')  # Redirecionar para a rota de edição
-
 
 
 ##########################################
