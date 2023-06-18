@@ -84,7 +84,5 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   
-    // Adicione o evento de clique ao botão "Editar Perfil"
-    document.querySelector("#edit-profile-btn").addEventListener("click", editarPerfil);
   });
   
