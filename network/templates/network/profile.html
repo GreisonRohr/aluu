@@ -10,9 +10,7 @@
             <div>
                 {% if user.username == username.username %}
                     
-                    <button class="btn btn-outline-success float-right" id="edit-profile-btn">
-                        <a href="/network/edita.html/">Editar Perfil</a>
-                    </button>
+                    <button class="btn btn-outline-success float-right" id="edit-profile-btn" onclick="editarPerfil()">Editar Perfil</button>
 
                 {% elif is_follower %}
                     <button class="btn btn-success float-right" onclick="unfollow_user(this,'{{username.username}}','edit_page')" id="following-btn">Seguindo</button>
