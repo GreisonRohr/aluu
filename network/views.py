@@ -141,6 +141,8 @@ def profile(request, username):
 
     follower_count = Follower.objects.get(user=user).followers.all().count()
     following_count = Follower.objects.filter(followers=user).count()
+
+    
     return render(request, 'network/profile.html', {
         "username": user,
         "posts": posts,
@@ -157,19 +159,8 @@ def profile(request, username):
 
 @login_required
 def edit_profile(request):
-    username = request.GET.get('username')
-    email = request.GET.get('email')
-    firstname = request.GET.get('firstname')
-    lastname = request.GET.get('lastname')
-    role = request.GET.get('role')
-    
-    return render(request, "network/edita.html", {
-        'username': username,
-        'email': email,
-        'firstname': firstname,
-        'lastname': lastname,
-        'role': role,
-    })
+    profile_url = reverse('profile', args=[request.user.username])
+    return redirect(profile_url)
 
 
 
