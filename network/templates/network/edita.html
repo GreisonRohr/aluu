@@ -63,16 +63,15 @@ Editar Dados | Aluu
                 <span class="star small"></span>
             </div>
             <center>
-                <input class="btn btn-primary" type="submit" value="Salvar Alterações" style="margin-top: 10px; width: 95%;">
-            </center>
+                <form method="post" id="edit-form" style="margin-top: 10px; width: 95%;">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">Salvar Alterações</button>
+                </form>            </center>
         </form>
 
         <div>
             <center>
-                <form method="post" id="edit-form" style="margin-top: 10px; width: 95%;">
-                    {% csrf_token %}
-                    <button class="btn btn-primary" type="submit">Salvar Alterações</button>
-                </form>
+                <a href="{% url 'profile' username=user.username %}">Cancelar</a>
             </center>
         </div><br><br>
     </div>
