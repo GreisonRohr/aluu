@@ -157,6 +157,7 @@ def profile(request, username):
 ##########################################
 
 
+f
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
@@ -164,7 +165,8 @@ def edit_profile(request):
         # ...
         return redirect(reverse('profile', args=[request.user.username]))
     else:
-        return redirect('edita.html')  # Redirecionar para a página de edição
+        return redirect('edit_profile')  # Redirecionar para a rota de edição
+
 
 
 ##########################################
