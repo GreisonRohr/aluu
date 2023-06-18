@@ -552,6 +552,8 @@ Array.from(ratingElements).forEach(element => {
 
 
 function editarPerfil() {
+    console.log('Botão clicado'); // Verifique se essa mensagem é exibida no console
+
     // Obtenha os valores dos campos do formulário
     let username = document.querySelector('#username').value;
     let email = document.querySelector('#email').value;
