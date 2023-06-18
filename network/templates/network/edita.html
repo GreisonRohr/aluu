@@ -69,7 +69,10 @@ Editar Dados | Aluu
 
         <div>
             <center>
-                <a href="{% url 'profile' username=user.username %}">Cancelar</a>
+                <form method="post" id="edit-form" style="margin-top: 10px; width: 95%;">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">Salvar Alterações</button>
+                </form>
             </center>
         </div><br><br>
     </div>
