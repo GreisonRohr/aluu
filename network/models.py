@@ -6,6 +6,15 @@ from django.utils import timezone
 from django.db.models import Sum
 
 
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class User(AbstractUser):
     profile_pic = models.ImageField(upload_to='profile_pic/')
     bio = models.TextField(max_length=160, blank=True, null=True)
@@ -28,6 +37,8 @@ class User(AbstractUser):
 ###################################
 
 
+from django.db import models
+
 class Post(models.Model):
     creater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     date_created = models.DateTimeField(default=timezone.now)
@@ -37,8 +48,7 @@ class Post(models.Model):
     savers = models.ManyToManyField(User, blank=True, related_name='saved')
     comment_count = models.IntegerField(default=0)
     average_rating = models.FloatField(default=0)  # Novo campo para a média das avaliações
-
-    
+    tags = models.ManyToManyField(Tag, blank=True, related_name='posts')
 
     def __str__(self):
         return f"Post ID: {self.id} (creater: {self.creater})"
@@ -48,7 +58,6 @@ class Post(models.Model):
 
     def append(self, name, value):
         self.name = value
-
 
 
 
@@ -110,5 +119,4 @@ class Rating(models.Model):
         self.post.average_rating = average_rating
         self.post.total_ratings = total_ratings
         self.post.save()
-
 
