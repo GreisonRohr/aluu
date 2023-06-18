@@ -159,9 +159,12 @@ def profile(request, username):
 
 @login_required
 def edit_profile(request):
-    profile_url = reverse('edit_profile', args=[request.user.username])
-    return redirect(profile_url)
-
+    if request.method == 'POST':
+        # Processar os dados do formulário enviado pelo usuário
+        # ...
+        return redirect(reverse('profile', args=[request.user.username]))
+    else:
+        return redirect('edita.html')  # Redirecionar para a página de edição
 
 
 ##########################################
