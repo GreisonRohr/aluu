@@ -556,8 +556,8 @@ function editarPerfil() {
     // Obtendo os dados do usuário atual
     let username = '{{ user.username }}';
     let email = '{{ user.email }}';
-    let firstname = '{{ user.firstname }}';
-    let lastname = '{{ user.lastname }}';
+    let firstname = '{{ user.first_name }}';
+    let lastname = '{{ user.last_name }}';
     let role = '{{ user.role }}';
 
     // Redirecionando para a página de edição de perfil com os dados do usuário
@@ -567,7 +567,6 @@ function editarPerfil() {
                             '&lastname=' + encodeURIComponent(lastname) +
                             '&role=' + encodeURIComponent(role);
 }
-
 
 
 

@@ -24,21 +24,21 @@ Editar Dados | Aluu
             <div class="form-group">
                 <div class="form-row align-items-center">
                     <div class="col-sm-6 my-1">
-                        <input class="form-control inp fname" type="text" name="firstname" placeholder="Primeiro Nome *" value="{{ user.firstname }}" autocomplete="off" autofocus>
+                        <input class="form-control inp fname" type="text" name="firstname" placeholder="Primeiro Nome *" value="{{ firstname }}" autocomplete="off" autofocus>
                         <span class="star small"></span>
                     </div>
                     <div class="col-sm-6 my-1">
-                        <input class="form-control inp lname" type="text" name="lastname" placeholder="Sobrenome *" value="{{ user.lastname }}" autocomplete="off">
+                        <input class="form-control inp lname" type="text" name="lastname" placeholder="Sobrenome *" value="{{ lastname }}" autocomplete="off">
                         <span class="star small"></span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <input class="form-control inp usrname" type="text" name="username" placeholder="Usuário *" value="{{ user.username }}" autocomplete="off">
+                <input class="form-control inp usrname" type="text" name="username" placeholder="Usuário *" value="{{ username }}" autocomplete="off">
                 <span class="star small">{{ message }}</span>
             </div>
             <div class="form-group">
-                <input class="form-control inp email" type="email" name="email" placeholder="Email  *" value="{{ user.email }}" autocomplete="off">
+                <input class="form-control inp email" type="email" name="email" placeholder="Email  *" value="{{ email }}" autocomplete="off">
                 <span class="star small"></span>
             </div>
             <div class="form-group">
@@ -65,8 +65,8 @@ Editar Dados | Aluu
             </div>
             <div class="form-group">
                 <select class="form-control inp" name="role">
-                    <option value="student" {% if user.role == 'student' %}selected{% endif %}>Aluno</option>
-                    <option value="teacher" {% if user.role == 'teacher' %}selected{% endif %}>Professor</option>
+                    <option value="student" {% if role == 'student' %}selected{% endif %}>Aluno</option>
+                    <option value="teacher" {% if role == 'teacher' %}selected{% endif %}>Professor</option>
                 </select>
                 <span class="star small"></span>
             </div>
