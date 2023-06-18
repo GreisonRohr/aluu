@@ -158,15 +158,31 @@ def profile(request, username):
 
 @login_required
 def edit_profile(request):
-    user = request.user
-    context = {
-        'username': user.username,
-        'email': user.email,
-        'firstname': user.first_name,
-        'lastname': user.last_name,
-        'role': user.role,
-    }
+    if request.method == 'POST':
+        user = request.user
+        # Atualizar os dados do usuário com base nos valores enviados no formulário
+        user.first_name = request.POST.get('firstname')
+        user.last_name = request.POST.get('lastname')
+        user.username = request.POST.get('username')
+        user.email = request.POST.get('email')
+        user.role = request.POST.get('role')
+        user.save()
+        # Redirecionar para a página de perfil ou outra página de sua escolha
+        # Substitua 'perfil' pelo nome da sua rota de perfil de usuário
+        return redirect('network/profile.html')
+    else:
+
+        user = request.user
+        context = {
+            'username': user.username,
+            'email': user.email,
+            'firstname': user.first_name,
+            'lastname': user.last_name,
+            'role': user.role,
+        }
     return render(request, 'network/edita.html', context)
+
+    # Caso contrário, se for uma solicitação GET, renderize o formulário de edição de usuário
 
 
 ##########################################
