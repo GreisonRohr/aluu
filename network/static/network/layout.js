@@ -553,26 +553,19 @@ Array.from(ratingElements).forEach(element => {
 function editarPerfil() {
     console.log('Botão clicado'); // Verifique se essa mensagem é exibida no console
 
-    // Fazendo a requisição AJAX para redirecionar para a página de edição de perfil
-    fetch('/edit_profile/', {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken')
-        }
-    })
-        .then(response => {
-            if (response.ok) {
-                // Redirecionando para a página de edição de perfil após a edição bem-sucedida
-                window.location.href = '/n/edita';
-            } else {
-                // Lidando com erros de resposta, se necessário
-                console.error('Erro ao editar perfil');
-            }
-        })
-        .catch(error => {
-            // Lidando com erros de requisição, se necessário
-            console.error('Erro na requisição AJAX', error);
-        });
+    // Obtendo os dados do usuário atual
+    let username = '{{ user.username }}';
+    let email = '{{ user.email }}';
+    let firstname = '{{ user.firstname }}';
+    let lastname = '{{ user.lastname }}';
+    let role = '{{ user.role }}';
+
+    // Redirecionando para a página de edição de perfil com os dados do usuário
+    window.location.href = '/n/edita?username=' + encodeURIComponent(username) +
+                            '&email=' + encodeURIComponent(email) +
+                            '&firstname=' + encodeURIComponent(firstname) +
+                            '&lastname=' + encodeURIComponent(lastname) +
+                            '&role=' + encodeURIComponent(role);
 }
 
 
