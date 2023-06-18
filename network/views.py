@@ -166,7 +166,7 @@ def edit_profile(request):
         'lastname': user.last_name,
         'role': user.role,
     }
-    return render(request, 'edita.html', context)
+    return render(request, 'network/edita.html', context)
 
 
 ##########################################
