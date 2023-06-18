@@ -553,21 +553,9 @@ Array.from(ratingElements).forEach(element => {
 function editarPerfil() {
     console.log('Botão clicado'); // Verifique se essa mensagem é exibida no console
 
-    // Obtendo os dados do usuário atual
-    let username = '{{ user.username }}';
-    let email = '{{ user.email }}';
-    let firstname = '{{ user.first_name }}';
-    let lastname = '{{ user.last_name }}';
-    let role = '{{ user.role }}';
-
-    // Redirecionando para a página de edição de perfil com os dados do usuário
-    window.location.href = '/n/edita?username=' + encodeURIComponent(username) +
-                            '&email=' + encodeURIComponent(email) +
-                            '&firstname=' + encodeURIComponent(firstname) +
-                            '&lastname=' + encodeURIComponent(lastname) +
-                            '&role=' + encodeURIComponent(role);
+    // Redirecionando para a página de edição de perfil
+    window.location.href = '/n/edita';
 }
-
 
 
 
