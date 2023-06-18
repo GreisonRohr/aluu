@@ -169,7 +169,7 @@ def edit_profile(request):
         user.save()
         # Redirecionar para a página de perfil ou outra página de sua escolha
         # Substitua 'perfil' pelo nome da sua rota de perfil de usuário
-        return redirect('network/profile.html')
+        return redirect('profile', username=user.username)
     else:
 
         user = request.user
