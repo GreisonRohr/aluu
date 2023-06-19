@@ -241,11 +241,16 @@ def create_post(request):
     if request.method == 'POST':
         text = request.POST.get('text')
         pic = request.FILES.get('picture')
-        tag = request.POST.get('tag')  # Obtém o valor da tag relacionada
+        tag_name = request.POST.get('tag')  # Obtém o valor da tag relacionada
 
         try:
             post = Post.objects.create(
-                creater=request.user, content_text=text, content_image=pic, tag=tag)  # Salva a tag relacionada no novo post
+                creater=request.user, content_text=text, content_image=pic)  # Salva o novo post sem a tag relacionada
+
+            if tag_name:
+                tag, created = Tag.objects.get_or_create(name=tag_name)
+                post.tags.add(tag)  # Associa a tag ao post
+
             return HttpResponseRedirect(reverse('index'))
         except Exception as e:
             return HttpResponse(e)
@@ -260,16 +265,19 @@ def edit_post(request, post_id):
         text = request.POST.get('text')
         pic = request.FILES.get('picture')
         img_chg = request.POST.get('img_change')
-        post_id = request.POST.get('id')
-        post = Post.objects.get(id=post_id)
-
-        tag = request.POST.get('tag')  # Obtém o valor atualizado da tag relacionada
+        tag_name = request.POST.get('tag')  # Obtém o valor atualizado da tag relacionada
 
         try:
+            post = Post.objects.get(id=post_id)
+
             post.content_text = text
             if img_chg != 'false':
                 post.content_image = pic
-            post.tag = tag  # Atualiza a tag relacionada do post
+
+            if tag_name:
+                tag, created = Tag.objects.get_or_create(name=tag_name)
+                post.tags.set([tag])  # Atualiza a tag relacionada do post
+
             post.save()
 
             if post.content_text:
@@ -295,6 +303,7 @@ def edit_post(request, post_id):
             })
     else:
         return HttpResponse("Method must be 'POST'")
+
 #################################################################################
 
 

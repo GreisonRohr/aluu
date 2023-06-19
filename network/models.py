@@ -36,9 +36,6 @@ class User(AbstractUser):
 
 ###################################
 
-
-from django.db import models
-
 class Post(models.Model):
     creater = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     date_created = models.DateTimeField(default=timezone.now)
@@ -57,9 +54,7 @@ class Post(models.Model):
         return self.content_image.url
 
     def append(self, name, value):
-        self.name = value
-
-
+        setattr(self, name, value)
 
 ###########################
 
@@ -119,4 +114,5 @@ class Rating(models.Model):
         self.post.average_rating = average_rating
         self.post.total_ratings = total_ratings
         self.post.save()
+
 
