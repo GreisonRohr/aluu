@@ -257,7 +257,6 @@ def create_post(request):
     else:
         return HttpResponse("Method must be 'POST'")
 
-
 @login_required
 @csrf_exempt
 def edit_post(request, post_id):
@@ -276,7 +275,8 @@ def edit_post(request, post_id):
 
             if tag_name:
                 tag, created = Tag.objects.get_or_create(name=tag_name)
-                post.tags.set([tag])  # Atualiza a tag relacionada do post
+                post.tags.clear()  # Remove todas as tags antigas do post
+                post.tags.add(tag)  # Adiciona a nova tag ao post
 
             post.save()
 
