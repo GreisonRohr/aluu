@@ -97,7 +97,12 @@ function delete_post(id) {
 function edit_post(element) {
     let post = element.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
     let popup = document.querySelector('.large-popup');
-    let tag = element.getAttribute('data-tag');  // Obtém o valor da tag atual
+    let tags = post.querySelector('.tags').getAttribute('data-tags');  // Obtém o valor das tags da postagem
+
+    // Preenche o campo de entrada de tag no formulário de edição
+    let tagInput = popup.querySelector('input[name="tag"]');
+    tagInput.value = tags; // Preenche o campo com as tags da postagem separadas por vírgulas
+    
     let promise = new Promise((resolve, reject) => {
         let post_text = post.querySelector('.post-content').innerText;
         let post_image = post.querySelector('.post-image').style.backgroundImage;
