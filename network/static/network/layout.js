@@ -102,7 +102,7 @@ function edit_post(element) {
     // Preenche o campo de entrada de tag no formulário de edição
     let tagInput = popup.querySelector('input[name="tag"]');
     tagInput.value = tags; // Preenche o campo com as tags da postagem separadas por vírgulas
-    
+
     let promise = new Promise((resolve, reject) => {
         let post_text = post.querySelector('.post-content').innerText;
         let post_image = post.querySelector('.post-image').style.backgroundImage;
@@ -134,10 +134,12 @@ function edit_post_submit(post_id) {
     let text = popup.querySelector('#post-text').value;
     let pic = popup.querySelector('#insert-img');
     let chg = popup.querySelector('#img-change');
+    let tag = popup.querySelector('input[name="tag"]').value;  // Obtém o valor da tag atualizada
     let formdata = new FormData();
     formdata.append('text', text);
     formdata.append('picture', pic.files[0]);
     formdata.append('img_change', chg.value);
+    formdata.append('tag', tag);  // Adiciona a tag atualizada aos dados do formulário
     formdata.append('id', post_id);
     fetch('/n/post/' + parseInt(post_id) + '/edit', {
         method: 'POST',
@@ -163,6 +165,16 @@ function edit_post_submit(post_id) {
                             post.querySelector('.post-image').style.backgroundImage = '';
                             post.querySelector('.post-image').style.display = 'none';
                         }
+                        if (response.tag) {
+                            let tagContainer = post.querySelector('.tags');
+                            tagContainer.innerHTML = '';  // Limpa as tags existentes
+                            response.tag.forEach(tag => {
+                                let tagElement = document.createElement('span');
+                                tagElement.className = 'tag';
+                                tagElement.textContent = '#' + tag.name;
+                                tagContainer.appendChild(tagElement);
+                            });
+                        }
                     }
                 });
                 return false;
@@ -174,6 +186,7 @@ function edit_post_submit(post_id) {
     remove_popup();
     return false;
 }
+
 
 function remove_popup() {
     let popup = document.querySelector('.popup');
