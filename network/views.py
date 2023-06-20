@@ -256,7 +256,8 @@ def create_post(request):
             return HttpResponse(e)
     else:
         return HttpResponse("Method must be 'POST'")
-
+    
+    
 @login_required
 @csrf_exempt
 def edit_post(request, post_id):
@@ -303,6 +304,7 @@ def edit_post(request, post_id):
             })
     else:
         return HttpResponse("Method must be 'POST'")
+
 
 #################################################################################
 
