@@ -259,7 +259,7 @@ def create_post(request):
 
 @login_required
 @csrf_exempt
-def edit_post(request, post_id):
+def edit_post_submit(request, post_id):
     if request.method == 'POST':
         text = request.POST.get('text')
         pic = request.FILES.get('picture')
