@@ -94,7 +94,7 @@ function delete_post(id) {
 //edit_post(element): Esta função é chamada para editar um post. Ele extrai as informações relevantes do elemento post e preenche o pop-up de edição com o texto e a imagem do post. 
 //Em seguida, ele chama a createpostfunção para exibir o pop-up e define o atributo onsubmit do formulário para chamar a edit_post_submitfunção com o ID do post.
 
-function edit_post(element) {
+function edit_post(element, currentTag) {
     let post = element.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
     let popup = document.querySelector('.large-popup');
     let promise = new Promise((resolve, reject) => {
@@ -110,6 +110,11 @@ function edit_post(element) {
         else {
             popup.querySelector('#img-div').style.backgroundImage = '';
         }
+
+        // Preencher campo de tag com a tag atual
+        let tagInput = popup.querySelector('#tag');
+        tagInput.value = currentTag;
+
         resolve(popup);
     });
     promise.then(() => {
@@ -118,6 +123,7 @@ function edit_post(element) {
         popup.querySelector('.submit-btn').disabled = false;
     });
 }
+
 
 //edit_post_submit(post_id): esta função é chamada quando o usuário envia o formulário de postagem editado. Ele recupera o texto e a imagem editados do formulário, 
 //envia uma solicitação POST ao servidor para atualizar a postagem e atualiza o elemento de postagem correspondente na página com o conteúdo editado.
@@ -556,20 +562,6 @@ function editarPerfil() {
     // Redirecionando para a página de edição de perfil
     window.location.href = '/n/edita';
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //////////////////////////////////////////////////
