@@ -94,9 +94,10 @@ function delete_post(id) {
 //edit_post(element): Esta função é chamada para editar um post. Ele extrai as informações relevantes do elemento post e preenche o pop-up de edição com o texto e a imagem do post. 
 //Em seguida, ele chama a createpostfunção para exibir o pop-up e define o atributo onsubmit do formulário para chamar a edit_post_submitfunção com o ID do post.
 
-function edit_post(element, currentTag) {
+function edit_post(element) {
     let post = element.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
     let popup = document.querySelector('.large-popup');
+    let tag = element.getAttribute('data-tag');  // Obtém o valor da tag atual
     let promise = new Promise((resolve, reject) => {
         let post_text = post.querySelector('.post-content').innerText;
         let post_image = post.querySelector('.post-image').style.backgroundImage;
@@ -110,10 +111,6 @@ function edit_post(element, currentTag) {
         else {
             popup.querySelector('#img-div').style.backgroundImage = '';
         }
-
-        // Preencher campo de tag com a tag atual
-        let tagInput = popup.querySelector('#tag');
-        tagInput.value = currentTag;
 
         resolve(popup);
     });
