@@ -10,8 +10,6 @@
                     Todas Postagens
                 {% elif page == 'following' %}
                     Seguindo
-                    <input type="text" id="tag-filter-input" placeholder="Filtrar por tag">
-                    <button id="tag-filter-button" onclick="filterByTag()">Filtrar</button>
                 {% elif page == 'saved' %}
                     Salvou
                 {% elif page == 'profile' %}
@@ -20,6 +18,12 @@
                     Explorar
                 {% endif %}
             </nav>
+            {% if page == 'following' %}
+                <div class="tag-filter">
+                    <input type="text" id="tag-filter-input" placeholder="Filtrar por tag">
+                    <button id="tag-filter-button" onclick="filterByTag()">Filtrar</button>
+                </div>
+            {% endif %}
          </div>
             <div class="left-div-content">
                 <div class="posts-view">
