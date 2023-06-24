@@ -3,6 +3,8 @@ from django.urls import path
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+
 
 from . import views
 
@@ -27,6 +29,11 @@ urlpatterns = [
     path("n/post/<int:post_id>/edit", views.edit_post, name="editpost"),
     path("n/post/<int:post_id>/write_rating", views.write_rating, name="writerating"),
     path("n/post/<int:post_id>/get_ratings", views.get_ratings, name="getratings"),
+
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
