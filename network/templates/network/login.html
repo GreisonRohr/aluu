@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="user-box"style="width: 100%">
+    <div class="user-box" style="width: 100%">
         <div>
             <center>
                 <img src="{% static 'network/Images/logo-aluu.png' %}" height="90em" style="margin-bottom: 2vh;">
@@ -15,7 +15,7 @@
             </center>
         </div>
 
-        <form action="{% url 'login' %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;">
+        <form action="{% url 'login' %}" method="post" id="signin-form" style="width: 100%; margin-bottom: 5vh;">
             {% csrf_token %}
             <div class="form-group">
                 <input class="form-control inp usrnm" type="text" name="username" placeholder="Nome de Usuário" autocomplete="off" autofocus>
@@ -32,6 +32,8 @@
         <div>
             <center>
                 Não tem uma conta? &nbsp;&nbsp;<a href="{% url 'register' %}">Criar</a>
+                <br>
+                <a href="{% url 'password_reset' %}">Esqueceu sua senha?</a>
             </center>
         </div>
     </div>
@@ -52,7 +54,3 @@
         });
     </script>
 {% endblock %}
-
-
-
-
