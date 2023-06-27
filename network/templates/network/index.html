@@ -8,18 +8,20 @@
             <nav class="head heading">
                 {% if page == 'all_posts' %}
                     Todas Postagens
-                    <div class="ml-auto">
-                        <form class="form-inline" action="{% url 'search_posts' %}" method="GET">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                    {% if user.is_authenticated %}
+                        <div class="ml-auto">
+                            <form class="form-inline" action="{% url 'search_posts' %}" method="GET">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    {% endif %}
                 {% elif page == 'following' %}
                     Seguindo
                 {% elif page == 'saved' %}
@@ -30,6 +32,7 @@
                     Explorar
                 {% endif %}
             </nav>
+            
             
             
             
