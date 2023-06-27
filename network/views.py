@@ -239,6 +239,7 @@ def saved(request):
 ##################################################################
 
 
+@login_required
 def search_posts(request):
     if request.method == 'GET':
         query = request.GET.get('query')  # Obtém o valor da pesquisa
@@ -246,7 +247,8 @@ def search_posts(request):
         if query:
             # Realize a pesquisa de posts com base na consulta
             posts = Post.objects.filter(
-                Q(content_text__icontains=query) | Q(tags__name__icontains=query)
+                Q(content_text__icontains=query) | Q(
+                    tags__name__icontains=query)
             ).distinct()
 
             context = {
@@ -259,8 +261,6 @@ def search_posts(request):
             return render(request, 'search.html')
     else:
         return HttpResponse("Method must be 'GET'")
-
-
 
 
 @login_required
@@ -283,8 +283,8 @@ def create_post(request):
             return HttpResponse(e)
     else:
         return HttpResponse("Method must be 'POST'")
-    
-    
+
+
 @login_required
 @csrf_exempt
 def edit_post(request, post_id):
@@ -292,7 +292,8 @@ def edit_post(request, post_id):
         text = request.POST.get('text')
         pic = request.FILES.get('picture')
         img_chg = request.POST.get('img_change')
-        tag_name = request.POST.get('tag')  # Obtém o valor atualizado da tag relacionada
+        # Obtém o valor atualizado da tag relacionada
+        tag_name = request.POST.get('tag')
 
         try:
             post = Post.objects.get(id=post_id)
