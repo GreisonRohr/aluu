@@ -8,7 +8,7 @@
             <nav class="head heading">
                 {% if page == 'all_posts' %}
                     Todas Postagens
-                    <form class="form-inline" action="{% url 'search_posts' %}" method="GET">
+                    <form class="form-inline ml-auto" action="{% url 'search_posts' %}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
                             <div class="input-group-append">
@@ -28,6 +28,7 @@
                     Explorar
                 {% endif %}
             </nav>
+            
             
             <div class="left-div-content">
                 <div class="posts-view">
