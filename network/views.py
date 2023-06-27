@@ -11,6 +11,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
 from .models import Post, Rating
+from django.db.models import Q
 
 from django.db.models import Avg, Count, Sum
 
@@ -236,6 +237,32 @@ def saved(request):
         return HttpResponseRedirect(reverse('login'))
 
 ##################################################################
+
+
+def search_posts(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')  # Obtém o valor da pesquisa
+
+        if query:
+            # Realize a pesquisa de posts com base na consulta
+            posts = Post.objects.filter(
+                Q(content_text__icontains=query) | Q(tags__name__icontains=query)
+            ).distinct()
+
+            context = {
+                'query': query,
+                'posts': posts
+            }
+
+            return render(request, 'search.html', context)
+        else:
+            return render(request, 'search.html')
+    else:
+        return HttpResponse("Method must be 'GET'")
+
+
+
+
 @login_required
 def create_post(request):
     if request.method == 'POST':
