@@ -7,10 +7,10 @@
         <div class="left-div">
             <nav class="head heading">
                 {% if page == 'all_posts' %}
-                    Todas Postagens
-                    {% if user.is_authenticated %}
-                        <div class="ml-auto">
-                            <form class="form-inline" action="{% url 'search_posts' %}" method="GET">
+                    <div class="d-flex align-items-center">
+                        <div>Todas Postagens</div>
+                        {% if user.is_authenticated %}
+                            <form class="ml-auto" action="{% url 'search_posts' %}" method="GET">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
                                     <div class="input-group-append">
@@ -20,8 +20,8 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 {% elif page == 'following' %}
                     Seguindo
                 {% elif page == 'saved' %}
@@ -32,6 +32,7 @@
                     Explorar
                 {% endif %}
             </nav>
+            
             
             
             
