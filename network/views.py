@@ -239,28 +239,25 @@ def saved(request):
 ##################################################################
 
 
+
 @login_required
 def search_posts(request):
-    if request.method == 'GET':
-        query = request.GET.get('query')  # Obtém o valor da pesquisa
+    tags = request.GET.get('tags')  # Obtém o valor da pesquisa
 
-        if query:
-            # Realize a pesquisa de posts com base na consulta
-            posts = Post.objects.filter(
-                Q(content_text__icontains=query) | Q(
-                    tags__name__icontains=query)
-            ).distinct()
-
-            context = {
-                'query': query,
-                'posts': posts
-            }
-
-            return render(request, 'search.html', context)
-        else:
-            return render(request, 'search.html')
+    if tags:
+        # Realiza a pesquisa de postagens com base nas tags
+        posts = Post.objects.filter(tags__name__icontains=tags)
     else:
-        return HttpResponse("Method must be 'GET'")
+        # Retorna todas as postagens se não houver pesquisa
+        posts = Post.objects.all()
+
+    context = {
+        'tags': tags,
+        'posts': posts
+    }
+
+    return render(request, 'network/index.html', context)
+
 
 
 @login_required
