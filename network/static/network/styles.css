@@ -961,3 +961,24 @@ svg {
     cursor: pointer;
 }
 
+.ranking-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .filter-option {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .ranking-options {
+      flex-direction: column;
+    }
+  
+    .filter-option {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
