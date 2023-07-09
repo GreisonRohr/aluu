@@ -42,19 +42,17 @@
                             </div>
                         </div>
                         <div class="main-div-content">
-                            {% for post in posts %}
-                                <div class="post">
-                                    <!-- Conteúdo da postagem -->
-                                    <!-- Exemplo: -->
-                                    <h3>{{ post.title }}</h3>
-                                    <p>{{ post.content }}</p>
-                                    <p>Curtidas: {{ post.likes_count }}</p>
-                                    <p>Nota: {{ post.rating }}</p>
-                                    <!-- ... -->
-                                </div>
                             {% empty %}
-                                <p>Nenhuma postagem encontrada.</p>
-                            {% endfor %}
+                            {% block emptyprofile %}
+                            {% endblock %}
+                            {% if page == 'all_posts' %}
+                                <center>
+                                    <br>
+                                    <strong style="font-size: 1.2em;">Desculpe! Ninguém postou nada ainda.</strong>
+                                    <div class="grey" style="font-size: .9em;">Quando o fizerem, suas postagens aparecerão aqui.</div>
+                                </center>
+                            {% endif %}
+                        {% endfor %}
                         </div>
                     {% endblock %}
                 </div>
