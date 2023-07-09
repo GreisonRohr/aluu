@@ -247,6 +247,43 @@ def saved(request):
 ##################################################################
 
 
+def ranking(request):
+    # Example: Get top 10 posts based on likes
+    top_posts = Post.objects.order_by('-likes')[:10]
+    return render(request, "network/ranking.html", {
+        "top_posts": top_posts
+    })
+
+
+@login_required
+def search_posts_ranking(request):
+    rating_filter = request.GET.get('rating')  # Obtém o filtro de nota
+    likes_filter = request.GET.get('likes')  # Obtém o filtro de curtidas
+
+    # Filtra as postagens com base nos filtros
+    if rating_filter == 'high':
+        posts = Post.objects.order_by('-rating')
+    elif rating_filter == 'low':
+        posts = Post.objects.order_by('rating')
+    elif likes_filter == 'high':
+        posts = Post.objects.order_by('-likes_count')
+    elif likes_filter == 'low':
+        posts = Post.objects.order_by('likes_count')
+    else:
+        posts = Post.objects.all()
+
+    context = {
+        'rating_filter': rating_filter,
+        'likes_filter': likes_filter,
+        'posts': posts
+    }
+
+    return render(request, 'network/index.html', context)
+
+
+
+
+
 @login_required
 def search_posts(request):
     tags = request.GET.get('tags')  # Obtém o valor da pesquisa

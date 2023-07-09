@@ -1,7 +1,5 @@
 {% extends "network/layout.html" %}
 
-{% load static %}
-
 {% block body %}
     <div class="main-div">
         <div class="left-div">
@@ -9,7 +7,7 @@
                 <div class="d-flex align-items-center">
                     <div>Ranking</div>
                     {% if user.is_authenticated %}
-                        <form class="ml-auto" action="{% url 'search_posts' %}" method="GET">
+                        <form class="ml-auto" action="{% url 'search_posts_ranking' %}" method="GET">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
                                 <div class="input-group-append">
@@ -44,7 +42,19 @@
                             </div>
                         </div>
                         <div class="main-div-content">
-                            <!-- Renderize aqui os posts do ranking -->
+                            {% for post in posts %}
+                                <div class="post">
+                                    <!-- Conteúdo da postagem -->
+                                    <!-- Exemplo: -->
+                                    <h3>{{ post.title }}</h3>
+                                    <p>{{ post.content }}</p>
+                                    <p>Curtidas: {{ post.likes_count }}</p>
+                                    <p>Nota: {{ post.rating }}</p>
+                                    <!-- ... -->
+                                </div>
+                            {% empty %}
+                                <p>Nenhuma postagem encontrada.</p>
+                            {% endfor %}
                         </div>
                     {% endblock %}
                 </div>
