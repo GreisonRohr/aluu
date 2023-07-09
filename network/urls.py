@@ -28,13 +28,20 @@ urlpatterns = [
     path("<str:username>/follow", views.follow, name="followuser"),
     path("<str:username>/unfollow", views.unfollow, name="unfollowuser"),
     path("n/post/<int:post_id>/edit", views.edit_post, name="editpost"),
-    path("n/post/<int:post_id>/write_rating", views.write_rating, name="writerating"),
-    path("n/post/<int:post_id>/get_ratings", views.get_ratings, name="getratings"),
+    path("n/post/<int:post_id>/write_rating",
+         views.write_rating, name="writerating"),
+    path("n/post/<int:post_id>/get_ratings",
+         views.get_ratings, name="getratings"),
+    path("n/ranking", views.ranking, name="ranking"),
 
-    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(),
+         name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
+         name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(),
+         name='password_reset_complete'),
 
 ]
 
