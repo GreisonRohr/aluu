@@ -189,6 +189,14 @@ def edit_profile(request):
 ##########################################
 
 
+def ranking(request):
+    # Example: Get top 10 posts based on likes
+    top_posts = Post.objects.order_by('-likes')[:10]
+    return render(request, "network/ranking.html", {
+        "top_posts": top_posts
+    })
+
+
 def following(request):
     if request.user.is_authenticated:
         following_user = Follower.objects.filter(
@@ -239,7 +247,6 @@ def saved(request):
 ##################################################################
 
 
-
 @login_required
 def search_posts(request):
     tags = request.GET.get('tags')  # Obtém o valor da pesquisa
@@ -257,7 +264,6 @@ def search_posts(request):
     }
 
     return render(request, 'network/index.html', context)
-
 
 
 @login_required
