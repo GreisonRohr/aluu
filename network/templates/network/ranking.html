@@ -1,0 +1,59 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    <div class="main-div">
+        <div class="left-div">
+            <nav class="head heading">
+                <div class="d-flex align-items-center">
+                    <div>Ranking</div>
+                    {% if user.is_authenticated %}
+                        <form class="ml-auto" action="{% url 'search_posts' %}" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </nav>
+            <div class="left-div-content">
+                <div class="posts-view">
+                    {% block ranking %}
+                        <div class="ranking-options">
+                            <div class="ranking-filters">
+                                <div class="filter-option">
+                                    <label for="filter-rating">Filtrar por Nota:</label>
+                                    <select id="filter-rating">
+                                        <option value="">Todos</option>
+                                        <option value="5">5 estrelas</option>
+                                        <option value="4">4 estrelas</option>
+                                        <option value="3">3 estrelas</option>
+                                        <option value="2">2 estrelas</option>
+                                        <option value="1">1 estrela</option>
+                                    </select>
+                                </div>
+                                <div class="filter-option">
+                                    <label for="filter-likes">Filtrar por Curtidas:</label>
+                                    <select id="filter-likes">
+                                        <option value="">Todos</option>
+                                        <option value="high">Mais curtidas</option>
+                                        <option value="low">Menos curtidas</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-div-content">
+                            <!-- Renderize aqui os posts do ranking -->
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
