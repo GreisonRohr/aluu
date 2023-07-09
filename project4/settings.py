@@ -75,22 +75,10 @@ WSGI_APPLICATION = 'project4.wsgi.application'
 
 # Configuração do banco de dados
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
- #   }
-#}
-
-
 DATABASES = {
-    "default": {
-        "ENGINE": 'aluu.database.windows.net',
-        "NAME": 'aluu',
-        "USER": 'CloudSAed3ab186',
-        "PASSWORD": 'Gr+07780210',
-        "HOST": "aluu.database.windows.net",
-        "PORT": "1540",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -150,6 +138,7 @@ USE_TZ = True
 # No exemplo fornecido, o suporte a fusos horários está ativado.
 
 
+
 # Configuração de e-mail
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -158,6 +147,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'aluutcc@gmail.com'
 EMAIL_HOST_PASSWORD = 'Gr+07780210'
+
 
 
 # Arquivos estáticos (CSS, JavaScript, Imagens)
