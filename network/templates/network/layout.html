@@ -141,6 +141,16 @@
                                             </div>
                                         </a>
                                     </li>
+                                    <li class="nav-item" id="ranking">
+                                        <a href="{% url 'ranking' %}" class="nav-link">
+                                            <div style="width: 100%">
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trophy" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 0a2 2 0 0 1 1.385 3.416L11.732 5H14a2 2 0 0 1 2 2v1a3 3 0 0 1-3 3h-1.764a4.001 4.001 0 1 0-5.472 0H4a3 3 0 0 1-3-3V7a2 2 0 0 1 2-2h2.268L6.615 3.416A2 2 0 0 1 8 0zm0 2a1.001 1.001 0 0 0-1 1v.154l.011.08C6.12 4.7 5.171 5.743 5.027 7H3a1 1 0 0 0-1 1v1a2 2 0 0 0 2 2h1a4 4 0 0 0 0 8h6a4 4 0 0 0 0-8h1a2 2 0 0 0 2-2V8a1 1 0 0 0-1-1h-2.027C10.829 5.742 9.879 4.699 9.962 3.234l.01-.084V3a1.001 1.001 0 0 0-1-1z"/>
+                                                </svg>
+                                                &nbsp;&nbsp;Ranking
+                                            </div>
+                                        </a>
+                                    </li>
                                     <li class="nav-item" id="logout">
                                         <a href="{% url 'logout' %}" class="nav-link">
                                             <div style="width: 100%">
@@ -219,7 +229,7 @@
                                     <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                                 </svg>
                             </div>
-                            <input type="text" name="query" id="search-box" placeholder="Rede de Pesquisa">
+                            <input type="text" name="query" id="search-box" placeholder="Pesquisa">
                         </div>
                     </form>
                 </nav>
