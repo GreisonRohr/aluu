@@ -9,14 +9,14 @@
                     {% if user.is_authenticated %}
                     <form class="ml-auto" action="{% url 'search_posts_ranking' %}" method="GET">
                         <div class="input-group">
-                                <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
+                            <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </div>
-                        </form>
+                        </div>
+                    </form>
                     {% endif %}
                 </div>
             </nav>
@@ -42,7 +42,6 @@
                             </div>
                         </div>
                         <div class="main-div-content">
-                            {% empty %}
                             {% block emptyprofile %}
                             {% endblock %}
                             {% if page == 'all_posts' %}
@@ -52,9 +51,8 @@
                                     <div class="grey" style="font-size: .9em;">Quando o fizerem, suas postagens aparecerão aqui.</div>
                                 </center>
                             {% endif %}
-                        {% endfor %}
                         </div>
-                    {% endblock %}
+                    {% endblock ranking %}
                 </div>
             </div>
         </div>
