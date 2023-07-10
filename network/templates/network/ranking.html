@@ -70,7 +70,6 @@
                                                                 <span class="tag">#{{ tag.name }}</span>
                                                             {% endfor %}
                                                         </div>
-                                                        
                                                         <div class="dropdown" style="height: 1em; margin-top: -3px; margin-right: -3px;">
                                                             <button class="icon-btn dropdown-toggle" type="button" id="dropdownMenuButton" onfocus="drop_down(event)" onblur="remove_drop_down(event)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <svg width="1em" height="1em" viewBox="0 -2 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -93,8 +92,6 @@
                                                                         </svg>
                                                                         &nbsp;Editar Postagem
                                                                     </button>
-                                                                    
-                                                                                                                         
                                                                 {% endif %}
                                                             </div>
                                                         </div>
@@ -111,7 +108,6 @@
                                                         <div class="post-image" style="display: none;"></div>
                                                     {% endif %}
                                                     <div class="post-actions">
-            
                                                         {% if user in post.likers.all %}
                                                             <div class="like" onclick="unlike_post(this)" data-post_id="{{post.id}}">
                                                                 <div class="svg-span">
@@ -133,7 +129,7 @@
                                                                 <div style="padding: 7px 0px;" class="likes_count">{{post.likers.count}}</div>
                                                             </div>
                                                         {% endif %}
-            
+                        
                                                         <div class="comment" onclick="show_comment(this)">
                                                             <div class="svg-span">
                                                                 <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-chat" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +139,6 @@
                                                             <div style="padding: 7px 0px;" class="cmt-count">{{post.comment_count}}</div>
                                                         </div>
                                                   
-            
                                                         {% if user in post.savers.all %}
                                                             <div class="save" onclick="unsave_post(this)" data-post_id="{{post.id}}">
                                                                 <div class="svg-span">
@@ -161,39 +156,28 @@
                                                                 </div>
                                                             </div>
                                                         {% endif %}
-            
-                                                
-            
-            
-                                                          
+                        
                                                         <div class="rating" data-post-id="{{ post.id }}">
                                                             <div class="svg-span" onclick="showRatingField(this)">
-                                                              <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
-                                                                <polygon points="12 2 15.09 8.72 22 9.82 17 14 18.18 21 12 17.27 5 18.18 6.91 14 2 9.82 8.91 8.72 12 2"/>
-                                                              </svg>
+                                                                <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                                                    <polygon points="12 2 15.09 8.72 22 9.82 17 18.18 21 12 17.27 5 18.18 6.91 14 2 9.82 8.91 8.72 12 2"/>
+                                                                </svg>
                                                             </div>
                                                             <div id="ratingField_{{ post.id }}" style="display: none;">
-                                                              <input type="number" id="ratingInput_{{ post.id }}" placeholder="0-10" min="0" max="10" step="0.1">
-                                                              <button onclick="write_rating({{ post.id }})">Avaliar</button>
+                                                                <input type="number" id="ratingInput_{{ post.id }}" placeholder="0-10" min="0" max="10" step="0.1">
+                                                                <button onclick="write_rating({{ post.id }})">Avaliar</button>
                                                             </div>
                                                             <div class="rating-average">
                                                                 Nota Média: <span id="average-rating-{{ post.id }}" class="average-value">{{ post.average_rating }}</span>
-            
                                                             </div>
                                                         </div>
-            
-            
-            
-            
-            
-            
-                                                        
-            
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="comment-div" style="display: none;" data-post_id="{{post.id}}">
-                                               
+                                                <div class="spinner-div">
+                                                    <img src="{% static 'network/Images/spinner.gif' %}" id="spinner" height="65px">
+                                                </div>
                                                 {% if user.is_authenticated %}
                                                     <div class="comment-div-data" style="display: none;">
                                                         <div class="head-comment-input">
@@ -226,7 +210,6 @@
                                             </center>
                                         {% endif %}
                                     {% endfor %}
-            
                                     <nav aria-label="Page navigation example" class="pagination-bar">
                                         <ul class="pagination justify-content-center">
                                             {% if posts.has_previous %}
@@ -255,11 +238,11 @@
                                                 </li>
                                             {% endif %}
                                         </ul>
-                                      </nav>
-            
+                                    </nav>
                                 </div>
                             </div>
                         </div>
+                        
                     {% endblock ranking %}
                 </div>
             </div>
