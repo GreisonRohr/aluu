@@ -246,7 +246,6 @@ def saved(request):
 
 ##################################################################
 
-
 def ranking(request):
     # Example: Get top 10 posts based on likes
     top_posts = Post.objects.order_by('-likes')[:10]
@@ -278,7 +277,8 @@ def search_posts_ranking(request):
         'posts': posts
     }
 
-    return render(request, 'network/index.html', context)
+    return render(request, 'network/ranking.html', context)
+
 
 
 
