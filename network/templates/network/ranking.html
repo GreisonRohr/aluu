@@ -23,75 +23,38 @@
             <div class="left-div-content">
                 <div class="posts-view">
                     {% block ranking %}
-                        <div class="ranking-options">
-                            <div class="filter-option">
-                                <label for="filter-rating">Filtrar por Nota:</label>
-                                <select id="filter-rating">
-                                    <option value="">Todos</option>
-                                    <option value="high">Maior nota</option>
-                                    <option value="low">Menor nota</option>
-                                </select>
-                            </div>
-                            <div class="filter-option">
-                                <label for="filter-likes">Filtrar por Curtidas:</label>
-                                <select id="filter-likes">
-                                    <option value="">Todos</option>
-                                    <option value="high">Mais curtidas</option>
-                                    <option value="low">Menos curtidas</option>
-                                </select>
-                            </div>
+                    <div class="ranking-options">
+                        <div class="filter-option">
+                            <label for="filter-rating">Filtrar por Nota:</label>
+                            <select id="filter-rating">
+                                <option value="">Todos</option>
+                                <option value="high">Maior nota</option>
+                                <option value="low">Menor nota</option>
+                            </select>
                         </div>
-
-                        {% for post in posts %}
-                            <div class="post" data-post_id="{{ post.id }}">
-                                <div>
-                                    <div>
-                                        <a href="{% url 'profile' post.creator.username %}">
-                                            <div class="small-profilepic" style="background-image: url(/network/media/{{ post.creator.profile_pic }})"></div>
-                                        </a>
-                                    </div>
-                                    <div style="flex: 1">
-                                        <div class="post-user">
-                                            <div>
-                                                <a href="{% url 'profile' post.creator.username %}">
-                                                    <span><strong>{{ post.creator.first_name }} {{ post.creator.last_name }}</strong></span>
-                                                </a>
-                                                <a href="{% url 'profile' post.creator.username %}">
-                                                    <span class="grey">&nbsp;@{{ post.creator.username }}</span>
-                                                </a>
-                                                <span class="grey">&nbsp;&middot;&nbsp;&nbsp;{{ post.date_created | date:"P M d Y" }}</span>
-                                            </div>
-                                            <div class="tags" data-tags="{% for tag in post.tags.all %}{{ tag.name }},{% endfor %}">
-                                                {% for tag in post.tags.all %}
-                                                    <span class="tag">#{{ tag.name }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-
-                                        {% if post.content_text is not None %}
-                                            <div class="post-content">
-                                                {{ post.content_text | linebreaksbr }}
-                                            </div>
-                                        {% endif %}
-                                        {% if post.content_image %}
-                                            <div class="post-image" style="background-image: url(/media/{{ post.content_image }});"></div>
-                                        {% else %}
-                                            <div class="post-image" style="display: none;"></div>
-                                        {% endif %}
-                                        <div class="post-actions">
-                                            <!-- Botões de ação da postagem -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% empty %}
-                            <center>
-                                <br>
-                                <strong style="font-size: 1.2em;">Desculpe! Não há postagens disponíveis para exibir no ranking.</strong>
-                                <div class="grey" style="font-size: .9em;">As postagens serão exibidas aqui quando estiverem disponíveis.</div>
-                            </center>
-                        {% endfor %}
-                    {% endblock %}
+                        <div class="filter-option">
+                            <label for="filter-likes">Filtrar por Curtidas:</label>
+                            <select id="filter-likes">
+                                <option value="">Todos</option>
+                                <option value="high">Mais curtidas</option>
+                                <option value="low">Menos curtidas</option>
+                            </select>
+                        </div>
+                    </div>
+                
+                    {% for post in top_posts %}
+                        <div class="post" data-post_id="{{ post.id }}">
+                            <!-- Conteúdo da postagem -->
+                        </div>
+                    {% empty %}
+                        <center>
+                            <br>
+                            <strong style="font-size: 1.2em;">Desculpe! Não há postagens disponíveis para exibir no ranking.</strong>
+                            <div class="grey" style="font-size: .9em;">As postagens serão exibidas aqui quando estiverem disponíveis.</div>
+                        </center>
+                    {% endfor %}
+                {% endblock %}
+                
                 </div>
             </div>
         </div>
