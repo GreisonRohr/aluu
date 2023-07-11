@@ -44,7 +44,6 @@
 
                         {% for post in posts %}
                             <div class="post" data-post_id="{{ post.id }}">
-                                <!-- Conteúdo da postagem -->
                                 <div>
                                     <div>
                                         <a href="{% url 'profile' post.creator.username %}">
@@ -92,7 +91,7 @@
                                 <div class="grey" style="font-size: .9em;">As postagens serão exibidas aqui quando estiverem disponíveis.</div>
                             </center>
                         {% endfor %}
-                    {% endblock ranking %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
