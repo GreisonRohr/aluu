@@ -189,6 +189,57 @@ def edit_profile(request):
 ##########################################
 
 
+
+def following(request):
+    if request.user.is_authenticated:
+        following_user = Follower.objects.filter(
+            followers=request.user).values('user')
+        all_posts = Post.objects.filter(
+            creater__in=following_user).order_by('-date_created')
+        paginator = Paginator(all_posts, 10)
+        page_number = request.GET.get('page')
+        if page_number == None:
+            page_number = 1
+        posts = paginator.get_page(page_number)
+        followings = Follower.objects.filter(
+            followers=request.user).values_list('user', flat=True)
+        suggestions = User.objects.exclude(pk__in=followings).exclude(
+            username=request.user.username).order_by("?")[:6]
+        return render(request, "network/index.html", {
+            "posts": posts,
+            "suggestions": suggestions,
+            "page": "following"
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+
+def saved(request):
+    if request.user.is_authenticated:
+        all_posts = Post.objects.filter(
+            savers=request.user).order_by('-date_created')
+
+        paginator = Paginator(all_posts, 10)
+        page_number = request.GET.get('page')
+        if page_number == None:
+            page_number = 1
+        posts = paginator.get_page(page_number)
+
+        followings = Follower.objects.filter(
+            followers=request.user).values_list('user', flat=True)
+        suggestions = User.objects.exclude(pk__in=followings).exclude(
+            username=request.user.username).order_by("?")[:6]
+        return render(request, "network/index.html", {
+            "posts": posts,
+            "suggestions": suggestions,
+            "page": "saved"
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+##################################################################
+
+
 @login_required
 def search_posts_ranking(request):
     rating_filter = request.GET.get('rating')  # Obtém o filtro de nota
@@ -222,66 +273,6 @@ def ranking(request):
         "top_posts": top_posts,
         "posts": []  # Adicione esta linha para garantir que a variável "posts" esteja sempre disponível no contexto
     })
-
-
-
-def saved(request):
-    if request.user.is_authenticated:
-        all_posts = Post.objects.filter(
-            savers=request.user).order_by('-date_created')
-
-        paginator = Paginator(all_posts, 10)
-        page_number = request.GET.get('page')
-        if page_number == None:
-            page_number = 1
-        posts = paginator.get_page(page_number)
-
-        followings = Follower.objects.filter(
-            followers=request.user).values_list('user', flat=True)
-        suggestions = User.objects.exclude(pk__in=followings).exclude(
-            username=request.user.username).order_by("?")[:6]
-        return render(request, "network/index.html", {
-            "posts": posts,
-            "suggestions": suggestions,
-            "page": "saved"
-        })
-    else:
-        return HttpResponseRedirect(reverse('login'))
-
-##################################################################
-
-def ranking(request):
-    # Example: Get top 10 posts based on likes
-    top_posts = Post.objects.order_by('-likes')[:10]
-    return render(request, "network/ranking.html", {
-        "top_posts": top_posts
-    })
-
-
-@login_required
-def search_posts_ranking(request):
-    rating_filter = request.GET.get('rating')  # Obtém o filtro de nota
-    likes_filter = request.GET.get('likes')  # Obtém o filtro de curtidas
-
-    # Filtra as postagens com base nos filtros
-    if rating_filter == 'high':
-        posts = Post.objects.order_by('-rating')
-    elif rating_filter == 'low':
-        posts = Post.objects.order_by('rating')
-    elif likes_filter == 'high':
-        posts = Post.objects.order_by('-likes_count')
-    elif likes_filter == 'low':
-        posts = Post.objects.order_by('likes_count')
-    else:
-        posts = Post.objects.all()
-
-    context = {
-        'rating_filter': rating_filter,
-        'likes_filter': likes_filter,
-        'posts': posts
-    }
-
-    return render(request, 'network/ranking.html', context)
 
 
 
