@@ -623,7 +623,7 @@ function write_comment(element) {
     if (comment_text.trim().length <= 0) {
         return false;
     }
-    fetch('/n/post/' + parseInt(post_id) + '/network/write_comment', {
+    fetch('/n/post/' + parseInt(post_id) + '/write_comment', {
         method: 'POST',
         body: JSON.stringify({
             comment_text: comment_text
