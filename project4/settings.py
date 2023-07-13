@@ -138,7 +138,6 @@ USE_TZ = True
 # No exemplo fornecido, o suporte a fusos horários está ativado.
 
 
-
 # Configuração de e-mail
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -147,7 +146,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'aluutcc@gmail.com'
 EMAIL_HOST_PASSWORD = 'Gr+07780210'
-
 
 
 # Arquivos estáticos (CSS, JavaScript, Imagens)
