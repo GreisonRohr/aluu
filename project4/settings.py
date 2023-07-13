@@ -82,6 +82,7 @@ DATABASES = {
     }
 }
 
+
 # Define as configurações do banco de dados.
 # No exemplo fornecido, é utilizado o banco de dados SQLite3.
 
