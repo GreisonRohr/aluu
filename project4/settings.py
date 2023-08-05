@@ -83,7 +83,7 @@ DATABASES = {
 }
 
 
-# Define as configurações do banco de dados.
+## Define as configurações do banco de dados.
 # No exemplo fornecido, é utilizado o banco de dados SQLite3.
 
 AUTH_USER_MODEL = "network.User"
