@@ -257,13 +257,12 @@ def search_posts_ranking(request):
     else:
         posts = Post.objects.all()
 
-    context = {
+
+    return render(request, 'network/ranking.html', {
         'rating_filter': rating_filter,
         'likes_filter': likes_filter,
         'posts': posts
-    }
-#
-    return render(request, 'network/ranking.html', context)
+        })
 
 
 def ranking(request):
