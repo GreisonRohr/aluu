@@ -160,3 +160,4 @@ STATIC_URL = '/network/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Define a URL base para os arquivos estáticos (CSS, JavaScript, imagens) e o diretório raiz onde os arquivos estáticos são armazenados.
+###########
