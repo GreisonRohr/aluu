@@ -262,7 +262,7 @@ def search_posts_ranking(request):
         'likes_filter': likes_filter,
         'posts': posts
     }
-
+#
     return render(request, 'network/ranking.html', context)
 
 
