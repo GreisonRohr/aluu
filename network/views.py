@@ -260,13 +260,12 @@ def search_posts_ranking(request):
     elif likes_filter == 'low':
         posts = posts.order_by('likes_count')
 
-    context = {
+
+    return render(request, 'network/ranking.html', {
         'rating_filter': rating_filter,
         'likes_filter': likes_filter,
         'posts': posts
-    }
-
-    return render(request, 'network/ranking.html', context)
+        })
 
 def ranking(request):
     top_posts = Post.objects.order_by('-likes')[:10]
