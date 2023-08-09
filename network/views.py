@@ -240,22 +240,25 @@ def saved(request):
 ##################################################################
 
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Post
+
 @login_required
 def search_posts_ranking(request):
-    rating_filter = request.GET.get('rating')  # Obtém o filtro de nota
-    likes_filter = request.GET.get('likes')  # Obtém o filtro de curtidas
+    rating_filter = request.GET.get('rating')
+    likes_filter = request.GET.get('likes')
+    posts = Post.objects.all()  # Começa com todas as postagens
 
-    # Filtra as postagens com base nos filtros
     if rating_filter == 'high':
-        posts = Post.objects.order_by('-rating')
+        posts = posts.order_by('-rating')
     elif rating_filter == 'low':
-        posts = Post.objects.order_by('rating')
-    elif likes_filter == 'high':
-        posts = Post.objects.order_by('-likes_count')
+        posts = posts.order_by('rating')
+
+    if likes_filter == 'high':
+        posts = posts.order_by('-likes_count')
     elif likes_filter == 'low':
-        posts = Post.objects.order_by('likes_count')
-    else:
-        posts = Post.objects.all()
+        posts = posts.order_by('likes_count')
 
     context = {
         'rating_filter': rating_filter,
@@ -265,14 +268,14 @@ def search_posts_ranking(request):
 
     return render(request, 'network/ranking.html', context)
 
-
 def ranking(request):
-    # Example: Get top 10 posts based on likes
     top_posts = Post.objects.order_by('-likes')[:10]
+    all_posts = Post.objects.all()  # Todas as postagens, você pode querer usar outros critérios aqui
     return render(request, "network/ranking.html", {
         "top_posts": top_posts,
-        "posts": []  # Adicione esta linha para garantir que a variável "posts" esteja sempre disponível no contexto
+        "posts": all_posts
     })
+
 
 
 
