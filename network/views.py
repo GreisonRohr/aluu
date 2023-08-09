@@ -248,7 +248,7 @@ from .models import Post
 def search_posts_ranking(request):
     rating_filter = request.GET.get('rating')
     likes_filter = request.GET.get('likes')
-    posts = Post.objects.all()  # Começa com todas as postagens
+    posts = Post.objects.all()
 
     if rating_filter == 'high':
         posts = posts.order_by('-rating')
@@ -260,16 +260,17 @@ def search_posts_ranking(request):
     elif likes_filter == 'low':
         posts = posts.order_by('likes_count')
 
-
-    return render(request, 'network/ranking.html', {
+    context = {
         'rating_filter': rating_filter,
         'likes_filter': likes_filter,
         'posts': posts
-        })
+    }
+
+    return render(request, 'network/ranking.html', context)
 
 def ranking(request):
     top_posts = Post.objects.order_by('-likes')[:10]
-    all_posts = Post.objects.all()  # Todas as postagens, você pode querer usar outros critérios aqui
+    all_posts = Post.objects.all()
     return render(request, "network/ranking.html", {
         "top_posts": top_posts,
         "posts": all_posts
