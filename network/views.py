@@ -261,6 +261,9 @@ def ranking(request):
 
 
 
+
+
+
 @login_required
 def search_posts(request):
     tags = request.GET.get('tags')  # Obtém o valor da pesquisa
