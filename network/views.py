@@ -240,40 +240,19 @@ def saved(request):
 ##################################################################
 
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from .models import Post
-
-@login_required
-def search_posts_ranking(request):
-    rating_filter = request.GET.get('rating')
-    likes_filter = request.GET.get('likes')
-    posts = Post.objects.all()
-
-    if rating_filter == 'high':
-        posts = posts.order_by('-rating')
-    elif rating_filter == 'low':
-        posts = posts.order_by('rating')
-
-    if likes_filter == 'high':
-        posts = posts.order_by('-likes_count')
-    elif likes_filter == 'low':
-        posts = posts.order_by('likes_count')
-
-    context = {
-        'rating_filter': rating_filter,
-        'likes_filter': likes_filter,
-        'posts': posts
-    }
-
-    return render(request, 'network/ranking.html', context)
+from django.db.models import Count, Avg
 
 def ranking(request):
-    top_posts = Post.objects.order_by('-likes')[:10]
-    all_posts = Post.objects.all()
+    top_rated_posts = Post.objects.annotate(
+        avg_rating=Avg('ratings__rating_value')).order_by('-avg_rating')[:10]
+
+    most_liked_posts = Post.objects.annotate(
+        num_likes=Count('likers')).order_by('-num_likes')[:10]
+
     return render(request, "network/ranking.html", {
-        "top_posts": top_posts,
-        "posts": all_posts
+        "top_rated_posts": top_rated_posts,
+        "most_liked_posts": most_liked_posts,
+        "page": "ranking",
     })
 
 

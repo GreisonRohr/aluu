@@ -6,47 +6,31 @@
             <nav class="head heading">
                 <div class="d-flex align-items-center">
                     <div>Ranking</div>
-                    {% if user.is_authenticated %}
-                    <form class="ml-auto" action="{% url 'search_posts_ranking' %}" method="GET">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    {% endif %}
                 </div>
             </nav>
             <div class="left-div-content">
                 <div class="posts-view">
                     {% block ranking %}
-                        <!-- Seção de opções de filtro -->
-                        <div class="ranking-options">
-                            <div class="filter-option">
-                                <label for="filter-rating">Filtrar por Nota:</label>
-                                <select id="filter-rating">
-                                    <option value="">Todos</option>
-                                    <option value="high">Maior nota</option>
-                                    <option value="low">Menor nota</option>
-                                </select>
-                            </div>
-                            <div class="filter-option">
-                                <label for="filter-likes">Filtrar por Curtidas:</label>
-                                <select id="filter-likes">
-                                    <option value="">Todos</option>
-                                    <option value="high">Mais curtidas</option>
-                                    <option value="low">Menos curtidas</option>
-                                </select>
-                            </div>
-                        </div>
-
                         <!-- Loop para exibir as postagens -->
-                        {% for post in posts %}
+                        {% for post in top_rated_posts %}
                             <div class="post" data-post_id="{{ post.id }}">
                                 <!-- Informações do usuário e conteúdo da postagem -->
+                                <div>
+                                    <a href="{% url 'profile' post.creater.username %}">
+                                        <div class="small-profilepic" style="background-image: url(/network/media/{{post.creater.profile_pic}})"></div>
+                                    </a>
+                                </div>
+                                <div style="flex: 1">
+                                    <div class="post-user">
+                                        <!-- Detalhes do usuário e data -->
+                                    </div>
+                                    <div class="post-content">
+                                        <!-- Conteúdo da postagem -->
+                                    </div>
+                                    <div class="post-actions">
+                                        <!-- Ações da postagem (curtidas, comentários, salvar, avaliação) -->
+                                    </div>
+                                </div>
                             </div>
                         {% empty %}
                             <center>
