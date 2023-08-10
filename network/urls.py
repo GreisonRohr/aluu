@@ -35,7 +35,6 @@ urlpatterns = [
     path("n/post/<int:post_id>/get_ratings",
          views.get_ratings, name="getratings"),
     path("n/ranking", views.ranking, name="ranking"),
-    path("n/search/ranking", views.search_posts_ranking, name="search_posts_ranking"),
 
     path('password_reset/', auth_views.PasswordResetView.as_view(),
          name='password_reset'),
