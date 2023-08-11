@@ -241,13 +241,15 @@ def saved(request):
 
 
 
+
+
 from django.shortcuts import render
 from django.db.models import Count, Avg
-from .models import Post
+from .models import Post, Rating  # Importa o modelo Rating
 
 def ranking(request):
     top_rated_posts = Post.objects.annotate(
-        avg_rating=Avg('ratings__rating_value')).order_by('-avg_rating')[:10]
+        avg_rating=Avg('rating__rating_value')).order_by('-avg_rating')[:10]
 
     most_liked_posts = Post.objects.annotate(
         num_likes=Count('likers')).order_by('-num_likes')[:10]
@@ -257,7 +259,6 @@ def ranking(request):
         "most_liked_posts": most_liked_posts,
         "page": "ranking",
     })
-
 
 
 
