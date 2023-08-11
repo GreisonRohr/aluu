@@ -240,7 +240,10 @@ def saved(request):
 ##################################################################
 
 
+
+from django.shortcuts import render
 from django.db.models import Count, Avg
+from .models import Post
 
 def ranking(request):
     top_rated_posts = Post.objects.annotate(
