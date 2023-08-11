@@ -982,3 +982,95 @@ svg {
       margin-bottom: 10px;
     }
   }
+
+  /*stilos para ranking.html*/
+
+/* ranking.css */
+
+/* Estilo para a seção de posts */
+.section {
+    margin-bottom: 30px;
+}
+
+/* Estilo para a lista de posts */
+.post-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Estilo para cada item de post */
+.post-item {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para a numeração de classificação */
+.post-rank {
+    font-size: 1.5em;
+    color: #3498db;
+    margin-right: 10px;
+}
+
+/* Estilo para a imagem do perfil pequena */
+.small-profilepic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Estilo para as informações do post */
+.post-info {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para as informações do criador do post */
+.post-details {
+    margin-left: 10px;
+}
+
+/* Estilo para o nome do criador do post */
+.post-details a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Estilo para as estatísticas do post (curtidas e nota média) */
+.post-stats {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* Estilo para as curtidas */
+.likes {
+    margin-right: 10px;
+}
+
+/* Estilo para a nota média */
+.avg-rating {
+    margin-left: 10px;
+}
+
+/* Estilo para a seção de paginação */
+.pagination-bar {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilo para os itens da páginação */
+.pagination-bar .page-item {
+    margin: 0 5px;
+    font-size: 1.2em;
+}
+
+/* Estilo para os links da paginação */
+.pagination-bar .page-link {
+    color: #3498db;
+}
