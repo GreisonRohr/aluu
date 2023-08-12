@@ -21,7 +21,7 @@
                                     <li class="post-item" data-post_id="{{ post.id }}">
                                         <div class="post-info">
                                             <span class="post-rank">{{ forloop.counter }}</span>
-                                            <div>
+                                            <div class="profile-pic">
                                                 <a href="{% url 'profile' post.creater.username %}">
                                                     <div class="small-profilepic" style="background-image: url(/network/media/{{post.creater.profile_pic}})"></div>
                                                 </a>
@@ -55,6 +55,12 @@
                                                     <div class="avg-rating">
                                                         <strong>Nota Média:</strong> {{ post.avg_rating }}
                                                     </div>
+                                                </div>
+                                                <div class="post-tags">
+                                                    <strong>#Tags:</strong>
+                                                    {% for tag in post.tags.all %}
+                                                        <span class="tag">{{ tag.name }}</span>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>

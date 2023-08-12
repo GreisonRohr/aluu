@@ -1045,8 +1045,9 @@ svg {
     font-size: 0.9em;
     color: #888;
     margin-top: 5px;
+    display: flex; /* Adicione esta linha para usar flexbox */
+    justify-content: space-between; /* Adicione esta linha para espaçar os elementos */
 }
-
 /* Estilo para as curtidas */
 .likes {
     margin-right: 10px;
@@ -1073,4 +1074,22 @@ svg {
 /* Estilo para os links da paginação */
 .pagination-bar .page-link {
     color: #3498db;
+}
+
+/* Estilo para as tags do post */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+/* Estilo para cada tag */
+.tag {
+    background-color: #3498db;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
