@@ -27,26 +27,18 @@
                                                 </a>
                                             </div>
                                             <div class="post-details">
+                                                <div class="tags">
+                                                    <strong>Tags:</strong>
+                                                    {% for tag in post.tags.all %}
+                                                        <span class="tag">{{ tag.name }}</span>
+                                                    {% endfor %}
+                                                </div>
                                                 <a href="{% url 'profile' post.creater.username %}">
                                                     <strong>{{ post.creater.first_name }} {{ post.creater.last_name }}</strong>
                                                 </a>
                                                 <span class="grey">@{{ post.creater.username }}</span>
                                                 <div class="post-content">
                                                     {{ post.content_text | linebreaksbr }}
-                                                </div>
-                                                <div class="rating" data-post-id="{{ post.id }}">
-                                                    <div class="svg-span" onclick="showRatingField(this)">
-                                                        <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
-                                                            <polygon points="12 2 15.09 8.72 22 9.82 17 14 18.18 21 12 17.27 5 18.18 6.91 14 2 9.82 8.91 8.72 12 2"/>
-                                                        </svg>
-                                                    </div>
-                                                    <div id="ratingField_{{ post.id }}" style="display: none;">
-                                                        <input type="number" id="ratingInput_{{ post.id }}" placeholder="0-10" min="0" max="10" step="0.1">
-                                                        <button onclick="write_rating({{ post.id }})">Avaliar</button>
-                                                    </div>
-                                                    <div class="rating-average">
-                                                        Nota Média: <span id="average-rating-{{ post.id }}" class="average-value">{{ post.avg_rating }}</span>
-                                                    </div>
                                                 </div>
                                                 <div class="post-stats">
                                                     <div class="likes">
@@ -55,12 +47,6 @@
                                                     <div class="avg-rating">
                                                         <strong>Nota Média:</strong> {{ post.avg_rating }}
                                                     </div>
-                                                </div>
-                                                <div class="post-tags">
-                                                    <strong>#Tags:</strong>
-                                                    {% for tag in post.tags.all %}
-                                                        <span class="tag">{{ tag.name }}</span>
-                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>

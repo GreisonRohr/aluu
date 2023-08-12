@@ -1076,20 +1076,26 @@ svg {
     color: #3498db;
 }
 
-/* Estilo para as tags do post */
-.post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 5px;
+/* Estilo para a seção de posts */
+.section {
+    margin-bottom: 30px;
+}
+
+
+
+/* Estilo para as tags */
+.tags {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 /* Estilo para cada tag */
 .tag {
     background-color: #3498db;
     color: #fff;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 3px 6px;
+    border-radius: 3px;
     font-size: 0.8em;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin-left: 5px;
 }
