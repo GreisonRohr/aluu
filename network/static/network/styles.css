@@ -1046,7 +1046,7 @@ svg {
     color: #888;
     margin-top: 5px;
     display: flex; /* Adicione esta linha para usar flexbox */
-    justify-content: space-between; /* Adicione esta linha para espaçar os elementos */
+    align-items: center; /* Centraliza verticalmente os itens */
 }
 /* Estilo para as curtidas */
 .likes {
