@@ -10,7 +10,7 @@
                     <div class="d-flex align-items-center">
                         <div>Todas Postagens</div>
                         {% if user.is_authenticated %}
-                            <form class="ml-auto" action="{% url 'search_posts' %}" method="GET">
+                            <form class="ml-auto d-none d-md-block" action="{% url 'search_posts' %}" method="GET">
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
                                     <div class="input-group-append">
@@ -20,6 +20,12 @@
                                     </div>
                                 </div>
                             </form>
+                            <!-- Ícone de pesquisa visível em telas menores -->
+                            <div class="d-md-none ml-auto">
+                                <a href="{% url 'search_posts' %}">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
                         {% endif %}
                     </div>
                 {% elif page == 'following' %}
@@ -32,6 +38,7 @@
                     Explorar
                 {% endif %}
             </nav>
+            
             
             
             
