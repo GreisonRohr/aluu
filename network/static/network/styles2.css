@@ -60,3 +60,28 @@
 .small{
     font-size: small;
 }
+
+/* Estilo para o botão "Menu" */
+.menu-toggle {
+    display: none; /* Inicialmente, o botão está oculto */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* Certifique-se de que o botão fique acima do conteúdo */
+    cursor: pointer;
+}
+
+/* Estilo adicional para o botão "Menu" quando o sidenav está visível */
+.sidenav-visible .menu-toggle {
+    display: none; /* Oculta o botão quando o sidenav está visível */
+}
+
+/* Estilo para o botão "Menu" quando o sidenav está oculto */
+.sidenav-hidden .menu-toggle {
+    display: block; /* Exibe o botão quando o sidenav está oculto */
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}

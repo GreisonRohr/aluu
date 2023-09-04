@@ -55,6 +55,7 @@ svg {
 }
 
 
+/* Estilo base para o sidenav */
 .sidenav {
     height: 100%;
     width: 21.8%;
@@ -67,6 +68,7 @@ svg {
     z-index: 100;
     padding-left: 3%;
     background-color: white;
+    transition: width 0.3s; /* Adicione uma transição suave para animar as mudanças de largura */
 }
 
 .sidenav ul {
@@ -98,6 +100,46 @@ svg {
     background-color: #e7f8ef;
     transition-duration: .2s;
 }
+
+/* Estilos para tornar o sidenav responsivo em telas menores */
+@media (max-width: 768px) {
+    .sidenav {
+        width: 0; /* Oculte o sidenav por padrão em telas menores */
+        overflow-x: hidden;
+    }
+    
+    .sidenav.open {
+        width: 100%; /* Exiba o sidenav quando estiver aberto */
+    }
+
+    .sidenav .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+    }
+    
+    /* Estilo do botão de fechar */
+    .sidenav .menu-toggle.close {
+        display: none; /* Oculte o botão de fechar quando o sidenav estiver fechado */
+    }
+    
+    /* Ajustes de estilo para itens do sidenav em telas menores */
+    .sidenav ul {
+        margin-top: 10px;
+    }
+    
+    .sidenav li {
+        margin-top: 5px;
+    }
+    
+    .sidenav .nav-link>div {
+        padding: 8px 15px 6px 15px;
+        font-size: 14px;
+    }
+}
+
 
 .new-post-btn {
     padding-left: 55px !important;

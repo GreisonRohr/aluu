@@ -682,3 +682,9 @@ function goto_login() {
 }
 
 
+//alternar a visibilidade do sidenav quando o botão "Menu" for clicado
+document.getElementById('menu-toggle').addEventListener('click', function () {
+    var sidenav = document.querySelector('.sidenav');
+    sidenav.classList.toggle('sidenav-hidden');
+    sidenav.classList.toggle('sidenav-visible');
+});
