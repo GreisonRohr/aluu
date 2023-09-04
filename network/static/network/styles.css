@@ -1058,22 +1058,35 @@ svg {
     margin-left: 10px;
 }
 
-/* Estilo para a seção de paginação */
+/* Estilo padrão para a seção de paginação */
 .pagination-bar {
     margin-top: 20px;
     display: flex;
     justify-content: center;
 }
 
-/* Estilo para os itens da páginação */
+/* Estilo padrão para os itens da paginação */
 .pagination-bar .page-item {
     margin: 0 5px;
     font-size: 1.2em;
 }
 
-/* Estilo para os links da paginação */
+/* Estilo padrão para os links da paginação */
 .pagination-bar .page-link {
     color: #3498db;
+}
+
+/* Estilo para telas menores (até 768px) */
+@media (max-width: 768px) {
+    .pagination-bar {
+        flex-direction: column; /* Coloca os itens em coluna */
+        align-items: center; /* Centraliza na vertical */
+    }
+    
+    .pagination-bar .page-item {
+        margin: 5px 0; /* Espaçamento entre os itens */
+        font-size: 1.2em;
+    }
 }
 
 /* Estilo para a seção de posts */
