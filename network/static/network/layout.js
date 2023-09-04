@@ -682,9 +682,17 @@ function goto_login() {
 }
 
 
-//alternar a visibilidade do sidenav quando o botão "Menu" for clicado
-document.getElementById('menu-toggle').addEventListener('click', function () {
-    var sidenav = document.querySelector('.sidenav');
-    sidenav.classList.toggle('sidenav-hidden');
-    sidenav.classList.toggle('sidenav-visible');
-});
+
+        // Função para alternar o estado do sidenav
+        function toggleSidenav() {
+            var sidenav = document.querySelector('.sidenav');
+            sidenav.classList.toggle('open'); // Adicione ou remova a classe 'open' no sidenav
+        }
+
+        // Seletor para o botão "Menu"
+        var menuToggle = document.getElementById('menu-toggle');
+
+        // Adicione um ouvinte de evento de clique para o botão "Menu"
+        menuToggle.addEventListener('click', function () {
+            toggleSidenav(); // Chame a função toggleSidenav() ao clicar no botão
+        });
