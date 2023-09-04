@@ -681,18 +681,16 @@ function goto_login() {
     window.location.href = '/n/login';
 }
 
+// Função para alternar o estado do sidenav
+function toggleSidenav() {
+    var sidenav = document.querySelector('.sidenav');
+    sidenav.classList.toggle('open'); // Adicione ou remova a classe 'open' no sidenav
+}
 
+// Seletor para o botão "Menu"
+var menuToggle = document.getElementById('menu-toggle');
 
-        // Função para alternar o estado do sidenav
-        function toggleSidenav() {
-            var sidenav = document.querySelector('.sidenav');
-            sidenav.classList.toggle('open'); // Adicione ou remova a classe 'open' no sidenav
-        }
-
-        // Seletor para o botão "Menu"
-        var menuToggle = document.getElementById('menu-toggle');
-
-        // Adicione um ouvinte de evento de clique para o botão "Menu"
-        menuToggle.addEventListener('click', function () {
-            toggleSidenav(); // Chame a função toggleSidenav() ao clicar no botão
-        });
+// Adicione um ouvinte de evento de clique para o botão "Menu"
+menuToggle.addEventListener('click', function () {
+    toggleSidenav(); // Chame a função toggleSidenav() ao clicar no botão
+});
