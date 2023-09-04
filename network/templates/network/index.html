@@ -5,7 +5,7 @@
 {% block body %}
     <div class="main-div">
         <div class="left-div">
-            <nav class="head heading">
+            <nav style="width: 100%" class="head heading">
                 {% if page == 'all_posts' %}
                     <div class="d-flex align-items-center">
                         <div>Todas Postagens</div>
@@ -20,12 +20,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <!-- Ícone de pesquisa visível em telas menores -->
-                            <div class="d-md-none ml-auto">
-                                <a href="{% url 'search_posts' %}">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div>
                         {% endif %}
                     </div>
                 {% elif page == 'following' %}
