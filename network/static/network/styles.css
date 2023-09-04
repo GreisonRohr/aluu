@@ -125,39 +125,45 @@ svg {
     display: none;
 }
 
-/* Estilo para o menu lateral (inicialmente oculto) */
-.sidenav {
-    position: fixed;
-    left: -250px; /* Inicialmente, o menu está oculto para a esquerda */
-    top: 0;
-    bottom: 0;
-    width: 250px;
-    background-color: #333;
-    color: white;
-    overflow-x: hidden;
-    transition: 0.5s; /* Efeito de transição suave */
-}
 
-/* Estilo para o menu lateral quando visível */
-.sidenav.open {
-    left: 0; /* Quando a classe 'open' é adicionada, o menu é exibido */
-}
+/* Estilos para tornar o sidenav responsivo em telas menores */
+@media (max-width: 768px) {
+    .sidenav {
+        width: 0; /* Oculte o sidenav por padrão em telas menores */
+        overflow-x: hidden;
+    }
+    
+    .sidenav.open {
+        width: 100%; /* Exiba o sidenav quando estiver aberto */
+    }
 
-/* Estilo para os itens do menu */
-.sidenav ul {
-    list-style: none;
-    padding: 0;
+    .sidenav .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+    }
+    
+    /* Estilo do botão de fechar */
+    .sidenav .menu-toggle.close {
+        display: none; /* Oculte o botão de fechar quando o sidenav estiver fechado */
+    }
+    
+    /* Ajustes de estilo para itens do sidenav em telas menores */
+    .sidenav ul {
+        margin-top: 10px;
+    }
+    
+    .sidenav li {
+        margin-top: 5px;
+    }
+    
+    .sidenav .nav-link>div {
+        padding: 8px 15px 6px 15px;
+        font-size: 14px;
+    }
 }
-
-.sidenav ul li {
-    padding: 10px;
-    border-bottom: 1px solid #666;
-}
-
-.sidenav ul li:last-child {
-    border-bottom: none; /* Remove a borda inferior do último item do menu */
-}
-
 
 
 .new-post-btn {
