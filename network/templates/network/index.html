@@ -5,9 +5,9 @@
 {% block body %}
     <div class="main-div">
         <div class="left-div">
-            <nav style="width: 100%" class="head heading">
+            <nav  class="head heading">
                 {% if page == 'all_posts' %}
-                    <div class="d-flex align-items-center">
+                    <div style="width: 100%" class="d-flex align-items-center">
                         <div>Todas Postagens</div>
                         {% if user.is_authenticated %}
                             <form class="ml-auto d-none d-md-block" action="{% url 'search_posts' %}" method="GET">
