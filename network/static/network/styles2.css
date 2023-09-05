@@ -45,8 +45,7 @@
 /* Reduz a altura da caixa de texto do placeholder */
 .form-control::placeholder {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 5px; /* Reduz o espaçamento superior */
-    padding-bottom: 5px; /* Reduz o espaçamento inferior */
+ 
+    padding-top: 10px; /* Reduz o espaçamento superior */
+    padding-bottom: 10px; /* Reduz o espaçamento inferior */
 }
