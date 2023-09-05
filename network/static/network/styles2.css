@@ -44,8 +44,10 @@
 
 /* Reduz a altura da caixa de texto do placeholder */
 .form-control::placeholder {
-    display: flex;
- 
     padding-top: 10px; /* Reduz o espaçamento superior */
     padding-bottom: 10px; /* Reduz o espaçamento inferior */
+}
+/* Reduz a altura da caixa de entrada */
+.form-control {
+    height: 30px; /* Define a altura desejada */
 }
