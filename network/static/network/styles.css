@@ -500,8 +500,11 @@ svg {
 }
 
 .post-content {
-    margin-top: 5px;
-}
+    max-width: 100%;
+    /* Força a quebra de palavras longas */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;}
 
 .post-image {
     height: 290px;
