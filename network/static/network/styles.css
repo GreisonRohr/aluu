@@ -695,6 +695,13 @@ svg {
     background-color: white;
 }
 
+/* Oculta .right-div em telas menores do que 768 pixels */
+@media (max-width: 768px) {
+    .right-div {
+        display: none;
+    }
+}
+
 .right-div .head {
     padding: .9vh 1.5vw;
 }
