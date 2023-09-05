@@ -501,7 +501,7 @@ svg {
 
 .post-content {
     max-width: 100%;
-    /* Força a quebra de palavras longas */
+    /* Força a quebra de palavras longas ;*/
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;}
