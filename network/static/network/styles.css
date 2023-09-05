@@ -205,11 +205,12 @@ svg {
 }
 
 .main-div-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Crie colunas responsivas */
-    gap: 16px; /* Espaçamento entre as colunas */
+    display: flex;
+    flex-direction: column; /* Altera a direção do flex para coluna */
+    align-items: center; /* Alinha o conteúdo verticalmente ao centro */
     padding: 16px; /* Adicione algum espaçamento interno ao conteúdo */
 }
+
 
 
 
