@@ -42,12 +42,6 @@
     font-size: small;
 }
 
-/* Reduz a altura da caixa de texto do placeholder */
-.form-control::placeholder {
-    padding-top: 10px; /* Reduz o espaçamento superior */
-    padding-bottom: 10px; /* Reduz o espaçamento inferior */
-}
-/* Reduz a altura da caixa de entrada */
 .form-control {
-    height: 30px; /* Define a altura desejada */
+    height: 33px; /* Defina a altura desejada em pixels */
 }

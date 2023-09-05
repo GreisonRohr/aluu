@@ -7,12 +7,12 @@
         <div class="left-div">
             <nav  class="head heading">
                 {% if page == 'all_posts' %}
-                    <div  class="d-flex align-items-center">
+                    <div  class="d-flex justify-content-between align-items-center" style="margin-top: -15px" >
                         <div>Todas Postagens</div>
                         {% if user.is_authenticated %}
                             <form action="{% url 'search_posts' %}" method="GET">
                                 <div class="input-group">
-                                    <input  type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
+                                    <input  type="text" class="form-control" name="tags" placeholder="Pesquisar por tags" >
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-primary" type="submit">
                                             <i class="fa fa-search"></i>
