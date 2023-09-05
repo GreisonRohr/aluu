@@ -204,6 +204,8 @@ svg {
     flex-basis: auto;*/
 }
 
+
+
 .left-div {
     position: relative;
 }
@@ -413,6 +415,7 @@ svg {
     }
 }
 
+/* Estilos para a classe .post */
 .post {
     background-color: white;
     border-top: 1px solid #e6ecf0;
@@ -423,6 +426,15 @@ svg {
     animation-fill-mode: forwards;
     animation-play-state: paused;
 }
+
+/* Estilos adicionais para a classe .post em telas menores (por exemplo, menos que 768px) */
+@media (max-width: 768px) {
+    .post {
+        padding: 5px 12px 5px 12px; /* Reduza o preenchimento em telas menores */
+        font-size: 0.8em; /* Reduza o tamanho da fonte em telas menores */
+    }
+}
+
 
 /*.post:hover{
     background-color: #f5f8fa;
