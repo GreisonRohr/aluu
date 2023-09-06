@@ -126,11 +126,6 @@ svg {
         cursor: pointer;
     }
     
-    /* Estilo do botão de fechar */
-    .sidenav .menu-toggle.close {
-        display: none; /* Oculte o botão de fechar quando o sidenav estiver fechado */
-    }
-    
     /* Ajustes de estilo para itens do sidenav em telas menores */
     .sidenav ul {
         margin-top: 10px;
