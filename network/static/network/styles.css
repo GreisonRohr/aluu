@@ -1192,3 +1192,12 @@ svg {
 }
 
 
+@media (max-width: 768px) {
+    .create-post-text {
+        display: none;
+    }
+
+    .create-post-icon {
+        display: inline-block;
+    }
+}
