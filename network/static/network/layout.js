@@ -680,3 +680,20 @@ function goto_register() {
 function goto_login() {
     window.location.href = '/n/login';
 }
+
+    // Função para verificar a largura da tela e adicionar/remover a classe .hide-text
+    function checkWidth() {
+        var ulElement = document.querySelector('.nav-list'); // Selecione a <ul> com a classe .nav-list
+        if (window.innerWidth < 768) {
+            // Largura da tela é menor que 768px, adicione a classe .hide-text à <ul>
+            ulElement.classList.add('hide-text');
+        } else {
+            // Largura da tela é maior ou igual a 768px, remova a classe .hide-text da <ul>
+            ulElement.classList.remove('hide-text');
+        }
+    }
+
+    // Verifique a largura da tela quando a página carregar e redimensionar
+    window.addEventListener('load', checkWidth);
+    window.addEventListener('resize', checkWidth);
+
