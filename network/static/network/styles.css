@@ -703,8 +703,8 @@ svg {
         display: none;
     }
 
-    .main-content {
-        flex: 1; /* Volta a ocupar todo o espaço em telas menores */
+    .body-content {
+        flex: 1; /* Ajuste a largura desejada para o corpo quando a right-div estiver oculta */
     }
 }
 
