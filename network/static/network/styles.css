@@ -179,6 +179,8 @@ svg {
     width: 47.25%;
     min-height: 100vh;
     left: 21.8%;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+
     /*display: flex;
     flex-basis: auto;*/
 }
@@ -190,7 +192,16 @@ svg {
     padding: 16px; /* Adicione algum espaçamento interno ao conteúdo */
 }
 
+/* Adicione um estilo para a main-div quando a right-div estiver oculta */
+.right-div.hidden {
+    width: 0;
+    left: 100%; /* Move a main-div para a direita para ocupar o espaço da right-div */
+}
 
+/* Estilo para a main-div-content quando a right-div estiver oculta */
+.main-div-content.hidden {
+    align-items: flex-start; /* Alinha ao início verticalmente */
+}
 
 
 .left-div {
@@ -700,6 +711,7 @@ svg {
 /* Oculta .right-div em telas menores do que 768 pixels */
 @media (max-width: 768px) {
     .right-div {
+        flex: 0;
         display: none;
     }
 
