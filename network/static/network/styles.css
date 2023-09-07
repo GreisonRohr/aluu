@@ -109,11 +109,7 @@ svg {
 
 /* Estilos para tornar o sidenav responsivo em telas menores */
 @media (max-width: 768px) {
-    .sidenav {
-        width: 0; /* Oculte o sidenav por padrão em telas menores */
-        overflow-x: hidden;
-    }
-    
+   
     .sidenav.open {
         width: 100%; /* Exiba o sidenav quando estiver aberto */
     }
