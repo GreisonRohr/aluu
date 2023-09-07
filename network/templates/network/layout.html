@@ -213,7 +213,7 @@
                         {% if user.is_authenticated %}
                             <li class="nav-item sidenav-user">
                                 <a href="{% url 'profile' user.username %}" class="nav-link">
-                                    <div style="width: 100%" class="user_account">
+                                    <div class="user_account">
                                         <div class="small-profilepic" style="float: left; background-image: url(/network/media/{{user.profile_pic}})"></div>
                                         <div class="d-none d-md-block" style="height: 2.7vw; margin: auto;">
                                             <div style="margin-top: 4px;"><strong>{{user.first_name}} {{user.last_name}}</strong></div>
