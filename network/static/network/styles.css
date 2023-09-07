@@ -702,6 +702,10 @@ svg {
     .right-div {
         display: none;
     }
+
+    .main-content {
+        flex: 1; /* Volta a ocupar todo o espaço em telas menores */
+    }
 }
 
 .right-div .head {
@@ -1179,14 +1183,5 @@ svg {
     .create-post-icon {
         display: inline-block;
     }
-
-    .body-content {
-        flex: 1; /* Ajuste a largura desejada para o corpo quando a right-div estiver oculta */
-    }
 }
 
-.body-content {
-    flex: 2; /* Ajuste a largura desejada para o corpo */
-    background-color: #eee;
-    /* Estilo do corpo principal */
-}
