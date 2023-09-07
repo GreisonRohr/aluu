@@ -215,8 +215,8 @@
                                 <a href="{% url 'profile' user.username %}" class="nav-link">
                                     <div class="user_account">
                                         <div class="small-profilepic" style="float: left; background-image: url(/network/media/{{user.profile_pic}})"></div>
-                                        <div class="d-none d-md-block" style="height: 2.7vw; margin: auto;">
-                                            <div class="grey" style="margin-top: 4px;">@{{ user.username }}</div>
+                                        <div class="user-info" style="float: left; margin-left: 10px;">
+                                            <div class="grey">@{{ user.username }}</div>
                                         </div>
                                     </div>
                                 </a>
