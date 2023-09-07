@@ -703,9 +703,7 @@ svg {
         display: none;
     }
 
-    .body-content {
-        flex: 2; /* Ajuste a largura desejada para o corpo quando a right-div estiver oculta */
-    }
+
 }
 
 .right-div .head {
