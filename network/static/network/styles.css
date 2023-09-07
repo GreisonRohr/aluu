@@ -179,7 +179,6 @@ svg {
     width: 47.25%;
     min-height: 100vh;
     left: 21.8%;
-    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 
     /*display: flex;
     flex-basis: auto;*/
@@ -701,8 +700,7 @@ svg {
 /* Oculta .right-div em telas menores do que 768 pixels */
 @media (max-width: 768px) {
     .right-div {
-        
-        display: none;
+        flex: 0;
     }
 
 
