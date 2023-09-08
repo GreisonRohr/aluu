@@ -184,15 +184,6 @@ svg {
     flex-basis: auto;*/
 }
 
-.main-div-content {
-    display: flex;
-    flex-direction: column; /* Altera a direção do flex para coluna */
-    align-items: center; /* Alinha o conteúdo verticalmente ao centro */
-    padding: 16px; /* Adicione algum espaçamento interno ao conteúdo */
-}
-
-
-
 .left-div {
     position: relative;
 }
