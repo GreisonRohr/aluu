@@ -184,7 +184,7 @@ svg {
 
 .main-div {
     position: relative;
-    width: 57.25%;
+    width: 60.25%;
     min-height: 100vh;
     left: 21.8%;
 
@@ -202,7 +202,7 @@ svg {
 
 .heading {
     position: fixed;
-    width: 47.255%;
+    width: 60.255%;
     top: 0px;
     padding: 18px;
     border-bottom: .5px solid #e6ecf0;
@@ -691,7 +691,7 @@ svg {
 
 
 .right-div {
-    width: 18%;
+    width: 15%;
     height: 100vh;
     position: fixed;
     right: 2.95%;
