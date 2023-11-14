@@ -1,7 +1,6 @@
 
 body {
     min-width: 730px; /* Largura mínima desejada */
-    min-height: 955px; /* Altura mínima desejada */
 }
 
 
@@ -194,6 +193,8 @@ svg {
     width: 60.25%;
     min-height: 100vh;
     left: 21.8%;
+    min-height: 955px; /* Defina a altura mínima desejada */
+
 
     /*display: flex;
     flex-basis: auto;*/
