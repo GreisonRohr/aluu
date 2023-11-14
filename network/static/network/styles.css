@@ -1,3 +1,10 @@
+
+body {
+    min-width: 730px; /* Largura mínima desejada */
+    min-height: 955px; /* Altura mínima desejada */
+}
+
+
 .body {
     display: flex;
     min-height: 100%;
