@@ -245,28 +245,28 @@
                                 Você deve saber
                             </div>
                             {% for suggestion in suggestions %}
-                                <div class="suggestion-user">
-                                    <div>
-                                        <a href="{% url 'profile' suggestion.username %}">
-                                            <div class="small-profilepic" style="background-image: url(/network/media/{{suggestion.profile_pic}})"></div>
-                                        </a>
-                                    </div>
-                                    <div class="user-details">
-                                        <a href="{% url 'profile' suggestion.username %}">
-                                            <div id="user-name">
-
-                                                <strong>
-                                                    {{suggestion.first_name}} {{suggestion.last_name}}
-                                                </strong>
-                                            </div>
-                                            <div class="grey">@{{suggestion.username}}</div>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-outline-success" type="button" onclick="follow_user(this,'{{suggestion.username}}','suggestion')">Seguir</button>
-                                    </div>
+                            <div class="suggestion-user">
+                                <div>
+                                    <a href="{% url 'profile' suggestion.username %}">
+                                        <div class="small-profilepic" style="background-image: url(/network/media/{{suggestion.profile_pic}})"></div>
+                                    </a>
                                 </div>
-                            {% empty %}
+                                <div class="user-details">
+                                    <a href="{% url 'profile' suggestion.username %}">
+                                        <div id="user-name">
+                                            <strong>
+                                                {{suggestion.first_name}} {{suggestion.last_name}}
+                                            </strong>
+                                        </div>
+                                        <div class="grey">@{{suggestion.username}}</div>
+                                    </a>
+                                </div>
+                                <div class="d-none d-lg-block"> <!-- Esta classe oculta em telas menores (lg e abaixo) -->
+                                    <button class="btn btn-outline-success" type="button" onclick="follow_user(this,'{{suggestion.username}}','suggestion')">Seguir</button>
+                                </div>
+                            </div>
+                        {% empty %}
+                        
                                     <div style="text-align: center; border-bottom: .5px solid #e6ecf0; padding: 10px 15px;">
                                         <span class="grey" style="font-size: .9em;">Nenhuma sugestão disponível.</span>
                                     </div>
