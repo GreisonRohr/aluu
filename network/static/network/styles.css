@@ -68,7 +68,8 @@ svg {
     z-index: 100;
     padding-left: 3%;
     background-color: white;
-    transition: width 0.3s; /* Adicione uma transição suave para animar as mudanças de largura */
+    transition: width 0.3s;
+    /* Adicione uma transição suave para animar as mudanças de largura */
 }
 
 .sidenav ul {
@@ -93,12 +94,15 @@ svg {
     border-radius: 25px;
     line-height: 0.9em;
     width: max-content;
-    display: flex; /* Adicione isso para que os ícones e o texto fiquem na mesma linha */
-    align-items: center; /* Alinhe verticalmente os ícones e o texto */
+    display: flex;
+    /* Adicione isso para que os ícones e o texto fiquem na mesma linha */
+    align-items: center;
+    /* Alinhe verticalmente os ícones e o texto */
 }
 
 .sidenav .nav-link>div svg {
-    margin-right: 10px; /* Adicione um espaço entre o ícone e o texto */
+    margin-right: 10px;
+    /* Adicione um espaço entre o ícone e o texto */
 }
 
 .sidenav .nav-link>div:hover {
@@ -109,9 +113,10 @@ svg {
 
 /* Estilos para tornar o sidenav responsivo em telas menores */
 @media (max-width: 768px) {
-   
+
     .sidenav.open {
-        width: 100%; /* Exiba o sidenav quando estiver aberto */
+        width: 100%;
+        /* Exiba o sidenav quando estiver aberto */
     }
 
     .sidenav .menu-toggle {
@@ -121,25 +126,28 @@ svg {
         left: 10px;
         cursor: pointer;
     }
-    
+
     /* Ajustes de estilo para itens do sidenav em telas menores */
     .sidenav ul {
         margin-top: 10px;
     }
-    
+
     .sidenav li {
         margin-top: 5px;
     }
-    
+
     .sidenav .nav-link>div {
         padding: 8px 15px 6px 15px;
         font-size: 14px;
-        display: flex; /* Adicione isso para que os ícones e o texto fiquem na mesma linha */
-        align-items: center; /* Alinhe verticalmente os ícones e o texto */
+        display: flex;
+        /* Adicione isso para que os ícones e o texto fiquem na mesma linha */
+        align-items: center;
+        /* Alinhe verticalmente os ícones e o texto */
     }
 
     .sidenav .nav-link>div svg {
-        margin-right: 10px; /* Adicione um espaço entre o ícone e o texto */
+        margin-right: 10px;
+        /* Adicione um espaço entre o ícone e o texto */
     }
 }
 
@@ -408,8 +416,10 @@ svg {
 /* Estilos adicionais para a classe .post em telas menores (por exemplo, menos que 768px) */
 @media (max-width: 768px) {
     .post {
-        padding: 5px 12px 5px 12px; /* Reduza o preenchimento em telas menores */
-        font-size: 0.8em; /* Reduza o tamanho da fonte em telas menores */
+        padding: 5px 12px 5px 12px;
+        /* Reduza o preenchimento em telas menores */
+        font-size: 0.8em;
+        /* Reduza o tamanho da fonte em telas menores */
     }
 }
 
@@ -474,7 +484,8 @@ svg {
     /* Força a quebra de palavras longas ;*/
     word-wrap: break-word;
     overflow-wrap: break-word;
-    word-break: break-word;}
+    word-break: break-word;
+}
 
 .post-image {
     height: 290px;
@@ -1034,25 +1045,25 @@ svg {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-  }
-  
-  .filter-option {
+}
+
+.filter-option {
     flex: 1;
     margin-right: 10px;
-  }
-  
-  @media (max-width: 768px) {
-    .ranking-options {
-      flex-direction: column;
-    }
-  
-    .filter-option {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-  }
+}
 
-  /*stilos para ranking.html*/
+@media (max-width: 768px) {
+    .ranking-options {
+        flex-direction: column;
+    }
+
+    .filter-option {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/*stilos para ranking.html*/
 
 /* ranking.css */
 
@@ -1114,9 +1125,12 @@ svg {
     font-size: 0.9em;
     color: #888;
     margin-top: 5px;
-    display: flex; /* Adicione esta linha para usar flexbox */
-    align-items: center; /* Centraliza verticalmente os itens */
+    display: flex;
+    /* Adicione esta linha para usar flexbox */
+    align-items: center;
+    /* Centraliza verticalmente os itens */
 }
+
 /* Estilo para as curtidas */
 .likes {
     margin-right: 10px;
@@ -1148,12 +1162,15 @@ svg {
 /* Estilo para telas menores (até 768px) */
 @media (max-width: 768px) {
     .pagination-bar {
-        flex-direction: column; /* Coloca os itens em coluna */
-        align-items: center; /* Centraliza na vertical */
+        flex-direction: column;
+        /* Coloca os itens em coluna */
+        align-items: center;
+        /* Centraliza na vertical */
     }
-    
+
     .pagination-bar .page-item {
-        margin: 5px 0; /* Espaçamento entre os itens */
+        margin: 5px 0;
+        /* Espaçamento entre os itens */
         font-size: 1.2em;
     }
 }
@@ -1174,3 +1191,24 @@ svg {
     }
 }
 
+/* Regular styles for larger screens */
+.right-div {
+    display: flex;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .right-div {
+        flex-direction: column;
+    }
+
+    .search-div {
+        width: 100%;
+    }
+
+    .suggestion-box,
+    .guest-box {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
