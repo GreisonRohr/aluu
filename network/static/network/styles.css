@@ -1192,23 +1192,18 @@ svg {
 }
 
 /* Regular styles for larger screens */
-.right-div {
+.right-div-content {
     display: flex;
+
+
+    flex-direction: column;
 }
 
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
-    .right-div {
-        flex-direction: column;
-    }
 
-    .search-div {
-        width: 100%;
-    }
 
-    .suggestion-box,
-    .guest-box {
-        width: 100%;
-        margin-top: 10px;
+    .right-div-content {
+        display: none;
     }
 }
