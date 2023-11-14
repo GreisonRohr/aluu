@@ -12,7 +12,7 @@
                         {% if user.is_authenticated %}
                             <form action="{% url 'search_posts' %}" method="GET">
                                 <div class="input-group">
-                                    <input  type="text" id="search-box" class="form-control" name="tags" placeholder="Pesquisar por tags" >
+                                    <input  type="text"  class="form-control" name="tags" placeholder="Pesquisar por tags" >
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-primary" type="submit">
                                             <i class="fa fa-search"></i>
