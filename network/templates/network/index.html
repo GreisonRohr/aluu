@@ -11,7 +11,7 @@
                     <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
                         <div class="navbar-brand">Todas Postagens</div>
                         {% if user.is_authenticated %}
-                            <form class="form-inline" action="{% url 'search_posts' %}" method="GET">
+                            <form class="form-inline d-none d-lg-flex" action="{% url 'search_posts' %}" method="GET">
                                 <input class="form-control mr-sm-2" type="text" name="tags" placeholder="Pesquisar por tags">
                                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
                                     Pesquisar
@@ -20,6 +20,7 @@
                         {% endif %}
                     </div>
                 </nav>
+                
                 
                 {% elif page == 'following' %}
                     Seguindo
