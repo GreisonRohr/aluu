@@ -9,17 +9,13 @@
                 {% if page == 'all_posts' %}
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
-                        <div>Todas Postagens</div>
+                        <div class="navbar-brand">Todas Postagens</div>
                         {% if user.is_authenticated %}
                             <form class="form-inline" action="{% url 'search_posts' %}" method="GET">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="tags" placeholder="Pesquisar por tags">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <input class="form-control mr-sm-2" type="text" name="tags" placeholder="Pesquisar por tags">
+                                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </form>
                         {% endif %}
                     </div>
