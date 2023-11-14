@@ -11,7 +11,7 @@
                         <div>Todas Postagens</div>
                         {% if user.is_authenticated %}
                         <form action="{% url 'search_posts' %}" method="GET">
-                            <div class="input-group">
+                            <div class="search-div">  //class="input-group"
                                 <div>
                                     <svg width="1em" height="1.6em" viewBox="0 0 16 6" class="bi bi-search" fill="#6d7e8c" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
