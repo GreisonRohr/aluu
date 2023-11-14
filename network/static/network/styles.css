@@ -1207,3 +1207,8 @@ svg {
         display: none;
     }
 }
+
+.btn-outline-primary {
+    color: #42b8c4;
+    border-color: #42b8c4;
+}
