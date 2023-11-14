@@ -8,7 +8,7 @@
             <nav  class="head heading">
                 {% if page == 'all_posts' %}
                 <nav class="navbar navbar-light bg-light">
-                    <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
+                    <div class="d-flex justify-content-between align-items-center" style="width:100%">
                         <div class="navbar-brand">Todas Postagens</div>
                         {% if user.is_authenticated %}
                             <form class="form-inline d-none d-lg-flex" action="{% url 'search_posts' %}" method="GET">
