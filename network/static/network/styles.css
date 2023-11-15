@@ -951,6 +951,7 @@ svg {
 @media (max-width: 576px) {
     .large-popup {
         width: 90%;
+        margin: 0 auto;
     }
 
      /* Alguns estilos adicionais para melhorar a experiência em telas pequenas */
