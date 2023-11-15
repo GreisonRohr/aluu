@@ -947,32 +947,6 @@ svg {
     margin-left: 10px;
 }
 
-/* Estilos para telas menores (dispositivos móveis) */
-@media (max-width: 576px) {
-    .large-popup {
-        width: 90%;
-    }
-
-    .form-action-btns {
-        flex-direction: column; /* Empilha os elementos verticalmente */
-        align-items: center; /* Centraliza os itens horizontalmente */
-    }
-
-    input[name="tag"] {
-        width: 100%; /* Preenche 100% da largura disponível */
-        margin-right: 0; /* Remove a margem direita */
-        margin-bottom: 5px; /* Adiciona um pequeno espaço entre os elementos */
-    }
-
-    .btn {
-        width: 100%; /* Preenche 100% da largura disponível */
-    }
-
-    .submit-btn {
-        margin-top: 5px; /* Adiciona um pequeno espaço acima do botão de envio */
-    }
-}
-
 .login-popup {
     display: none;
     position: absolute;
