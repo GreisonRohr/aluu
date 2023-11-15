@@ -1212,3 +1212,13 @@ svg {
     color: #42b8c4;
     border-color: #42b8c4;
 }
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 0.99rem;
+    line-height: inherit;
+    white-space: nowrap;
+}
