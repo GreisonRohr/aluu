@@ -947,6 +947,21 @@ svg {
     margin-left: 10px;
 }
 
+/* Estilos para telas pequenas (dispositivos móveis) */
+@media (max-width: 576px) {
+    .large-popup {
+        width: 90%;
+    }
+
+     /* Alguns estilos adicionais para melhorar a experiência em telas pequenas */
+     .form-area {
+        padding: 10px;
+    }
+
+    #img-div {
+        text-align: center;
+    }
+}
 
 .login-popup {
     display: none;
