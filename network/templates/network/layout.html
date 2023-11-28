@@ -245,7 +245,7 @@
                                 Você deve saber
                             </div>
                             {% for suggestion in suggestions %}
-                            <div class="suggestion-user">
+                            <div class="suggestion-user" style="width: 100%">
                                 <div>
                                     <a href="{% url 'profile' suggestion.username %}">
                                         <div class="small-profilepic" style="background-image: url(/network/media/{{suggestion.profile_pic}})"></div>
