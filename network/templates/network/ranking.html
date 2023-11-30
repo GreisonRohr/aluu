@@ -45,7 +45,7 @@
                                                         <strong>Curtidas:</strong> {{ post.likers.count }}
                                                     </div>
                                                     <div class="avg-rating">
-                                                        <strong>Nota Média:</strong> {{ post.avg_rating }}
+                                                        <strong>Nota Média:</strong> <span id="average-rating-{{ post.id }}" class="average-value">{{ post.average_rating }}</span>
                                                     </div>
                                                 </div>
                                             </div>
